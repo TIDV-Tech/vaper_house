@@ -1,0 +1,31 @@
+:root {
+  /* Colors */
+  --black: #000000;
+  --white: #ffffff;
+  --darkgray: #201818;
+  --gray2: #222020;
+
+  /* Weight */
+  --ten: 10px;
+  --twe: 20px;
+  --thi: 30px;
+  --fou: 40px;
+  --fif: 50px;
+  --six: 60px;
+  --sev: 70px;
+  --eig: 80px;
+  --nin: 90px;
+  --hun: 100px;
+  --r10: 10%;
+  --r20: 20%;
+  --r30: 30%;
+  --r40: 40%;
+  --r50: 50%;
+  --r60: 60%;
+  --r70: 70%;
+  --r80: 80%;
+  --r90: 90%;
+  --r100: 100%;
+  --fvw: 100vw;
+  --fvh: 100vh;
+}
