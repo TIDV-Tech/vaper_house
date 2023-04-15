@@ -1,7 +1,7 @@
-from flask import Flask
+from flask import *
 
 app = Flask(__name__)
 
 @app.route('/')
 def index ():
-  return 'Welcome to Vaper House'
+  return render_template('/pages/index.html', name='Index')

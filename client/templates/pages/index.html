@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaper House</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/root.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <section id="header">
+    <div class="hd1">
+      <img src="{{ url_for('static', filename='resources/logo.png') }}" alt="Logo Vaper House" id="logo">
+    </div>
+    <div class="hd2">
+      <div class="hd2_up">
+        <div class="hd2_up_left">
+          <input type="search" placeholder="Encuentra todo para tu vapeo...">
+          <i class='bx bx-search'></i>
+        </div>
+        <div class="hd2_up_right">
+          <div>
+            <span>$15.99</span>
+            <i class='bx bxs-cart icon' ></i>
+          </div>
+          <div>
+            <span>Mi Cuenta</span>
+            <i class='bx bxs-user-circle icon'></i>
+          </div>
+        </div>
+      </div>
+      <div class="hd2_down">
+        <nav>
+          <ul>
+            <li>Inicio</li>
+            <li>Dispositivos</li>
+            <li>Atomizadores</li>
+            <li>E-Liquids</li>
+            <li>Salt Nic</li>
+            <li>Accesorios</li>
+            <li>Puffs</li>
+            <li>Promociones</li>
+            <li>Destacado</li>
+            <li>Contacto</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+  <section id="main">
+    <p class="warning">Advertencia: Prohibida la venta a menores de 18 años. Algunos productos contienen nicotina, una sustancia altamente adictiva</p>
+
+  </section>
+  <section id="footer">
+
+  </section>
+</body>
+</html>

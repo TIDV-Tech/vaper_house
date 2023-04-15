@@ -2,4 +2,116 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  color: var(--white);
+}
+
+body {
+  min-width: var(--fvw);
+  min-height: var(--fvh);
+}
+
+#header {
+  display: grid;
+  grid-template-columns: 1fr 11fr;
+  column-gap: var(--ten);
+  background-color: var(--black);
+  width: var(--r100);
+  height: var(--hun);
+}
+
+#logo { max-width: 150px; }
+
+.hd2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.hd2_up, .hd2_down {
+  margin-top: var(--ten);
+  height: var(--r50);
+}
+
+.hd2_up_left {
+  display: flex;
+  flex-direction: row;
+  width: calc(var(--r100) - 30%);
+}
+
+.hd2_up, .hd2_up_right, .hd2_up_right > div, ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.hd2_up_right { width: 264px; }
+
+.hd2_up_left > input {
+  outline: 0;
+  color: var(--black);
+  border-radius: 10px 0 0 10px;
+  width: var(--r100);
+  height: var(--fou);
+  padding: 0px calc(var(--ten) + 5px);
+  border: 0;
+}
+
+.hd2_up_left > i {
+  font-size: 35px;
+  border-radius: 0 10px 10px 0;
+  width: var(--six);
+  height: var(--fou);
+  padding: 5px calc(var(--ten) + 5px);
+  background-color: var(--gray2);
+  cursor: pointer;
+}
+
+.hd2_up_right > div {
+  padding: 0px var(--ten);
+  justify-content: center;
+  align-items: center;
+}
+
+.hd2_up_right > div:nth-child(1) { padding-right: var(--thi); }
+
+.hd2_up_right {
+  border-radius: 10px;
+  background-color: var(--darkgray);
+}
+
+.icon {
+  font-size: calc(var(--thi) + 5px);
+  color: var(--white);
+  margin-left: var(--ten);
+  cursor: pointer;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+  background-color: var(--white);
+  margin-top: 1px;
+}
+
+ul > li {
+  text-align: center;
+  width: 10%;
+  color: var(--black);
+  border-right: 1px solid var(--black);
+  padding: 10px calc(var(--ten) + 5px);
+  cursor: pointer;
+}
+
+li:hover {
+  transition: .8s;
+  opacity: .8;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+#main { width: var(--r100); }
+
+.warning {
+  margin: 5px;
+  text-align: center;
+  color: var(--black);
 }
