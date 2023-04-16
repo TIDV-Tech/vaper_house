@@ -108,7 +108,10 @@ li:hover {
   color: var(--white);
 }
 
-#main { width: var(--r100); }
+#main {
+  width: (--r100);
+  margin: 0 10%;
+}
 
 .warning {
   margin: 5px;

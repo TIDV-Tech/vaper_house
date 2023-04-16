@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ language }}">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vaper House</title>
+  <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/root.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/flickity.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="{{ url_for('static', filename='js/flickity.min.js') }}"></script>
 </head>
 <body>
   <section id="header">
     <div class="hd1">
-      <img src="{{ url_for('static', filename='resources/logo.png') }}" alt="Logo Vaper House" id="logo">
+      <img src="static/{{ logo.base }}" alt="Logo Vaper House" id="logo">
     </div>
     <div class="hd2">
       <div class="hd2_up">
@@ -34,25 +37,45 @@
       <div class="hd2_down">
         <nav>
           <ul>
-            <li>Inicio</li>
-            <li>Dispositivos</li>
-            <li>Atomizadores</li>
-            <li>E-Liquids</li>
-            <li>Salt Nic</li>
-            <li>Accesorios</li>
-            <li>Puffs</li>
-            <li>Promociones</li>
-            <li>Destacado</li>
-            <li>Contacto</li>
+            {% for option in options: %}
+                <li>{{ option.name }}</li>
+            {% endfor %}
           </ul>
         </nav>
       </div>
     </div>
   </section>
-  <section id="main">
-    <p class="warning">Advertencia: Prohibida la venta a menores de 18 años. Algunos productos contienen nicotina, una sustancia altamente adictiva</p>
 
+  <marquee
+    class="warning"
+    behavior="scroll"
+    direction="left"
+    scrolldelay="100"
+    scrollamount="15"
+  >
+    {{ warning_msg }}
+  </marquee>
+
+  <section id="main">
+    <div class="gallery js-flickity" data-flickity-options='{
+      "wrapAround": true,
+      "freeScroll": true,
+      "autoPlay": true,
+      "autoPlay": 2500,
+      "draggable": true,
+      "selectedAttraction": 0.01,
+      "friction": 0.15,
+      "fullscreen": true,
+      "lazyLoad": 1
+    }'>
+      {% for file in files %}
+        <div class="gallery-cell">
+          <img src="static/resources/{{ file }}" alt="">
+        </div>
+      {% endfor %}
+    </div>
   </section>
+
   <section id="footer">
 
   </section>

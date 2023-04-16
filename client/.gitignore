@@ -1,2 +1,6 @@
 /__pycache__/
 /venv/
+/static/resources/*png
+/static/resources/*webp
+/static/resources/*jpg
+/util/__pycache__
