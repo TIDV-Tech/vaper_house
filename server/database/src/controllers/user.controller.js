@@ -2,46 +2,45 @@ import { User }   from "../models/User.js"
 
 const user_controller = {}
 
-user_controller.saveUser = async (data) => {
+user_controller.saveUser = async (req, res) => {
   try {
+    const data = req.body
     const newUser = new User(data)
     const savedUser = await newUser.save()
-    return {
-      msg: "User saved successfully",
-      savedUser
-    }
+    res.json({msg: "User registered successfully", savedUser}) 
+    // console.log("works... i guess")
   } catch (error) {
-    return {
-      msg: "Something went wrong...",
-      error: error.message
-    }
+    res.json({ msg: " Something went wrong...", error: error.message }) 
+    console.log("XD")
   }
 }
 
-user_controller.findUsers = async () => {
+user_controller.findUsers = async (req, res) => {
   try {
     const users = await User.find().lean()
-    return users
+    res.json(users)
   } catch (error) {
-   return error
+    res.json(error)
   }
 }
 
-user_controller.updateUser = async (userId, newData) => {
+user_controller.updateUser = async (req, res) => {
   try {
-    const response = await User.findByIdAndUpdate(userId, newData)
-    return response
+    const { userId, newData } = req.body
+    await User.findByIdAndUpdate(userId, newData)
+    res.json({msg: "Updated successfully!"}) 
   } catch (error) {
-    return error.message
+    res.json(error.message) 
   }
 }
 
-user_controller.deleteUser = async (userId) => {
+user_controller.deleteUser = async (req, res) => {
   try {
-    const response = User.findByIdAndDelete(userId)
-    return response
+    const { userId } = req.data
+    await User.findByIdAndDelete(userId)
+    res.json({msg: "Deleted successfully!"}) 
   } catch (error) {
-    return error.message
+    res.json(error.message) 
   }
 }
 
