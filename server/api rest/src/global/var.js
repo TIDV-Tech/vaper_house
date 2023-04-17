@@ -6,8 +6,9 @@ const PORT = process.env.PORT
 
 // ROUTES
 const ROOT = process.env.ROOT
+const REGISTER = process.env.REGISTER
 
 module.exports = {
 	URL, PORT,
-	ROOT
+	ROOT , REGISTER
 }
