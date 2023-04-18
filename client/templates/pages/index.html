@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/flickity.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="{{ url_for('static', filename='js/flickity.min.js') }}"></script>
 </head>
@@ -39,28 +38,28 @@
         <nav>
           <ul>
             {% for option in options: %}
-                <li>{{ option.name }}</li>
+            <li>{{ option.name }}</li>
             {% endfor %}
           </ul>
         </nav>
       </div>
     </div>
   </section>
-
+  
   <marquee
-    class="warning"
-    behavior="scroll"
-    direction="left"
-    scrolldelay="100"
-    scrollamount="15"
+  class="warning"
+  behavior="scroll"
+  direction="left"
+  scrolldelay="100"
+  scrollamount="15"
   >
-    {{ warning_msg }}
-  </marquee>
+  {{ warning_msg }}
+</marquee>
 
-  <section id="main">
-    <div class="gallery js-flickity" data-flickity-options='{
-      "wrapAround": true,
-      "freeScroll": true,
+<section id="main">
+  <div class="gallery js-flickity" data-flickity-options='{
+    "wrapAround": true,
+    "freeScroll": true,
       "autoPlay": true,
       "autoPlay": 2500,
       "draggable": true,
@@ -69,46 +68,25 @@
       "fullscreen": true,
       "lazyLoad": 1
     }'>
-      {% for file in files %}
-        <div class="gallery-cell">
-          <img src="static/resources/{{ file }}" alt="">
-        </div>
-      {% endfor %}
+    {% for file in files %}
+    <div class="gallery-cell">
+      <img src="static/resources/{{ file }}" alt="">
     </div>
-  </section>
+    {% endfor %}
+  </div>
+  <div class="categories-container">
+    {% for category in categories %}
+    <div class="category">
+      <p>{{ category.name }}</p> 
+      <img src="static/{{ category.img }}">
+    </div>
+    {% endfor %}
+  </div>
+</section>
 
   <section id="footer">
-    <div class="footer">
-      <div class="info">
-        <span>Información</span>
-        <p>¿Quiénes somos?</p>
-        <p>¿Qué ofrecemos?</p>
-      </div>
-      <div class="pol">
-        <span>Políticas</span>
-        <p>Términos y condiciones</p>
-        <p>Políticas de seguridad</p>
-        <p>Políticas de Cookies</p>
-      </div>
-      <div class="pay">
-        <span>Métodos de pago</span>
-        <p><i class='bx bx-credit-card bx-sm'></i></p>
-        <p><i class='bx bxl-visa bx-sm' ></i></p>
-        <p><i class='bx bxl-paypal bx-sm'></i></p>
-        <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m16.624 13.92l2.717 2.716l-7.353 7.353l-7.352-7.352l2.717-2.717l4.636 4.66l4.635-4.66zm4.637-4.636L24 12l-2.715 2.716L18.568 12l2.693-2.716zm-9.272 0l2.716 2.692l-2.717 2.717L9.272 12l2.716-2.715zm-9.273 0L5.41 12l-2.692 2.692L0 12l2.716-2.716zM11.99.01l7.352 7.33l-2.717 2.715l-4.636-4.636l-4.635 4.66l-2.717-2.716L11.989.011z"/></svg></p>
-      </div>
-      <div class="follow">
-        <span>Siguenos</span>
-        <p><i class='bx bxl-facebook bx-sm'></i>Vaper House Café</p>
-        <p><i class='bx bxl-instagram bx-sm'></i> vaperhouse.vzla</p>
-      </div>
-      <hr>
-      <div class="lugar">
-        <p><i class='bx bx-map'></i> Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a cada Matina</p>
-        <p><i class='bx bxl-gmail'></i> comprasvaperhouse@gmail.com</p>
-        <p><i class='bx bx-phone'></i> +58412-1729864 / +58414-7573307</p>
-      </div>
-    </div>
+
   </section>
 </body>
+<script src="{{ url_for('static', filename='js/confirm_age.js') }}"></script>
 </html>

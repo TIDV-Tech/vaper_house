@@ -28,5 +28,13 @@ data = {
     { 'name': 'Promociones', },
     { 'name': 'Destacado', },
     { 'name': 'Contacto', }
+  ],
+  'categories': [
+    {"name": "Lo más nuevo", "img": "resources/categories/lo_mas_nuevo.jfif"},
+    {"name": "Promociones", "img": "resources/categories/promociones.jfif"},
+    {"name": "Accesorios", "img": "resources/categories/accesorios.jpg"},
+    {"name": "Tanques", "img": "resources/categories/tanques.jpg"},
+    {"name": "e-liquids", "img": "resources/categories/e_liquids.jpg"},
+    {"name": "Kits", "img": "resources/categories/kits.jpg"},
   ]
 }
