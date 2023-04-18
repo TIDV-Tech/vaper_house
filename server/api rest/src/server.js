@@ -1,12 +1,12 @@
 const express = require('express')
 const cors    = require('cors')
 const _var    = require('./global/var.js')
-const root    = require('./routes/root.routes.js')
+const user    = require('./routes/user.routes.js')
 const app     = express()
 
 app.use(express.json())
 app.use(cors())
-app.use(root)
+app.use(user)
 
 app.listen(_var.PORT, (err) => {
 	if (err) throw err

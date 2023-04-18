@@ -1,0 +1,11 @@
+.footer{
+	background: var(--black);
+	width: 100%;
+	display: flex;
+	position: absolute;
+	bottom: 0;
+}
+
+hr{
+	color: var(--light);
+}
