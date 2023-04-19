@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/flickity.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/carousel.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/categories.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="{{ url_for('static', filename='js/flickity.min.js') }}"></script>
@@ -118,7 +120,6 @@
     </div>
     <hr>
     <section id="localidad">
-      
       <div class="lugar">
         <p><i class='bx bx-map bx-sm'></i>  Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a cada Matina</p>
         <p><i class='bx bxl-gmail bx-sm'></i> comprasvaperhouse@gmail.com</p>
@@ -126,6 +127,17 @@
       </div>
     </section>
   </section>
+
+  <div class="modal_bg">
+    <div class="loader"></div>
+    <div class="modal_content">
+      <h1>ADVERTENCIA</h1>
+      <p>Este sitio contiene productos que son indebidos para menores de edad. Confirma que tienes más de 18 años para poder acceder.</p>
+      <p>¿Tienes 18 años o más?</p>
+      <button id="yes">Sí</button>
+      <button id="no">No</button>
+    </div>
+  </div>
 </body>
 <script src="{{ url_for('static', filename='js/confirm_age.js') }}"></script>
 </html>
