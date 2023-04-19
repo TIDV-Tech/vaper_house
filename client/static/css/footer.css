@@ -1,13 +1,21 @@
+.footer1{
+	display: flex;
+	position: relative;
+	bottom: 0;
+	margin-top: 30%;
+}
+
 .footer{
 	background: var(--black);
 	width: 100%;
-	display: flex;
 	bottom: 0;
+	position: relative;
 	padding: 20px;
 }
 
 #localidad{
 	background: var(--black);
+	position: absolute;
 	width: 100%;
 	padding: 20px;
 	padding-top: 0;
