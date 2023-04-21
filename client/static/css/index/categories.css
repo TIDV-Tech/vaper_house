@@ -21,9 +21,9 @@
   background-size: cover;
 }
 
-.category:hover{
-  filter: brightness(0.7);
-  transition: 0.5s;
+.category:hover img{
+  filter: brightness(.4);
+  transition: 1s;
 }
 
 .category img{

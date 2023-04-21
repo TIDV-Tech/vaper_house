@@ -3,4 +3,7 @@
 /static/resources/*png
 /static/resources/*webp
 /static/resources/*jpg
+/static/resources/products/*jpg
+/static/resources/products/*png
+/static/resources/products/*svg
 /util/__pycache__

@@ -6,20 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/root.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/main.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/flickity.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/carousel.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/categories.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/products.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/modal.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index2/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index2/flickity.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index2/carousel.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index2/categories.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index2/products.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index2/modal.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index2/footer.css') }}">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="{{ url_for('static', filename='js/flickity.min.js') }}"></script>
 </head>
 <body>
   <section id="header">
     <div class="hd1">
-      <img src="static/{{ logo.base }}" alt="Logo Vaper House" id="logo">
+      <img src="/static/{{ logo.base }}" alt="Logo Vaper House" id="logo">
     </div>
     <div class="hd2">
       <div class="hd2_up">
@@ -37,15 +37,6 @@
             <i class='bx bxs-user-circle icon'></i>
           </div>
         </div>
-      </div>
-      <div class="hd2_down">
-        <nav>
-          <ul>
-            {% for option in options: %}
-            <li>{{ option.name }}</li>
-            {% endfor %}
-          </ul>
-        </nav>
       </div>
     </div>
   </section>
@@ -74,76 +65,30 @@
       }'>
       {% for file in files %}
       <div class="gallery-cell">
-        <img src="static/resources/{{ file }}" alt="">
-      </div>
-      {% endfor %}
-    </div>
-    <div class="categories-container">
-      {% for category in categories %}
-      <div class="category">
-        <p>{{ category.name }}</p>
-        <img src="static/{{ category.img }}">
+        <img src="/static/resources/{{ file }}" alt="">
       </div>
       {% endfor %}
     </div>
   </section>
+  <div class="categories-container">
+    {% for category in categories2 %}
+    <div class="category">
+      <img src="/static/{{ category.img }}">
+      <p>{{ category.name }}</p>
+    </div>
+    {% endfor %}
+  </div>
 
   <section id="products">
-    <div class="products">
-      <div class="product">
-        <figure>
-          <img src="/static/resources/products/6e575250e436fd98da66a14db8cf53f5.jpg">
-        </figure>
-        <div class="contenido">
-          <h3>Titulo</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.</p>
-          <span >10.00$</span>
-          <a href="#">Añadir al carrito</a>
+    {% for product in products %}
+      <div class="products">
+        <div class="product">
+          <figure>
+            <img src="/static/{{ product.img }}">
+          </figure>
         </div>
       </div>
-    </div>
-
-    <div class="products">
-      <div class="product">
-        <figure>
-          <img src="/static/resources/products/descarga.jpeg">
-        </figure>
-        <div class="contenido">
-          <h3>Titulo</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.</p>
-          <span >10.00$</span>
-          <a href="#">Añadir al carrito</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="products">
-      <div class="product">
-        <figure>
-          <img src="/static/resources/products/CBD_05_A.jpg">
-        </figure>
-        <div class="contenido">
-          <h3>Titulo</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.</p>
-          <span >10.00$</span>
-          <a href="#">Añadir al carrito</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="products">
-      <div class="product">
-        <figure>
-          <img src="/static/resources/products/draw_svg20210507-22909-pboesy.svg.png">
-        </figure>
-        <div class="contenido">
-          <h3>Titulo</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.</p>
-          <span >10.00$</span>
-          <a href="#">Añadir al carrito</a>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </section>
 
   <section id="footer">
