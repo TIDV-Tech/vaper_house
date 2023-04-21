@@ -4,6 +4,7 @@
   white-space: nowrap;
   width: 100%;
   padding: 20px;
+  margin-top: 20px;
 }
 
 .category{
@@ -44,7 +45,8 @@
 
 ::-webkit-scrollbar{ 
   background-color: white;
-  height: 10px;
+  width: 8px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb{ 

@@ -2,12 +2,14 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Roboto', sans-serif;
   color: var(--white);
 }
 
 body {
   min-width: var(--fvw);
   min-height: var(--fvh);
+  overflow-x: hidden;
 }
 
 #header {
@@ -43,7 +45,7 @@ body {
   justify-content: space-between;
 }
 
-.hd2_up_right { width: 264px; }
+.hd2_up_right { max-width: 280px; margin-right: 25px; }
 
 .hd2_up_left > input {
   outline: 0;
@@ -70,6 +72,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+.hd2_up_right div > span { font-size: 15px; }
 
 .hd2_up_right > div:nth-child(1) { padding-right: var(--thi); }
 
