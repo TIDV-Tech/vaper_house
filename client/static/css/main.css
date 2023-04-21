@@ -121,3 +121,5 @@ li:hover {
   text-align: center;
   color: var(--black);
 }
+
+.category > p { font-family: 'Archivo Narrow', sans-serif; }

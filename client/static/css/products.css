@@ -2,19 +2,27 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: sans-serif;
 }
 
 #products{
-	width: 100%;
-	display: flex;
-	max-width: 1100px;
+	width: 80%;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
 	margin: auto;
+	margin: 0 10%;
+}
+
+.products {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 .product{
 	width: 100%;
-	margin: 20px;
+	max-width: 250px;
+	margin: 20px 0;
 	border-radius: 6px;
 	overflow: hidden;
 	cursor: default;
@@ -63,5 +71,3 @@
 	transition: 0.8s;
 	border: 1px solid black;
 }
-
-.category > p { font-family: 'Archivo Narrow', sans-serif; }
