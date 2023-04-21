@@ -2,7 +2,6 @@
 	display: flex;
 	position: relative;
 	bottom: 0;
-	margin-top: 30%;
 }
 
 .footer{
@@ -21,9 +20,14 @@
 	padding-top: 0;
 }
 
-.lugar{
-	padding-top: 20px;
+#localidad .lugar > p {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
+
+.lugar{ padding-top: 20px; }
+.info > span, .politica > span, .pay > span, .follow > span { margin-bottom: 10px; }
 
 .lugar p{
 	display: flex;
@@ -31,13 +35,8 @@
 	font-size: 17px;
 }
 
-.lugar i{
-	padding-right: 7px;
-}
-
-hr{ 
-	color: var(--light); 
-}
+.lugar i{	padding-right: 7px; }
+hr{ color: var(--light); }
 
 .more{
 	display: grid;
@@ -63,17 +62,9 @@ hr{
 	font-size: 17px;
 }
 
-.follow i{
-	padding-right: 5px;
-}
-
-.instagram i{
-	color: #b15353;
-}
-
-.facebook i{
-	color: rgb(59, 59, 172);
-}
+.follow i{ padding-right: 5px; }
+.instagram i{ color: #b15353; }
+.facebook i{ color: rgb(59, 59, 172); }
 
 .politica p{
 	padding: 5px 5px 5px 0;

@@ -4,6 +4,7 @@
   white-space: nowrap;
   width: 100%;
   padding: 20px;
+  margin-top: 20px;
 }
 
 .category{
@@ -20,9 +21,9 @@
   background-size: cover;
 }
 
-.category:hover{
-  filter: brightness(0.7);
-  transition: 0.5s;
+.category:hover img{
+  filter: brightness(.4);
+  transition: 1s;
 }
 
 .category img{
@@ -44,7 +45,8 @@
 
 ::-webkit-scrollbar{ 
   background-color: white;
-  height: 10px;
+  width: 8px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb{ 
