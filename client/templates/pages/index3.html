@@ -7,11 +7,9 @@
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/root.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/index/main.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/flickity.min.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/carousel.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/categories.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/index/products.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/index3/description.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/index/modal.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index2/categories.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/index/footer.css') }}">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <script src="{{ url_for('static', filename='js/flickity.min.js') }}"></script>
@@ -19,7 +17,7 @@
 <body>
   <section id="header">
     <div class="hd1">
-      <img src="static/{{ logo.base }}" alt="Logo Vaper House" id="logo">
+      <img src="/static/{{ logo.base }}" alt="Logo Vaper House" id="logo">
     </div>
     <div class="hd2">
       <div class="hd2_up">
@@ -61,89 +59,79 @@
   </marquee>
 
   <section id="main">
-    <div class="gallery js-flickity" data-flickity-options='{
-      "wrapAround": true,
-      "freeScroll": true,
-        "autoPlay": true,
-        "autoPlay": 2500,
-        "draggable": true,
-        "selectedAttraction": 0.01,
-        "friction": 0.15,
-        "fullscreen": true,
-        "lazyLoad": 1
-      }'>
-      {% for file in files %}
-      <div class="gallery-cell">
-        <img src="static/resources/{{ file }}" alt="">
-      </div>
-      {% endfor %}
-    </div>
-    <div class="categories-container">
-      {% for category in categories %}
-      <div class="category">
-        <p>{{ category.name }}</p>
-        <img src="static/{{ category.img }}">
-      </div>
-      {% endfor %}
-    </div>
-  </section>
+		{% for description in descriptions %}
+			<div class="products">
+    		<div class="product">
+					<img src="/static/{{ description.img }}" alt="Vandy">
+					<div class="desc">
+						<p class="title">{{ description.name }}</p>
+						<p class="price">$35.00</p>
+						<p class="description">
+							Vandy Vape Kylin M Pro RTA aumenta la capacidad de e-juice a 8 ml al grabar el CNC dentro del hardware. Utilizando un diseño de entrada de flujo de aire superior, es antifugas. Las bobinas A1 M de 0.2ohm y 0.15ohm están incluidas en el paquete. Es fácil de construir y rellenar.
+						</p>
+						<div class="compra">
+							<button class="carrito">Añadir al carrito</button>
+							<p class="cantidad">Cantidad</p>
+							<div class="cuadro">
+								<div class="cuadro1">1</div>
+								<div class="cuadro2">
+									<div class="arriba">
+										<i class='bx bx-chevron-up'></i>
+									</div>
+									<hr>
+									<div class="abajo">
+										<i class='bx bx-chevron-down' ></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
 
-  <section id="products">
-    <div class="products">
-      <div class="product">
-        <figure>
-          <img src="/static/resources/products/6e575250e436fd98da66a14db8cf53f5.jpg">
-        </figure>
-        <div class="contenido">
-          <h3>Titulo</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.</p>
-          <span >10.00$</span>
-          <a href="#">Añadir al carrito</a>
-        </div>
-      </div>
-    </div>
+			<div class="datos">
+				<hr>
+				<div class="btn">
+					<button class="descripcion">Descripción</button>
+					<button class="valoracion">Valoraciones</button>
+				</div>
+				<div class="desc2">
+					<p class="title2">Descripción</p>
+					<p>
+						El tanque KYLIN M PRO RTA de VandyVape cuenta con una capacidad de e-juice de 8 ml, una plataforma de construcción estilo abrazadera y utiliza resistencias de lámina de malla para calentar rápidamente y producir vapor. Con capacidad para hasta 8 ml de eLiquid, el Kylin M Pro RTA es el más adecuado para eJuice de base libre, lo que permite el desarrollo del sabor a partir de la resistencia mesh. Utilizando una plataforma de construcción estilo abrazadera, el KYLIN M PRO RTA puede acomodar una resistencia de malla simple, fijada desde los lados con un tornillo Phillips. Equipado con un soporte central de algodón cerámico, el centro accionado por resorte empuja el algodón cargado de jugo directamente contra la lámina de malla para producir un sabor delicioso.
+					</p>
+				</div>
 
-    <div class="products">
-      <div class="product">
-        <figure>
-          <img src="/static/resources/products/descarga.jpeg">
-        </figure>
-        <div class="contenido">
-          <h3>Titulo</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.</p>
-          <span >10.00$</span>
-          <a href="#">Añadir al carrito</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="products">
-      <div class="product">
-        <figure>
-          <img src="/static/resources/products/CBD_05_A.jpg">
-        </figure>
-        <div class="contenido">
-          <h3>Titulo</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.</p>
-          <span >10.00$</span>
-          <a href="#">Añadir al carrito</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="products">
-      <div class="product">
-        <figure>
-          <img src="/static/resources/products/draw_svg20210507-22909-pboesy.svg.png">
-        </figure>
-        <div class="contenido">
-          <h3>Titulo</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.</p>
-          <span >10.00$</span>
-          <a href="#">Añadir al carrito</a>
-        </div>
-      </div>
-    </div>
+				<div class="vlr">
+					<p>Valoraciones</p>
+					<form action="">
+						<div class="name">
+							<label>Nombre:</label>
+							<input type="text">
+						</div>
+						<div class="email">
+							<label>Correo Electrónico:</label>
+							<input type="email">
+						</div>
+						<div class="opinion">
+							<label>Tu valoración:</label>
+							<textarea></textarea>
+						</div>
+						<div class="puntaje">
+							<label class="pt">Tu puntuación:</label>
+							<i class='bx bxs-star'></i>
+							<i class='bx bxs-star'></i>
+							<i class='bx bxs-star'></i>
+							<i class='bx bx-star'></i>
+							<i class='bx bx-star'></i>
+						</div>
+						<div class="enviar">
+							<input type="button" value="Enviar">
+						</div>
+					</form>
+				</div>
+			</div>
   </section>
 
   <section id="footer">
@@ -179,7 +167,7 @@
         </div>
       </div>
     </div>
-    <hr>
+		<hr>
     <section id="localidad">
       <div class="lugar">
         <p><i class='bx bx-map bx-sm'></i>  Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a cada Matina</p>

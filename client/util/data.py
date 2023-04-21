@@ -56,5 +56,8 @@ data = {
     {"name": "Titulo", "img": "resources/products/logo-1.svg"},
     {"name": "Titulo", "img": "resources/products/cart-top-image.png"},
     {"name": "Titulo", "img": "resources/products/vape-store-logo-design_626969-479.jpg"},
+  ],
+  "descriptions": [
+    {"name": "Kylin M Pro RTA color tornasol", "img": "resources/product_description/vandy.jpg"},
   ]
 }
