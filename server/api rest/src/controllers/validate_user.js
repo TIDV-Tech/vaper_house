@@ -27,26 +27,42 @@ const checkRegister = (name, email, password) => {
 }
 
 const checkLogin = (email, password) => {
-  const valores  = { email, password }
-  const arrValue = [valores]
-	const countArr = arrValue.push(...[valores])
-	console.log(countArr)
-
-  for (i = 0; i < arrValue.length; i++) {
-    const res = arrValue[i]
-		console.log(res)
-    if (res === arrValue) {
+  let valores  = [ email, password ]
+  for (i = 0; i < valores.length; i++) {
+    const res = valores[i]
+    if (res === valores[0]) {
       msg = {
         status: true,
         message: "Log in succesfully",
         code: 200,
       }
-    } else if (res != arrValue) {
+    } else if (res != valores) {
       msg = {
         status: false,
         message: "An error has occurred",
         code: 500,
       }
+    }
+  }
+  return msg
+}
+
+const comparate = () => {
+  let x = checkRegister()
+  let y = checkLogin()
+  console.log(x)
+  console.log(y)
+  if (y === x) {
+    msg = {
+      status: true,
+      message: "por fin funciona esta mamada",
+      code: 200
+    }
+  } else if(y != x) {
+    msg = {
+      status: false,
+      message: "sigue sin funcionar esta mierda",
+      code: 500
     }
   }
   return msg
