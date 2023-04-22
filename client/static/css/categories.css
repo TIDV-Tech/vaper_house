@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 .categories-container{
   overflow: auto;
   white-space: nowrap;
@@ -43,7 +42,7 @@
   z-index: 2;
 }
 
-::-webkit-scrollbar{ 
+::-webkit-scrollbar{
   background-color: white;
   width: 8px;
   height: 6px;

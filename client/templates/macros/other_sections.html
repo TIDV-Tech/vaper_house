@@ -1,0 +1,88 @@
+{% macro navbar(options) %}
+  <nav>
+    <ul>
+      {% for option in options %}
+        <li>{{ option.name }}</li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endmacro %}
+
+{% macro images_carousel(images) %}
+  {% for image in images %}
+    <div class="gallery-cell">
+      <img src="static/resources/{{ image }}" alt="">
+    </div>
+  {% endfor %}
+{% endmacro %}
+
+{% macro category_section(categories) %}
+  {% for category in categories %}
+    <div class="category">
+      <p>{{ category.name }}</p>
+      <img src="static/{{ category.img }}">
+    </div>
+  {% endfor %}
+{% endmacro %}
+
+{% macro products_section(products) %}
+  {% for product in products %}
+    <div class="products">
+      <div class="product">
+        <figure>
+          <img src="static/{{ product.img }}">
+        </figure>
+        <div class="contenido">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <span>{{ product.price }}$</span>
+          <a href="#">Añadir al carrito</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endmacro %}
+
+{% macro more_section(info, politica, social) %}
+  <div class="info">
+    <span>Información</span>
+    {% for inf in info %}
+      <p>{{ inf }}</p>
+    {% endfor %}
+    <br>
+  </div>
+  <div class="politica">
+    <span>Políticas</span>
+    {% for poli in politica %}
+      <p>{{ poli }}</p>
+    {% endfor %}
+  </div>
+  <div class="pay">
+    <span>Métodos de Pago</span>
+    <div class="pay2">
+      <p><i class='bx bx-credit-card bx-sm'></i></p>
+      <p><i class='bx bxl-visa bx-sm' ></i></p>
+      <p><i class='bx bxl-paypal bx-sm' ></i></p>
+      <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m16.624 13.92l2.717 2.716l-7.353 7.353l-7.352-7.352l2.717-2.717l4.636 4.66l4.635-4.66zm4.637-4.636L24 12l-2.715 2.716L18.568 12l2.693-2.716zm-9.272 0l2.716 2.692l-2.717 2.717L9.272 12l2.716-2.715zm-9.273 0L5.41 12l-2.692 2.692L0 12l2.716-2.716zM11.99.01l7.352 7.33l-2.717 2.715l-4.636-4.636l-4.635 4.66l-2.717-2.716L11.989.011z"/></svg></p>
+    </div>
+  </div>
+  <div class="follow">
+    <span>Síguenos</span>
+    {% for soci in social %}
+      <p class="{{ soci.red }}">
+        <i class='{{ soci.ico }}''></i>
+        {{ soci.dir }}
+      </p>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro address_and_contact(address, contact, numbers) %}
+  <p><i class='bx bx-map bx-sm'></i>{{ address }}</p>
+  <p><i class='bx bxl-gmail bx-sm'></i>{{ contact }}</p>
+  <p><i class='bx bx-phone bx-sm'></i>
+    {% for number in numbers %}
+      | {{ number }} |
+    {% endfor %}
+  </p>
+{% endmacro %}
