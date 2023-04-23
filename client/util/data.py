@@ -114,16 +114,16 @@ data = {
   'social': [
     {
       'red': 'facebook',
-      'ico': 'bx bxl-instagram bx-sm',
-      'dir': 'vaperhouse.vzla'
-    },
-    {
-      'red': 'instagram',
       'ico': 'bx bxl-facebook-circle bx-sm',
       'dir': 'Vaper House Café'
     },
+    {
+      'red': 'instagram',
+      'ico': 'bx bxl-instagram bx-sm',
+      'dir': 'vaperhouse.vzla'
+    },
   ],
-  'direccion': 'Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a cada Matina',
-  'contacto': 'comprasvaperhouse@gmail.com',
+  'direccion': 'Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a casa Matina',
+  'contacto': 'vaperhouse.sc@gmail.com',
   'numeros': ['+58412-1729864', '+58414-7573307']
 }
