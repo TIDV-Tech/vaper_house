@@ -18,14 +18,12 @@ body {
   column-gap: var(--ten);
   background-color: var(--black);
   width: var(--r100);
-  height: var(--sev);
+  height: var(--hun);
 }
 
-.hd1 {
-  overflow: hidden;
-}
-
-#logo { max-width: 150px; transform: translate(-10px, -15px); }
+.hd1 { overflow: hidden; }
+#logo { max-width: 150px; }
+/* #logo { max-width: 150px; transform: translate(-10px, -15px); } */
 
 .hd2 {
   display: flex;
@@ -76,8 +74,8 @@ body {
   justify-content: center;
   align-items: center;
 }
-.hd2_up_right div > span { font-size: 15px; }
 
+.hd2_up_right div > span { font-size: 15px; }
 .hd2_up_right > div:nth-child(1) { padding-right: var(--thi); }
 
 .hd2_up_right {

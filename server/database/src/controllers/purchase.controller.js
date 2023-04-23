@@ -17,7 +17,7 @@ purchase_controller.registerPurchase = async (req, res) => {
 }
 
 purchase_controller.showPurchases = async (req, res) => {
-  const purchases = await Purchase.aggregate([
+  const resultado1 = await Purchase.aggregate([
     {
       $lookup: {
         from: "users",
@@ -29,16 +29,27 @@ purchase_controller.showPurchases = async (req, res) => {
     {
       $lookup: {
         from: "products",
-        localField: "product",
-        foreignField: "_id",
+        let: {
+          productId: "$products"
+        },
+        pipeline: [
+          {
+            $match: {
+              $expr: { $in: ["$_id", "$$productId"] }
+            }
+          }
+        ],
         as: "products_purchase"
       }
     }
   ])
 
-  if(!purchases.length){
-    res.json({msg: "There's no purchases yet!", purchases}) 
-  }
-  res.json({msg: "Here's the purchases!", purchases}) 
+  
+  // if(!purchases.length){
+    //   res.json({msg: "There's no purchases yet!", purchases}) 
+  // }
+  // res.json({msg: "Here's the purchases!", purchases}) 
+
+  res.json({resultado1})
 }
 export { purchase_controller }
