@@ -4,65 +4,119 @@ const product_controller = {}
 
 product_controller.saveProduct = async (req, res) => {
   try {
+    let response = {
+      msg: "Product saved successfully",
+      status: 201,
+      data: {}
+    }
     const data = req.body
     const newProduct = new Product(data)
     const productFound = await Product.findOne({name: newProduct.name}) 
     if(productFound){
       await Product.updateOne({name: newProduct.name}, {$inc: {amount: 1}})
-      return res.json({ msg: "Product updated successfully" })
-    }else{
-      const savedProduct = await newProduct.save()
-      return res.json({ msg: "Product saved successfully", savedProduct })
+      response = {
+        msg: "Product updated successfully",
+        status: 200
+      }
+      return res.status(response.status).json(response)
     }
+    const savedProduct = await newProduct.save()
+    response.data = savedProduct
+    return res.status(response.status).json(response)
   } catch (error) {
-    res.json({ msg: "Something went wrong...", error: error.message })
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
   }
 }
 
 product_controller.findProducts = async (req, res) => {
   try {
+    let response = {
+      msg: "There's no products yet!",
+      status: 200,
+      data: []
+    }
     const products = await Product.find().lean()
-    res.json(products)
+    if(!products.length){
+      return res.status(response.status).json(response)
+    }
+    response.msg = "Here's the products" 
+    response.data = products
+    res.status(response.status).json(response)
   } catch (error) {
-    res.json(error)
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
   }
 }
 
-product_controller.findProductsByName = async (req, res) => {
+product_controller.findByFilter = async (req, res) => {
   try {
-    let { search }      = req.body
-    search              = search.toLowerCase()
-    const products      = await Product.find()
-    const productFound  = products.filter(product => {
-      const lowerName = product.name.toLowerCase()
-      console.log(lowerName)
-      const found     = lowerName.includes(search)
-      console.log(found)
-      return found
-    })
-    res.json(productFound)
+    let response = {
+      msg: "Products not found!",
+      status: 200,
+      data: []
+    }
+    const {filter} = req.body
+    const products = await Product.find(filter)
+    if(!products.length){
+      return res.status(response.status).json(response)
+    }
+    response.msg = "Here's the products" 
+    response.data = products
+    return res.status(response.status).json(response)
   } catch (error) {
-    res.json({msg: "something went wrong...", error})
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
   }
 }
 
 product_controller.updateProduct = async (req, res) => {
   try {
+    let response = {
+      msg: "Product updated successfully!",
+      status: 200
+    }
     const { productId, newData } = req.body
-    const response = await Product.findByIdAndUpdate(productId, newData)
-    res.json({msg: "Updated successfully!"})
+    await Product.findByIdAndUpdate(productId, newData)
+    res.status(response.status).json(response)
   } catch (error) {
-    res.json(error.message)
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
   }
 }
 
 product_controller.deleteProduct = async (req, res) => {
   try {
-    const { productId } = req.body
-    const response      = await Product.findByIdAndDelete(productId)
-    res.json({msg: "Deleted successfully!"})
+    let response = {
+      msg: "Product deleted successfully",
+      status: 200
+    }
+    const { productId }   = req.body
+    await Product.findByIdAndDelete(productId)
+    res.status(response.status).json(response)
   } catch (error) {
-    res.json(error.message)
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
   }
 }
 
