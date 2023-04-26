@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const _var       = require('../global/var.js')
 const controller = require('../controllers/validate_user.js')
-const addCar 	 = require('../fileSystem/createFile.js')
+const funct 	   = require('../fileSystem/createFile.js')
 const router     = Router()
 
 router.get(_var.ROOT, (req, res) => {
@@ -14,34 +14,25 @@ router.post(_var.REGISTER, async (req, res) => {
 	res.status(validate.code).json(validate)
 })
 
-router.post("/agregarCar" , async(req,res)=>{
+router.post("/agregarCar/:title" , async(req,res)=>{
 	try {
-		const { id_user , id_product , cant_prod } = req.body
-		// const info = [{
-		// 	id_user:1,
-		// 	id_product:1,
-		// 	cant_prod:1
-		// }]
-
-		const validate = await addCar(id_user , id_product , cant_prod)
-		res.send(validate)
-	
-		// const add = addCar(info)
-		
-	} catch (err) {
-		console.log(err)
-	}
+		const { title } = req.params
+		const { carrito, id_user, id_product, cant_prod } = req.body
+		const obj = {
+			type: title,
+			info: [{id_user, id_product, cant_prod}]
+		}
+		const value = funct.addCar(obj)
+		if(typeof value == 'object') { return res.status(500).json(value) }
+		res.json({status: true, message: "Archivo creado!", value})
+	} catch (err) { throw err }
 })
 
 
 router.post(_var.LOGIN, async (req, res) => {
 	const { email, password } = req.body
-	//let x = await controller.checkRegister(email, password)
-	//if(x.status) res.status(500).json({ message: "User already registered", status: false })
-	//if(!x.status){
 		let y = await controller.checkLogin(email, password)
 		res.status(y.code).json(y)
-	//} 
 })
 
 module.exports = router
