@@ -26,46 +26,15 @@ const checkRegister = (name, email, password) => {
   return msg
 }
 
-const checkLogin = (email, password) => {
-  let valores  = [ email, password ]
-  for (i = 0; i < valores.length; i++) {
-    const res = valores[i]
-    if (res === valores[0]) {
-      msg = {
-        status: true,
-        message: "Log in succesfully",
-        code: 200,
-      }
-    } else if (res != valores) {
-      msg = {
-        status: false,
-        message: "An error has occurred",
-        code: 500,
-      }
-    }
+const checkLogin = (correo, email) => {
+  for (i = 0; i < correo.length; i++) {
+    const e = correo[i]
+    if (e != email) {
+      console.log('No estas registrado')
+    } else if (e == email) { console.log(`Correcto ${email}`) }
+    //console.log(e == email)
+    //console.log(email)
   }
-  return msg
-}
-
-const comparate = () => {
-  let x = checkRegister()
-  let y = checkLogin()
-  console.log(x)
-  console.log(y)
-  if (y === x) {
-    msg = {
-      status: true,
-      message: "por fin funciona esta mamada",
-      code: 200
-    }
-  } else if(y != x) {
-    msg = {
-      status: false,
-      message: "sigue sin funcionar esta mierda",
-      code: 500
-    }
-  }
-  return msg
 }
 
 module.exports = {

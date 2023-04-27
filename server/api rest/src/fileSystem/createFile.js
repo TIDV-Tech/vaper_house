@@ -1,5 +1,7 @@
 const fs = require("fs")
 
+let msg = {}
+
 const addCar = (obj) => {
   const exists = fs.existsSync("car.json")
 
@@ -32,8 +34,22 @@ const addCar = (obj) => {
   }
 }
 
-const carValidate = () => {
-	
+const carValidate = (id_product, product, cant_prod) => {
+   for (i = 0; i < product.length; i++) {
+    const pro = product[i]
+    if (id_product == pro.id) { console.log('Producto encontrado') } 
+    else if (id_product != pro.id) { console.log('Producto no registrado') } 
+    if (cant_prod <= pro.cantidad) { 
+      let rest = cant_prod - pro.cantidad
+      if (rest == 0) {
+        let p = id_product
+        console.log(`Producto agotado ${p}`)
+        if (p == rest) { console.log('Producto no disponible') }
+      } 
+    }
+    else if (cant_prod > pro.cantidad) { console.log('No hay esta cantidad de este producto') }
+    else { console.log('Error') }
+   }
 }
 
 module.exports = {
