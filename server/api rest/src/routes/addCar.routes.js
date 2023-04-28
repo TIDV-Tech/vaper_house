@@ -16,7 +16,6 @@ router.post(_var.ADDCAR, async(req,res)=>{
 			{id: 3, cantidad: 13},
 			{id: 4, cantidad: 14}
 		]
-		//const cantidad = [10, 12, 13, 14]
 
 		const validate = funct.carValidate(id_product, product, cant_prod)
 

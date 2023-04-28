@@ -1,7 +1,5 @@
 const fs = require("fs")
 
-let msg = {}
-
 const addCar = (obj) => {
   const exists = fs.existsSync("car.json")
 
@@ -21,10 +19,6 @@ const addCar = (obj) => {
       }
     })
   } else if (!exists) {
-    /* const value = JSON.stringify(obj)
-			const salto = () => value.split(/\r\n|\r|\n/,-1)
-			const val   = JSON.parse(value) */
-
       fs.writeFileSync("car.json", JSON.stringify(obj), (err) => {
         if (err) throw err
         console.log(info)

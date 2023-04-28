@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt')
+
 let msg = {
   status: false,
   message: "Error retrieving data",
@@ -5,7 +7,7 @@ let msg = {
   code: 500,
 }
 
-const checkRegister = (name, email, password) => {
+const checkRegister = async (name, email, password) => {
   let validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   let validatePass =
     /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
@@ -23,17 +25,34 @@ const checkRegister = (name, email, password) => {
       code: 500,
     }
   }
+
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) throw err
+    console.log(password)
+    console.log(`Esta es la password hasheada: ${hash}`)
+  })
   return msg
 }
 
-const checkLogin = (correo, email) => {
+const checkLogin = async (correo, email, password) => {
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) throw err
+    bcrypt.compare(password, hash, (err, comp) => {
+      if (err) throw err
+      console.log(`Comparacion exitosa: ${comp}`)
+      if (comp == true) console.log('Has iniciado sesion')
+      else console.log('Tienes un error, vuelve a intentarlo') 
+    })
+    
+    console.log(password)
+    console.log(`Esta es la password hasheada: ${hash}`)
+  })
+
   for (i = 0; i < correo.length; i++) {
     const e = correo[i]
     if (e != email) {
       console.log('No estas registrado')
     } else if (e == email) { console.log(`Correcto ${email}`) }
-    //console.log(e == email)
-    //console.log(email)
   }
 }
 

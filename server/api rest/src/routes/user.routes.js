@@ -1,7 +1,6 @@
 const { Router } = require('express')
 const _var       = require('../global/var.js')
 const controller = require('../controllers/validate_user.js')
-const funct 	   = require('../fileSystem/createFile.js')
 const router     = Router()
 
 router.get(_var.ROOT, (req, res) => {
@@ -24,11 +23,8 @@ router.post(_var.LOGIN, async (req, res) => {
 			"prueba@root.com",
 			"user@root.com"
 		]
-		let validateCar = await funct.carValidate(correo, email)
-	
-		//let y = await controller.checkLogin(email, password)
-		//res.status(y.code).json(y)
-		res.send('Data enviada')
+		let validateUser = await controller.checkLogin(correo, email, password)
+		res.send('Data del usuario enviada exitosamente')
 	} catch (err) { throw err}
 })
 
