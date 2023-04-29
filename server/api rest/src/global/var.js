@@ -16,9 +16,13 @@ const REG_PRO = process.env.REG_PRO
 // - ADDCAR
 const ADDCAR = process.env.ADD_CAR
 
+// JSONWEBTOKEN
+const KEY = process.env.KEY
+
 module.exports = {
 	URL, PORT,
 	ROOT, REGISTER, LOGIN,
 	REG_PRO,
-	ADDCAR
+	ADDCAR,
+	KEY
 }

@@ -1,4 +1,6 @@
-const fs = require("fs")
+const fs   = require("fs")
+const jwt  = require('jsonwebtoken')
+const _var = require('../global/var.js')
 
 const addCar = (obj) => {
   const exists = fs.existsSync("car.json")
@@ -7,22 +9,28 @@ const addCar = (obj) => {
     fs.readFile("car.json", "utf-8", (err, data) => {
       if (err) {
         console.log("error: ", err)
-      } else {         
+      } else { 
         let prueba = JSON.parse(data) 
 				let info   = prueba.info[0]
         const send = prueba.info.push(info)
 
-        fs.writeFileSync("car.json", JSON.stringify(prueba), (err) => {
-          if (err) throw err
-          console.log('Informacion ingresada exitosamente')
-        })
+        //jwt.sign(obj, _var.KEY, {algorithm: 'HS256'}, (err, token) => {
+          //if (err) throw err
+          
+          fs.writeFileSync("car.json", JSON.stringify(prueba), (err) => {
+            if (err) throw err
+            console.log('Informacion ingresada exitosamente')
+            //console.log(token)
+          })
+        //})
+        
       }
     })
   } else if (!exists) {
-      fs.writeFileSync("car.json", JSON.stringify(obj), (err) => {
-        if (err) throw err
-        console.log(info)
-      })
+    fs.writeFileSync("car.json", JSON.stringify(obj), (err) => {
+      if (err) throw err
+      console.log(info)
+    })
 
     return obj
   }
