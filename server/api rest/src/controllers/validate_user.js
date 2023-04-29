@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt')
+
 let msg = {
   status: false,
   message: "Error retrieving data",
@@ -5,7 +7,7 @@ let msg = {
   code: 500,
 }
 
-const checkRegister = (name, email, password) => {
+const checkRegister = async (name, email, password) => {
   let validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   let validatePass =
     /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
@@ -23,49 +25,35 @@ const checkRegister = (name, email, password) => {
       code: 500,
     }
   }
+
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) throw err
+    console.log(password)
+    console.log(`Esta es la password hasheada: ${hash}`)
+  })
   return msg
 }
 
-const checkLogin = (email, password) => {
-  let valores  = [ email, password ]
-  for (i = 0; i < valores.length; i++) {
-    const res = valores[i]
-    if (res === valores[0]) {
-      msg = {
-        status: true,
-        message: "Log in succesfully",
-        code: 200,
-      }
-    } else if (res != valores) {
-      msg = {
-        status: false,
-        message: "An error has occurred",
-        code: 500,
-      }
-    }
-  }
-  return msg
-}
+const checkLogin = async (correo, email, password) => {
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) throw err
+    bcrypt.compare(password, hash, (err, comp) => {
+      if (err) throw err
+      console.log(`Comparacion exitosa: ${comp}`)
+      if (comp == true) console.log('Has iniciado sesion')
+      else console.log('Tienes un error, vuelve a intentarlo') 
+    })
+    
+    console.log(password)
+    console.log(`Esta es la password hasheada: ${hash}`)
+  })
 
-const comparate = () => {
-  let x = checkRegister()
-  let y = checkLogin()
-  console.log(x)
-  console.log(y)
-  if (y === x) {
-    msg = {
-      status: true,
-      message: "por fin funciona esta mamada",
-      code: 200
-    }
-  } else if(y != x) {
-    msg = {
-      status: false,
-      message: "sigue sin funcionar esta mierda",
-      code: 500
-    }
+  for (i = 0; i < correo.length; i++) {
+    const e = correo[i]
+    if (e != email) {
+      console.log('No estas registrado')
+    } else if (e == email) { console.log(`Correcto ${email}`) }
   }
-  return msg
 }
 
 module.exports = {
