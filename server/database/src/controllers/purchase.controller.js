@@ -1,5 +1,7 @@
-import mongoose from "mongoose"
-import { Purchase } from "../models/Purchase.js"
+import { Purchase }           from "../models/Purchase.js"
+import { Product }            from "../models/Product.js"
+import { Cart }               from "../models/Cart.js"
+
 const purchase_controller = {}
 
 purchase_controller.registerPurchase = async (req, res) => {
@@ -9,12 +11,16 @@ purchase_controller.registerPurchase = async (req, res) => {
       status: 201,
       data: {}
     }
-    let { paymentMethod, totalPrice, user, products } = req.body
-    user                = new mongoose.Types.ObjectId(user)
-    products            = products.map(product => new mongoose.Types.ObjectId(product))
-    const data          = {user, products, paymentMethod, totalPrice}
-    const purchaseSaved = await new Purchase(data).save()
-    response.data = purchaseSaved
+    let { 
+      userId, paymentMethod, totalPrice 
+    }                       = req.body
+    const cart              = await Cart.findById(userId)
+    const data              = {user: userId, products: cart.products, paymentMethod, totalPrice}
+    const purchaseSaved     = await new Purchase(data).save()
+    cart.products           = []
+    cart.amountProducts     = []
+    const savedCart         = await cart.save()
+    response.data = {purchaseSaved, savedCart}
     return res.status(response.status).json(response) 
   } catch (error) {
     let response = {
@@ -71,5 +77,16 @@ purchase_controller.showPurchases = async (req, res) => {
     return res.status(response.status).json(response)
   }
 }
+
+Purchase.watch().on("change", (event) => {
+  if(event.operationType == "insert"){
+    event.fullDocument.products.forEach(async (productId, index) => {
+      const userId  = event.fullDocument.user 
+      const cart    = await Cart.findById(userId)
+      const product = await Product.findById(productId)
+      await Product.findByIdAndUpdate(productId, {amount: product.amount - cart.amountProducts[index]})
+    })
+  }
+})
 
 export { purchase_controller }

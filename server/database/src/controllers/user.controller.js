@@ -1,4 +1,5 @@
 import { User }   from "../models/User.js"
+import { Cart }   from "../models/Cart.js"
 
 const user_controller = {}
 
@@ -12,7 +13,8 @@ user_controller.saveUser = async (req, res) => {
     const data = req.body
     const newUser = new User(data)
     const savedUser = await newUser.save()
-    response.data = savedUser
+    const cartAdded = await new Cart({_id: savedUser._id}).save()
+    response.data = {savedUser, cartAdded}
     res.status(response.status).json(response)
   } catch (error) {
     let response = {
