@@ -1,0 +1,56 @@
+{% extends 'pages/base.html' %}
+{% import 'macros/import_files.html' as files %}
+{% import 'macros/other_sections.html' as sections %}
+
+{% block title %} {{ super() }} {% endblock %}
+
+{% block styles %}
+  {{ files.render_links(styles) }}
+  {{ files.link_external(external) }}
+{% endblock %}
+
+{% block header %}
+  {{ sections.header_section(logo.base, saldo, user, options, warning_msg) }}
+{% endblock %}
+
+{% block carousel %}
+  {{ sections.images_carousel(images) }}
+{% endblock %}
+
+{% block categories %}
+    <div class="categories-container">
+      {{ sections.category_section(categories2) }}
+    </div>
+  </section>
+{% endblock %}
+
+{% block products %}
+  {{ sections.products_section(products, show_content=False) }}
+  {{ sections.products_section(products, show_content=False) }}
+  {{ sections.products_section(products, show_content=False) }}
+{% endblock %}
+
+{% block footer %}
+  <section id="footer">
+    <div class="footer1">
+      <div class="footer">
+        <div class="more">
+          {{ sections.more_section(info, politica, social) }}
+        </div>
+      </div>
+    </div>
+    <section id="localidad">
+      <div class="lugar">
+        {{ sections.address_and_contact(direccion, contacto, numeros) }}
+      </div>
+    </section>
+  </section>
+{% endblock %}
+
+{% block modal %}
+  {{ sections.modal() }}
+{% endblock %}
+
+{% block scripts %}
+  {{ files.render_scripts(script) }}
+{% endblock %}

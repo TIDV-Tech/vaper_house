@@ -9,38 +9,58 @@
 {% endmacro %}
 
 {% macro images_carousel(images) %}
-  {% for image in images %}
-    <div class="gallery-cell">
-      <img src="static/resources/{{ image }}" alt="">
+  <section id="main">
+    <div
+      class="gallery js-flickity"
+      data-flickity-options='{
+        "wrapAround": true,
+        "freeScroll": true,
+        "autoPlay": true,
+        "autoPlay": 2500,
+        "draggable": true,
+        "selectedAttraction": 0.01,
+        "friction": 0.15,
+        "fullscreen": true,
+        "lazyLoad": 1
+      }'
+    >
+      {% for image in images %}
+        <div class="gallery-cell">
+          <img src="/static/resources/{{ image }}" alt="">
+        </div>
+      {% endfor %}
     </div>
-  {% endfor %}
 {% endmacro %}
 
 {% macro category_section(categories) %}
   {% for category in categories %}
     <div class="category">
       <p>{{ category.name }}</p>
-      <img src="static/{{ category.img }}">
+      <img src="/static/{{ category.img }}">
     </div>
   {% endfor %}
 {% endmacro %}
 
-{% macro products_section(products) %}
-  {% for product in products %}
-    <div class="products">
-      <div class="product">
-        <figure>
-          <img src="static/{{ product.img }}">
-        </figure>
-        <div class="contenido">
-          <h3>{{ product.name }}</h3>
-          <p>{{ product.description }}</p>
-          <span>{{ product.price }}$</span>
-          <a href="#">Añadir al carrito</a>
+{% macro products_section(products, show_content, logged) %}
+  <section id="products">
+    {% for product in products %}
+      <div class="products">
+        <div class="product">
+          <figure>
+            <img src="/static/{{ product.img }}">
+          </figure>
+          {% if show_content %}
+            <div class="contenido">
+              <h3>{{ product.name }}</h3>
+              <p>{{ product.description }}</p>
+              {% if logged %}<span>{{ product.price }}$</span>{% endif %}
+              <a href="#">Añadir al carrito</a>
+            </div>
+          {% endif %}
         </div>
       </div>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </section>
 {% endmacro %}
 
 {% macro more_section(info, politica, social) %}
@@ -85,4 +105,56 @@
       | {{ number }} |
     {% endfor %}
   </p>
+{% endmacro %}
+
+{% macro header_section(base, saldo, user, options, warning_msg) %}
+  <section id="header">
+    <div class="hd1">
+      <img src="/static/{{ base }}" alt="Logo Vaper House" id="logo">
+    </div>
+    <div class="hd2">
+      <div class="hd2_up">
+        <div class="hd2_up_left">
+          <input type="search" placeholder="Encuentra todo para tu vapeo...">
+          <i class='bx bx-search'></i>
+        </div>
+        <div class="hd2_up_right">
+          <div>
+            <span>${{ saldo }}</span>
+            <i class='bx bxs-cart icon' ></i>
+          </div>
+          <div>
+            <span>{{ user }}</span>
+            <i class='bx bxs-user-circle icon'></i>
+          </div>
+        </div>
+      </div>
+      <div class="hd2_down">
+        {{ navbar(options) }}
+      </div>
+    </div>
+  </section>
+
+  <marquee
+    class="warning"
+    behavior="scroll"
+    direction="left"
+    scrolldelay="100"
+    scrollamount="15"
+  >
+    {{ warning_msg }}
+  </marquee>
+{% endmacro %}
+
+{% macro modal() %}
+  <div class="modal_bg">
+    <div class="loader"></div>
+    <div class="modal_content">
+      <h1>ADVERTENCIA</h1>
+      <p>Este sitio contiene productos que son indebidos para menores de edad. Confirma que tienes más de 18 años para poder acceder.</p>
+      <p>¿Tienes 18 años o más?</p>
+      <button id="yes">Sí</button>
+      <button id="no">No</button>
+    </div>
+  </div>
 {% endmacro %}

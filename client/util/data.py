@@ -109,7 +109,7 @@ data = {
       'price': 10.00
     },
   ],
-  'info': ['¿Quiénes somos?', '¿Qué ofrecemos?'],
+  'info': ['¿Quiénes somos?', '¿Qué ofrecemos?', 'Contacto'],
   'politica': ['Términos y condiciones', 'Políticas de seguridad', 'Políticas de Cookies'],
   'social': [
     {
@@ -125,5 +125,11 @@ data = {
   ],
   'direccion': 'Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a cada Matina',
   'contacto': 'comprasvaperhouse@gmail.com',
-  'numeros': ['+58412-1729864', '+58414-7573307']
+  'numeros': ['+58412-1729864', '+58414-7573307'],
+  'descriptions': [
+    {
+      'name': 'Kylin M Pro RTA color tornasol',
+      'img': 'resources/product_description/vandy.jpg'
+    },
+  ]
 }
