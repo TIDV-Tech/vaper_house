@@ -2,9 +2,7 @@
 {% import 'macros/import_files.html' as files %}
 {% import 'macros/other_sections.html' as sections %}
 
-{% block title %}
-  {{ super() }}
-{% endblock %}
+{% block title %} {{ super() }} {% endblock %}
 
 {% block styles %}
   {{ files.render_links(styles) }}
@@ -12,62 +10,11 @@
 {% endblock %}
 
 {% block header %}
-  <section id="header">
-    <div class="hd1">
-      <img src="static/{{ logo.base }}" alt="Logo Vaper House" id="logo">
-    </div>
-    <div class="hd2">
-      <div class="hd2_up">
-        <div class="hd2_up_left">
-          <input type="search" placeholder="Encuentra todo para tu vapeo...">
-          <i class='bx bx-search'></i>
-        </div>
-        <div class="hd2_up_right">
-          <div>
-            <span>${{ saldo }}</span>
-            <i class='bx bxs-cart icon' ></i>
-          </div>
-          <div>
-            <span>{{ user }}</span>
-            <i class='bx bxs-user-circle icon'></i>
-          </div>
-        </div>
-      </div>
-      <div class="hd2_down">
-        {{ sections.navbar(options) }}
-      </div>
-    </div>
-  </section>
-
-  <marquee
-    class="warning"
-    behavior="scroll"
-    direction="left"
-    scrolldelay="100"
-    scrollamount="15"
-  >
-    {{ warning_msg }}
-  </marquee>
+  {{ sections.header_section(logo.base, saldo, user, options, warning_msg) }}
 {% endblock %}
 
 {% block carousel %}
-  <section id="main">
-    <div
-      class="gallery js-flickity"
-      data-flickity-options='{
-        "wrapAround": true,
-        "freeScroll": true,
-        "autoPlay": true,
-        "autoPlay": 2500,
-        "draggable": true,
-        "selectedAttraction": 0.01,
-        "friction": 0.15,
-        "fullscreen": true,
-        "lazyLoad": 1
-      }'
-    >
-      {{ sections.images_carousel(images) }}
-    </div>
+  {{ sections.images_carousel(images) }}
 {% endblock %}
 
 {% block categories %}
@@ -78,39 +25,15 @@
 {% endblock %}
 
 {% block products %}
-  <section id="products">
-    {{ sections.products_section(products) }}
-  </section>
+  {{ sections.products_section(products, show_content=True) }}
 {% endblock %}
 
 {% block footer %}
-  <section id="footer">
-    <div class="footer1">
-      <div class="footer">
-        <div class="more">
-          {{ sections.more_section(info, politica, social) }}
-        </div>
-      </div>
-    </div>
-    <section id="localidad">
-      <div class="lugar">
-        {{ sections.address_and_contact(direccion, contacto, numeros) }}
-      </div>
-    </section>
-  </section>
+  {{ sections.footer(info, politica, social, direccion, contacto, numeros) }}
 {% endblock %}
 
 {% block modal %}
-  <div class="modal_bg">
-    <div class="loader"></div>
-    <div class="modal_content">
-      <h1>ADVERTENCIA</h1>
-      <p>Este sitio contiene productos que son indebidos para menores de edad. Confirma que tienes más de 18 años para poder acceder.</p>
-      <p>¿Tienes 18 años o más?</p>
-      <button id="yes">Sí</button>
-      <button id="no">No</button>
-    </div>
-  </div>
+  {{ sections.modal() }}
 {% endblock %}
 
 {% block scripts %}

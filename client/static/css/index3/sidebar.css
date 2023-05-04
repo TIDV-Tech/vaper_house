@@ -10,13 +10,9 @@
 	transition: all 500ms linear;
 }
 
-#sidebar.active{
-	right: 0;
-}
-
-#sidebar .pro{
-	display: flex;
-}
+#sidebar.active{ right: 0; }
+#sidebar .pro{ display: flex; }
+#sidebar .pro{ margin-top: 10px; }
 
 #sidebar .pro img{
 	width: 27%;
@@ -26,9 +22,6 @@
 	margin-left: 10px;
 }
 
-#sidebar .pro{
-	margin-top: 10px;
-}
 
 #sidebar .pro .title{
 	margin-top: 3px;
@@ -39,9 +32,8 @@
 
 #sidebar .pro p,
 #sidebar .total label,
-#sidebar .total p{
-	color: var(--black);
-}
+#sidebar .total p{ color: var(--black); }
+#sidebar .total label{ margin-right: 5px; }
 
 #sidebar .total{
 	display: flex;
@@ -50,9 +42,6 @@
 	justify-content: center;
 }
 
-#sidebar .total label{
-	margin-right: 5px;
-}
 
 #sidebar .button button{
 	margin-top: 10px;
@@ -68,9 +57,7 @@
 	cursor: pointer;
 }
 
-#sidebar .button{
-	text-align: center;
-}
+#sidebar .button{ text-align: center; }
 
 #sidebar .num .num2{
 	display: flex;

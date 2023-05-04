@@ -1,4 +1,4 @@
-.categories-container{
+.categories-container {
   overflow: auto;
   white-space: nowrap;
   width: 100%;
@@ -6,7 +6,7 @@
   margin-top: 20px;
 }
 
-.category{
+.category {
   width: 25%;
   margin: 0 5px;
   border-radius: 10px;
@@ -20,12 +20,12 @@
   background-size: cover;
 }
 
-.category:hover img{
+.category:hover img {
   filter: brightness(.4);
   transition: 1s;
 }
 
-.category img{
+.category img {
   width: 50%;
   height: 100px;
   filter: brightness(0.7);
@@ -33,7 +33,7 @@
   transform: scale(2);
 }
 
-.category p{
+.category p {
   position: absolute;
   font-size: 36px;
   font-family: 'Roboto', sans-serif;
@@ -42,13 +42,13 @@
   z-index: 2;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   background-color: white;
   width: 8px;
   height: 6px;
 }
 
-::-webkit-scrollbar-thumb{ 
+::-webkit-scrollbar-thumb { 
   background-color: rgb(161, 161, 161);
   border-radius: 10px;
 }

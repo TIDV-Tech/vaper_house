@@ -15,6 +15,14 @@ purchase_controller.registerPurchase = async (req, res) => {
       userId, paymentMethod, totalPrice 
     }                       = req.body
     const cart              = await Cart.findById(userId)
+    if(!cart.products.length){
+      response = {
+        msg: "You need at least one product on the cart to buy something",
+        status: 400,
+        data: {}
+      }
+      return res.status(response.status).json(response) 
+    }
     const data              = {user: userId, products: cart.products, paymentMethod, totalPrice}
     const purchaseSaved     = await new Purchase(data).save()
     cart.products           = []
@@ -65,7 +73,7 @@ purchase_controller.showPurchases = async (req, res) => {
         }
       }
     ])
-    response.msg = "Here's the products"
+    response.msg = "Here's the purchases"
     response.data = purchases 
     res.status(response.status).json(response)
   } catch (error) {
