@@ -1,5 +1,5 @@
-const fs = require("fs")
-const jwt = require("jsonwebtoken")
+const fs   = require("fs")
+const jwt  = require("jsonwebtoken")
 const _var = require("../global/var.js")
 
 const addCar = (obj) => {
@@ -26,23 +26,26 @@ const addCar = (obj) => {
               if (err) throw err
               console.log("Informacion ingresada exitosamente")
               console.log(token)
+
+            })
+            jwt.verify(token, _var.KEY, function (err, decoded) {
+              if (err) throw err
+              console.log(decoded)
             })
           })
         })
 
-        jwt.verify(prueba, _var.KEY, function (err, decoded) {
-          if (err) throw err
-          console.log(decoded)
-        })
       }
     })
   } else if (!exists) {
+    console.log(obj.info[0])
     jwt.sign(obj, _var.KEY, { algorithm: "HS256" }, (err, token) => {
       if (err) throw err
       fs.writeFileSync("car.json", JSON.stringify(token), (err) => {
         if (err) throw err
         console.log(info)
       })
+      
     })
     return obj
   }

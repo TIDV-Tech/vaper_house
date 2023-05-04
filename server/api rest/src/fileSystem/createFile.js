@@ -11,21 +11,21 @@ const carValidate = (id_product, product, cant_prod, obj) => {
 			{id: 4, cantidad: 14}
 		] */
 
-    if (id_product != pro.id) {
-      console.log("Producto no registrado")
-    }
-    if (cant_prod > pro.cantidad) {
-      console.log("No hay esta cantidad de este producto")
-    } 
-    if (cant_prod > pro.cantidad && id_product == pro.id) {
-      console.log('Error')
-    }
-    if (cant_prod <= pro.cantidad && id_product != pro.id) {
-      console.log('Error 2')
-    }
-    if (cant_prod > pro.cantidad && id_product != pro.id) {
-      console.log('Error 3')
-    }
+    // if (id_product != pro.id) {
+    //   console.log("Producto no registrado")
+    // }
+    // if (cant_prod > pro.cantidad) {
+    //   console.log("No hay esta cantidad de este producto")
+    // } 
+    // if (cant_prod > pro.cantidad && id_product == pro.id) {
+    //   console.log('Error')
+    // }
+    // if (cant_prod <= pro.cantidad && id_product != pro.id) {
+    //   console.log('Error 2')
+    // }
+    // if (cant_prod > pro.cantidad && id_product != pro.id) {
+    //   console.log('Error 3')
+    // }
     /*  if (id_product == pro.id) { 
       funct.addCar(obj) 
       console.log('lgf')
@@ -47,6 +47,5 @@ const carValidate = (id_product, product, cant_prod, obj) => {
     } 
   }
 }
-
 
 module.exports = { carValidate }
