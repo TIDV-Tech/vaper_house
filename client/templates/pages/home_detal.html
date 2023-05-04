@@ -29,20 +29,7 @@
 {% endblock %}
 
 {% block footer %}
-  <section id="footer">
-    <div class="footer1">
-      <div class="footer">
-        <div class="more">
-          {{ sections.more_section(info, politica, social) }}
-        </div>
-      </div>
-    </div>
-    <section id="localidad">
-      <div class="lugar">
-        {{ sections.address_and_contact(direccion, contacto, numeros) }}
-      </div>
-    </section>
-  </section>
+  {{ sections.footer(info, politica, social, direccion, contacto, numeros) }}
 {% endblock %}
 
 {% block modal %}

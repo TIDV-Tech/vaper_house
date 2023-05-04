@@ -13,29 +13,12 @@
   {{ sections.header_section(logo.base, saldo, user, options, warning_msg) }}
 {% endblock %}
 
-{% block carousel %}
-  {{ sections.images_carousel(images) }}
-{% endblock %}
-
-{% block categories %}
-    <div class="categories-container">
-      {{ sections.category_section(categories2) }}
-    </div>
-  </section>
-{% endblock %}
-
 {% block products %}
-  {{ sections.products_section(products, show_content=False) }}
-  {{ sections.products_section(products, show_content=False) }}
-  {{ sections.products_section(products, show_content=False) }}
+  {{ id }}
 {% endblock %}
 
 {% block footer %}
   {{ sections.footer(info, politica, social, direccion, contacto, numeros) }}
-{% endblock %}
-
-{% block modal %}
-  {{ sections.modal() }}
 {% endblock %}
 
 {% block scripts %}

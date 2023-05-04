@@ -8,19 +8,24 @@ router.get(_var.ROOT, (req, res) => {
 })
 
 router.post(_var.REGISTER, async (req, res) => {
-	const { name , email , password } = req.body
-	const validate = await controller.checkRegister(name , email , password)
-	res.status(validate.code).json(validate)
+	try {
+		const { name , email , password } = req.body
+		const validate = await controller.checkRegister(name , email , password)
+		res.status(validate.code).json(validate)
+	} catch (err) { throw err }
 })
 
 router.post(_var.LOGIN, async (req, res) => {
-	const { email, password } = req.body
-	//let x = await controller.checkRegister(email, password)
-	//if(x.status) res.status(500).json({ message: "User already registered", status: false })
-	//if(!x.status){
-		let y = await controller.checkLogin(email, password)
-		res.status(y.code).json(y)
-	//} 
+	try {
+		const { email, password } = req.body
+		const correo = [
+			"chacon@root.com",
+			"prueba@root.com",
+			"user@root.com"
+		]
+		let validateUser = await controller.checkLogin(correo, email, password)
+		res.send('Data del usuario enviada exitosamente')
+	} catch (err) { throw err}
 })
 
 module.exports = router

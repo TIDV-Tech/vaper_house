@@ -2,7 +2,7 @@
   <nav>
     <ul>
       {% for option in options %}
-        <li>{{ option.name }}</li>
+        <li><a href="{{ option.url }}">{{ option.name }}</a></li>
       {% endfor %}
     </ul>
   </nav>
@@ -54,7 +54,7 @@
               <h3>{{ product.name }}</h3>
               <p>{{ product.description }}</p>
               {% if logged %}<span>{{ product.price }}$</span>{% endif %}
-              <a href="#">Añadir al carrito</a>
+              <a href="/product/{{ product.id }}">Añadir al carrito</a>
             </div>
           {% endif %}
         </div>
@@ -66,33 +66,26 @@
 {% macro more_section(info, politica, social) %}
   <div class="info">
     <span>Información</span>
-    {% for inf in info %}
-      <p>{{ inf }}</p>
-    {% endfor %}
-    <br>
+    {% for inf in info %}<a>{{ inf }}</a><br>{% endfor %}
   </div>
   <div class="politica">
     <span>Políticas</span>
-    {% for poli in politica %}
-      <p>{{ poli }}</p>
-    {% endfor %}
+    {% for poli in politica %}<a>{{ poli }}</a><br>{% endfor %}
   </div>
   <div class="pay">
     <span>Métodos de Pago</span>
-    <div class="pay2">
-      <p><i class='bx bx-credit-card bx-sm'></i></p>
-      <p><i class='bx bxl-visa bx-sm' ></i></p>
-      <p><i class='bx bxl-paypal bx-sm' ></i></p>
-      <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m16.624 13.92l2.717 2.716l-7.353 7.353l-7.352-7.352l2.717-2.717l4.636 4.66l4.635-4.66zm4.637-4.636L24 12l-2.715 2.716L18.568 12l2.693-2.716zm-9.272 0l2.716 2.692l-2.717 2.717L9.272 12l2.716-2.715zm-9.273 0L5.41 12l-2.692 2.692L0 12l2.716-2.716zM11.99.01l7.352 7.33l-2.717 2.715l-4.636-4.636l-4.635 4.66l-2.717-2.716L11.989.011z"/></svg></p>
-    </div>
+    <p><i class='bx bx-credit-card bx-sm'></i></p>
+    <p><i class='bx bxl-visa bx-sm' ></i></p>
+    <p><i class='bx bxl-paypal bx-sm' ></i></p>
+    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m16.624 13.92l2.717 2.716l-7.353 7.353l-7.352-7.352l2.717-2.717l4.636 4.66l4.635-4.66zm4.637-4.636L24 12l-2.715 2.716L18.568 12l2.693-2.716zm-9.272 0l2.716 2.692l-2.717 2.717L9.272 12l2.716-2.715zm-9.273 0L5.41 12l-2.692 2.692L0 12l2.716-2.716zM11.99.01l7.352 7.33l-2.717 2.715l-4.636-4.636l-4.635 4.66l-2.717-2.716L11.989.011z"/></svg></p>
   </div>
   <div class="follow">
-    <span>Síguenos</span>
+    <span>Síguenos</span><br>
     {% for soci in social %}
-      <p class="{{ soci.red }}">
+      <a class="{{ soci.red }}">
         <i class='{{ soci.ico }}''></i>
         {{ soci.dir }}
-      </p>
+      </a><br>
     {% endfor %}
   </div>
 {% endmacro %}
@@ -111,6 +104,9 @@
   <section id="header">
     <div class="hd1">
       <img src="/static/{{ base }}" alt="Logo Vaper House" id="logo">
+      <div>
+        <i class='bx bx-menu icon' id="menu"></i>
+      </div>
     </div>
     <div class="hd2">
       <div class="hd2_up">
@@ -121,7 +117,25 @@
         <div class="hd2_up_right">
           <div>
             <span>${{ saldo }}</span>
-            <i class='bx bxs-cart icon' ></i>
+            <div id="cart">
+              <i class='bx bxs-cart icon'></i>
+              <div id="carrito">
+                <table id="list">
+                  <thead>
+                    <tr>
+                      <th>Imagen</th>
+                      <th>Nombre</th>
+                      <th>Precio</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+                <div class="center">
+                  <a href="#" id="empty" class="btn-empty">Vaciar</a>
+                </div>
+              </div>
+            </div>
           </div>
           <div>
             <span>{{ user }}</span>
@@ -157,4 +171,15 @@
       <button id="no">No</button>
     </div>
   </div>
+{% endmacro %}
+
+{% macro footer(info, politica, social, direccion, contacto, numeros) %}
+  <section id="footer">
+    <div class="footer1">
+      {{ more_section(info, politica, social) }}
+    </div>
+    <div class="footer2">
+      {{ address_and_contact(direccion, contacto, numeros) }}
+    </div>
+  </section>
 {% endmacro %}

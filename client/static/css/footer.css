@@ -1,98 +1,44 @@
-.footer1{
+#footer {
 	display: flex;
-	position: relative;
-	bottom: 0;
-}
-
-.footer{
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	background: var(--black);
 	width: 100%;
-	bottom: 0;
-	position: relative;
-	padding: 20px;
+	padding: 40px 0;
 }
 
-#localidad{
-	background: var(--black);
-	position: absolute;
+.footer1 {
 	width: 100%;
-	padding: 20px;
-	padding-top: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 }
 
-#localidad .lugar > p {
+.footer2 {
+	margin-top: var(--twe);
+	width: 100%;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 
-.lugar{ padding-top: 20px; }
-.info > span, .politica > span, .pay > span, .follow > span { margin-bottom: 10px; }
-
-.lugar p{
-	display: flex;
-	padding: 5px 5px 5px 0;
-	font-size: 17px;
-}
-
-.lugar i{	padding-right: 7px; }
-hr{ color: var(--light); }
-
-.more{
-	display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 220px;
-	align-items: center;
-	padding-left: 8px;
-	padding-top: 20px;
-}
-
-.pay2{
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-gap: 2px;
-	align-self: center;
-}
-
-.follow p{
-	padding: 5px 5px 5px 0;
-	display: flex;
-  justify-content: center;
-  align-items: center;
-	font-size: 17px;
-}
-
-.follow i{ padding-right: 5px; }
-.instagram i{ color: #b15353; }
-.facebook i{ color: rgb(59, 59, 172); }
-
-.politica p{
-	padding: 5px 5px 5px 0;
-	display: flex;
-  justify-content: center;
-  align-items: center;
-	font-size: 17px;
-}
-
-.info p{ 
-	padding: 5px 5px 5px 0; 
-	display: flex;
-  justify-content: center;
-  align-items: center;
-	font-size: 17px;
-}
-
-.pay p{
-	padding: 5px 5px 5px 0;
-	display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-span{
-	display: flex;
-  justify-content: center;
-  align-items: center;
-	font-size: 20px;
+.footer1 div > span {
 	font-weight: 600;
+	font-size: 18px;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.footer1 div > a, .footer1 div > p { margin-top: 10px;}
+.footer1 > a, .footer1 > p { text-align: justify; }
+
+@media screen and (max-width:991px) {
+	.footer1 {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
+		padding: 10px;
+	}
 }

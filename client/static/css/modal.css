@@ -1,4 +1,4 @@
-.modal_bg{
+.modal_bg {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 50;
   position: fixed;
@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.modal_content{
+.modal_content {
   background-color: white;
   width: 40%;
   height: auto;
@@ -20,15 +20,15 @@
   border-radius: 5px;
 }
 
-.modal_content p, .modal_content h1, .modal_content button{
+.modal_content p, .modal_content h1, .modal_content button {
   color: black;
   margin: 35px 0;
 }
 
-.modal_content p{ font-size: 25px; }
-.modal_content h1{ font-size: 45px; }
+.modal_content p  { font-size: 25px; }
+.modal_content h1 { font-size: 45px; }
 
-.modal_content button{
+.modal_content button {
   font-size: 20px;
   padding: 10px 30px;
   cursor: pointer;
@@ -37,7 +37,7 @@
   margin: 0 10px;
 }
 
-.modal_content button:hover{
+.modal_content button:hover {
   transition: 0.5s;
   background-color: black;
   color: white;
@@ -58,6 +58,6 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
+  0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }

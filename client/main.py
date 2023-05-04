@@ -3,20 +3,31 @@ from util.data import *
 
 app = Flask(__name__)
 
+@app.errorhandler(404)
+def page_not_found(e):
+  return render_template('/pages/404.html', \
+                         name='Error404', \
+                         **data, \
+                         message=messages['error'])
+
 @app.route('/')
 def index ():
   return render_template('/pages/home_detal.html', \
                           name='VentasDetal', \
-                          **data)
+                          **data, \
+                          message=messages['index'])
 
 @app.route('/marcas/')
 def index2 ():
   return render_template('/pages/home_mayor.html', \
                           name='VentasMayor', \
-                          **data)
+                          **data, \
+                          message=messages['mayor'])
 
-@app.route('/product/')
-def index3 ():
-  return render_template('/pages/index3.html', \
+@app.route('/product/cart/<int:id_article>')
+def index3 (id_article):
+  return render_template('/pages/cart.html', \
                           name='DecripcionProducto', \
-                          **data)
+                          **data, \
+                          id=id_article, \
+                          message=messages['cart'])

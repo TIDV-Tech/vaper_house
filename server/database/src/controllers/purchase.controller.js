@@ -1,44 +1,92 @@
-import mongoose from "mongoose"
-import { Purchase } from "../models/Purchase.js"
+import { Purchase }           from "../models/Purchase.js"
+import { Product }            from "../models/Product.js"
+import { Cart }               from "../models/Cart.js"
+
 const purchase_controller = {}
 
 purchase_controller.registerPurchase = async (req, res) => {
   try {
-    const { paymentMethod, totalPrice }   = req.body
-    let   { user, products }              = req.body
-    user        = new mongoose.Types.ObjectId(user)
-    products    = products.map(product => new mongoose.Types.ObjectId(product))
-    const data  = {user, products, paymentMethod, totalPrice}
-    const purchaseSaved = await new Purchase(data).save()
-    res.json({msg: "Purchase registered successfuly", purchaseSaved}) 
+    let response = {
+      msg: "Purchase registered successfully",
+      status: 201,
+      data: {}
+    }
+    let { 
+      userId, paymentMethod, totalPrice 
+    }                       = req.body
+    const cart              = await Cart.findById(userId)
+    const data              = {user: userId, products: cart.products, paymentMethod, totalPrice}
+    const purchaseSaved     = await new Purchase(data).save()
+    cart.products           = []
+    cart.amountProducts     = []
+    const savedCart         = await cart.save()
+    response.data = {purchaseSaved, savedCart}
+    return res.status(response.status).json(response) 
   } catch (error) {
-    res.json({msg: "ERROR", error: error.message}) 
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
   }
 }
 
 purchase_controller.showPurchases = async (req, res) => {
-  const purchases = await Purchase.aggregate([
-    {
-      $lookup: {
-        from: "users",
-        localField: "user",
-        foreignField: "_id",
-        as: "users_purchase"
-      }
-    },
-    {
-      $lookup: {
-        from: "products",
-        localField: "product",
-        foreignField: "_id",
-        as: "products_purchase"
-      }
+  try {
+    let response = {
+      msg: "There's no purchases yet!",
+      status: 200,
+      data: []
     }
-  ])
-
-  if(!purchases.length){
-    res.json({msg: "There's no purchases yet!", purchases}) 
+    const purchases = await Purchase.aggregate([
+      {
+        $lookup: {
+          from: "users",
+          localField: "user",
+          foreignField: "_id",
+          as: "users_purchase"
+        }
+      },
+      {
+        $lookup: {
+          from: "products",
+          let: {
+            productId: "$products"
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $in: ["$_id", "$$productId"] }
+              }
+            }
+          ],
+          as: "products_purchase"
+        }
+      }
+    ])
+    response.msg = "Here's the products"
+    response.data = purchases 
+    res.status(response.status).json(response)
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
   }
-  res.json({msg: "Here's the purchases!", purchases}) 
 }
+
+Purchase.watch().on("change", (event) => {
+  if(event.operationType == "insert"){
+    event.fullDocument.products.forEach(async (productId, index) => {
+      const userId  = event.fullDocument.user 
+      const cart    = await Cart.findById(userId)
+      const product = await Product.findById(productId)
+      await Product.findByIdAndUpdate(productId, {amount: product.amount - cart.amountProducts[index]})
+    })
+  }
+})
+
 export { purchase_controller }

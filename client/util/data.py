@@ -10,7 +10,6 @@ logo      = str(listdir(f'static/{logo_base}'))
 data = {
   'title': 'Vaper House',
   'language': 'es',
-  'message': 'Bienvenido',
   'logo': {
     'name': logo.split('.')[0][2:],
     'ext': logo.split('.')[1][:-2],
@@ -28,16 +27,46 @@ data = {
     Algunos productos contienen nicotina, una sustancia
     altamente adictiva''',
   'options': [
-    { 'name': 'Inicio' },
-    { 'name': 'Dispositivos',},
-    { 'name': 'Atomizadores', },
-    { 'name': 'E-Liquids', },
-    { 'name': 'Salt Nic', },
-    { 'name': 'Accesorios', },
-    { 'name': 'Puffs', },
-    { 'name': 'Promociones', },
-    { 'name': 'Destacado', },
-    { 'name': 'Contacto', }
+    {
+      'name': 'Inicio',
+      'url': '/'
+    },
+    {
+      'name': 'Dispositivos',
+      'url': '/dispositivo'
+    },
+    {
+      'name': 'Atomizadores',
+      'url': '/atomizador'
+    },
+    {
+      'name': 'E-Liquids',
+      'url': '/eliquid'
+    },
+    {
+      'name': 'Salt Nic',
+      'url': '/saltnic'
+    },
+    {
+      'name': 'Accesorios',
+      'url': '/accesorio'
+    },
+    {
+      'name': 'Puffs',
+      'url': '/puff'
+    },
+    {
+      'name': 'Promociones',
+      'url': '/promocion'
+    },
+    {
+      'name': 'Destacado',
+      'url': '/destacado'
+    },
+    {
+      'name': 'Contacto',
+      'url': '/contacto'
+    }
   ],
   'categories': [
     {
@@ -85,24 +114,28 @@ data = {
   ],
   'products': [
     {
+      'id': 1,
       'name': 'Titulo',
       'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 10.00
     },
     {
+      'id': 2,
       'name': 'Tiulo',
       'img': 'resources/products/descarga.jpeg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 10.00
     },
     {
+      'id': 3,
       'name': 'Titulo',
       'img': 'resources/products/CBD_05_A.jpg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 10.00
     },
     {
+      'id': 4,
       'name': 'Titulo',
       'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
@@ -114,17 +147,20 @@ data = {
   'social': [
     {
       'red': 'facebook',
-      'ico': 'bx bxl-instagram bx-sm',
-      'dir': 'vaperhouse.vzla'
-    },
-    {
-      'red': 'instagram',
       'ico': 'bx bxl-facebook-circle bx-sm',
       'dir': 'Vaper House Café'
     },
+    {
+      'red': 'instagram',
+      'ico': 'bx bxl-instagram bx-sm',
+      'dir': 'vaperhouse.vzla'
+    },
   ],
+  'direccion': 'Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a casa Matina',
+  'contacto': 'vaperhouse.sc@gmail.com',
+  'numeros': ['+58412-1729864', '+58414-7573307'],
   'direccion': 'Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a cada Matina',
-  'contacto': 'comprasvaperhouse@gmail.com',
+  'contacto': 'vaperhouse.sc@gmail.com',
   'numeros': ['+58412-1729864', '+58414-7573307'],
   'descriptions': [
     {
@@ -132,4 +168,11 @@ data = {
       'img': 'resources/product_description/vandy.jpg'
     },
   ]
+}
+
+messages = {
+  'error': 'Error: Página no encontrada',
+  'index': 'Bienvenido - Encuentra todo para tu vapeo',
+  'mayor': 'Bienvenido - Ventas al mayor',
+  'cart':  'Carrito de ventas',
 }
