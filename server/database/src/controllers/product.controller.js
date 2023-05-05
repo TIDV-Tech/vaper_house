@@ -9,19 +9,19 @@ product_controller.saveProduct = async (req, res) => {
       status: 201,
       data: {}
     }
-    const data = req.body
-    const newProduct = new Product(data)
-    const productFound = await Product.findOne({name: newProduct.name}) 
+    const data          = req.body
+    const newProduct    = new Product(data)
+    const productFound  = await Product.findOne({name: newProduct.name}) 
     if(productFound){
-      await Product.updateOne({name: newProduct.name}, {$inc: {amount: 1}})
+      await Product.updateOne({name: newProduct.name}, {$inc: {quantity: 1}})
       response = {
         msg: "Product updated successfully",
         status: 200
       }
       return res.status(response.status).json(response)
     }
-    const savedProduct = await newProduct.save()
-    response.data = savedProduct
+    const savedProduct  = await newProduct.save()
+    response.data       = savedProduct
     return res.status(response.status).json(response)
   } catch (error) {
     let response = {
@@ -30,6 +30,43 @@ product_controller.saveProduct = async (req, res) => {
       error: error.message
     }
     return res.status(response.status).json(response)
+  }
+}
+
+product_controller.changeProductPromotion = async (req, res) => {
+  try {
+    let response = {
+      msg: "The product's on promotion now",
+      status: 200,
+    }
+    const { productId, promotionPrice }   = req.body
+    const product                         = await Product.findById(productId)
+    if(!product.promotion){
+      if(!promotionPrice){
+        response = {
+          msg: "The promotion price's required to promote this product",
+          status: 400
+        }
+        return res.status(response.status).json(response)
+      }
+      product.promotion       = true 
+      product.promotionPrice  = promotionPrice
+      await product.save()
+      return res.status(response.status).json(response)
+    }else{
+      product.promotion       = false
+      product.promotionPrice  = 0
+      await product.save()
+      response.msg            = "The product isn't on promotion now"
+      return res.status(response.status).json(response)
+    }
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response) 
   }
 }
 
@@ -44,7 +81,7 @@ product_controller.findProducts = async (req, res) => {
     if(!products.length){
       return res.status(response.status).json(response)
     }
-    response.msg = "Here's the products" 
+    response.msg  = "Here's the products" 
     response.data = products
     res.status(response.status).json(response)
   } catch (error) {
@@ -71,6 +108,29 @@ product_controller.findByFilter = async (req, res) => {
     }
     response.msg = "Here's the products" 
     response.data = products
+    return res.status(response.status).json(response)
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
+  }
+}
+
+product_controller.findByMostRecent = async (req, res) => {
+  try {
+    let response = {
+      msg: "Here's the most recent products!",
+      data: [],
+      status: 200
+    }
+    const today           = new Date()
+    let lastFifteenDays   = today.setDate(today.getDate() - 15)
+    lastFifteenDays       = new Date(lastFifteenDays)
+    const products        = await Product.find({createdAt: {"$gte": new Date(lastFifteenDays), "$lte": new Date()}})
+    response.data         = products
     return res.status(response.status).json(response)
   } catch (error) {
     let response = {

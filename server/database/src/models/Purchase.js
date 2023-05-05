@@ -10,6 +10,4 @@ const purchaseSchema = new Schema({
   versionKey: false
 })
 
-const Purchase = model("purchase", purchaseSchema)
-
-export { Purchase }
+export const Purchase = model("purchase", purchaseSchema)

@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose"
 
 const CartSchema = new Schema({
   products: {type: [Schema.Types.ObjectId], default: []},
-  amountProducts: {type: [Number], default: []},
+  quantityProducts: {type: [Number], default: []},
 }, {
   versionKey: false
 })
