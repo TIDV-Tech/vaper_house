@@ -7,7 +7,9 @@ const addCar  = require('./routes/addCar.routes.js')
 const app     = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+	origin: 'http://localhost:5001'
+}))
 app.use(user)
 app.use(product)
 app.use(addCar)

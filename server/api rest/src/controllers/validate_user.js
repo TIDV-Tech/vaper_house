@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const axios  = require('axios')
 
 let msg = {
   status: false,
@@ -31,6 +32,7 @@ const checkRegister = async (name, email, password) => {
     console.log(password)
     console.log(`Esta es la password hasheada: ${hash}`)
   })
+
   return msg
 }
 
