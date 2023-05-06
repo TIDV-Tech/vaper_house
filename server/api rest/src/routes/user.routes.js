@@ -17,7 +17,7 @@ router.post(_var.REGISTER, async (req, res) => {
 			password: 'prueba'
 		}) */
 		const validate = await controller.checkRegister(name , email , password)
-		res.status(validate.code).json(validate)
+		return res.status(validate.code).json(validate)
 	} catch (err) { throw err }
 })
 
@@ -25,20 +25,45 @@ router.post(_var.LOGIN, async (req, res) => {
 	try {
 		const { email, password } = req.body
 		const correo = [
-			"chacon@root.com",
-			"prueba@root.com",
-			"user@root.com"
+			{cor_elec: "chacon@root.com", clave: "chacon"},
+			{cor_elec: "prueba@root.com", clave: "prueba"},
+			{cor_elec: "user@root.com",   clave: "user"}
 		]
 
 		let validateUser = await controller.checkLogin(correo, email, password)
-		res.send('Data del usuario enviada exitosamente')
+		res.status(validateUser.code).json(validateUser)
 	} catch (err) { throw err}
 })
 
-axios.post('/register/user', {
+/* axios.post('/register/user', {
 	name: 'name', 
 	email: 'email@email.com', 
 	password: 'password'
+}) */
+
+router.get(_var.VIEW_ALL_USER, async (req, res) => {
+	try {
+    const { id } = req.query
+    const user = await controller.viewUser(id)
+    res.send(user)
+  } catch (err) { throw err }
+})
+
+router.get(_var.VIEW_USER, async (req, res) => {
+	try {
+    const { id } = req.query
+    const user = await controller.viewUser(id)
+    res.send(user)
+  } catch (err) { throw err }
+})
+
+
+router.get(_var.EDIT_USER, async (req, res) => {
+
+})
+
+router.get(_var.DELETE_USER, async (req, res) => {
+
 })
 
 module.exports = router
