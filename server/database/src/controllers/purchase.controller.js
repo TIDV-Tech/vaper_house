@@ -11,10 +11,8 @@ purchase_controller.registerPurchase = async (req, res) => {
       status: 201,
       data: {}
     }
-    let { 
-      userId, paymentMethod, totalPrice 
-    }                       = req.body
-    const cart              = await Cart.findById(userId)
+    const { userId, paymentMethod } = req.body
+    const cart                      = await Cart.findById(userId)
     if(!cart.products.length){
       response = {
         msg: "You need at least one product on the cart to buy something",
@@ -23,11 +21,48 @@ purchase_controller.registerPurchase = async (req, res) => {
       }
       return res.status(response.status).json(response) 
     }
-    const data              = {user: userId, products: cart.products, paymentMethod, totalPrice}
-    const purchaseSaved     = await new Purchase(data).save()
-    cart.products           = []
-    cart.amountProducts     = []
-    const savedCart         = await cart.save()
+    let allCarts = await Cart.aggregate([
+      {
+        $lookup: {
+          from: "products",
+          let: {
+            productId: "$products"
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $in: ["$_id", "$$productId"] }
+              }
+            }
+          ],
+          as: "products_cart"
+        }
+      }
+    ])
+    let products = allCarts.map(cart => {
+      if(cart._id.toString() == userId.toString()){
+        const { products } = cart
+        return { products }
+      }
+    })
+    products = products[0].products
+    for(let i = 0; i < products.length; i++){
+      const product = await Product.findById(products[i].toString())
+      products[i]   = product
+    }
+    let prices      = products.map(product => product.price)
+    prices          = prices.map((price, index) => price * cart.quantityProducts[index]) 
+    let totalPrice  = prices.reduce((acum, price) => acum += price)
+    const data      = {
+      user: userId, 
+      products: cart.products, 
+      paymentMethod, 
+      totalPrice: parseFloat(totalPrice)
+    }
+    const purchaseSaved           = await new Purchase(data).save()
+    cart.products.length          = 0
+    cart.quantityProducts.length  = 0
+    const savedCart               = await cart.save()
     response.data = {purchaseSaved, savedCart}
     return res.status(response.status).json(response) 
   } catch (error) {
@@ -47,13 +82,13 @@ purchase_controller.showPurchases = async (req, res) => {
       status: 200,
       data: []
     }
-    const purchases = await Purchase.aggregate([
+    let purchases = await Purchase.aggregate([
       {
         $lookup: {
           from: "users",
           localField: "user",
           foreignField: "_id",
-          as: "users_purchase"
+          as: "user_purchase"
         }
       },
       {
@@ -74,6 +109,10 @@ purchase_controller.showPurchases = async (req, res) => {
       }
     ])
     response.msg = "Here's the purchases"
+    purchases = purchases.map(purchase => {
+      const {_id, paymentMethod, createdAt, updatedAt, totalPrice, user_purchase, products_purchase} = purchase
+      return {_id, paymentMethod, createdAt, updatedAt, totalPrice, user_purchase, products_purchase}
+    })
     response.data = purchases 
     res.status(response.status).json(response)
   } catch (error) {
@@ -86,13 +125,13 @@ purchase_controller.showPurchases = async (req, res) => {
   }
 }
 
-Purchase.watch().on("change", (event) => {
+Purchase.watch().on("change", event => {
   if(event.operationType == "insert"){
     event.fullDocument.products.forEach(async (productId, index) => {
       const userId  = event.fullDocument.user 
       const cart    = await Cart.findById(userId)
       const product = await Product.findById(productId)
-      await Product.findByIdAndUpdate(productId, {amount: product.amount - cart.amountProducts[index]})
+      await Product.findByIdAndUpdate(productId, {quantity: product.quantity - cart.quantityProducts[index]})
     })
   }
 })

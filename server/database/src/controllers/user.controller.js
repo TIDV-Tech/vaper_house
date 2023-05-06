@@ -15,7 +15,7 @@ user_controller.saveUser = async (req, res) => {
     const savedUser = await newUser.save()
     const cartAdded = await new Cart({_id: savedUser._id}).save()
     response.data = {savedUser, cartAdded}
-    res.status(response.status).json(response)
+    return res.status(response.status).json(response)
   } catch (error) {
     let response = {
       msg: "Something went wrong...",
@@ -35,18 +35,18 @@ user_controller.findUsers = async (req, res) => {
     }
     const users = await User.find().lean()
     if(!users.length){
-      res.status(response.status).json(response)
+      return res.status(response.status).json(response)
     }
     response.msg = "Here's the users"
     response.data = users
-    res.status(response.status).json(response)
+    return res.status(response.status).json(response)
   } catch (error) {
     let response = {
       msg: "Something went wrong...",
       status: 400,
       error: error.message
     }
-    res.status(response.status).json(response)
+    return res.status(response.status).json(response)
   }
 }
 
@@ -102,6 +102,7 @@ user_controller.deleteUser = async (req, res) => {
     }
     const { userId } = req.body
     await User.findByIdAndDelete(userId)
+    await Cart.findByIdAndDelete(userId)
     res.status(response.status).json(response) 
   } catch (error) {
     let response = {

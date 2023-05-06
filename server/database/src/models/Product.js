@@ -3,15 +3,18 @@ import {Schema, model} from "mongoose"
 const productSchema = new Schema({
   name: {type: String, required: true},
   description: {type: String, required: true},
-  brand: {type: String},
+  type: {type: String, enum: ["Vaper", "Acondicionador", "Bateria", "Resistencia", "E-liquid", "Accesorio"]},
+  brand: {type: String, required: true},
+  reviews: {type: [Schema.Types.ObjectId]},
+  rating: {type: Schema.Types.ObjectId},
   avaible: {type: Boolean, default: true},
-  amount: {type: Number, required: true},
-  price: {type: Number, default: 0}
+  promotion: {type: Boolean, default: false},
+  quantity: {type: Number, required: true},
+  price: {type: Number, default: 0},
+  promotionPrice: {type: Number, default: 0}
 }, {
   timestamps: true,
   versionKey: false
 })
 
-const Product = model("product", productSchema)
-
-export { Product }
+export const Product = model("product", productSchema)

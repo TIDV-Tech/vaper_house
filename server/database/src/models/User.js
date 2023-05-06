@@ -10,6 +10,4 @@ const userSchema = new Schema({
   versionKey: false
 })
 
-const User = model("user", userSchema)
-
-export { User }
+export const User = model("user", userSchema)
