@@ -10,9 +10,10 @@ router.get(_var.ROOT, (req, res) => {
 
 router.post(_var.REGISTER, async (req, res) => {
 	try {
-		const { name , email , date, password } = req.body
+		const { fullName , email , dateBirth, password } = req.body
 
-		const validate = await controller.checkRegister(name , email, password)
+		const validate = await controller.checkRegister( fullName , email , dateBirth, password )
+		//console.log(validate)
 		/* const info = await axios.post('http://localhost:5001/register/user', {
 			fullName: name, 
 			email: email, 
@@ -56,8 +57,20 @@ router.get(_var.VIEW_USER, async (req, res) => {
 })
 
 
-router.get(_var.EDIT_USER, async (req, res) => {
-
+router.post(_var.EDIT_USER, async (req, res) => {
+	try {
+		const { id_user , fullname , email , dateBirth , password } = req.body 
+		const info = {
+		  id_user: 1,
+		  fullname: "Diego A Cabrera M",
+		  email: "kenaa@example.com",
+		  dateBirth: "1990-01-01",
+		  password: "123456"
+		}
+		
+		let user = await controller.editUser( id_user , fullname, email, dateBirth, password , info )
+		res.send(user)
+	  } catch (err) { console.log(err) }	
 })
 
 router.get(_var.DELETE_USER, async (req, res) => {

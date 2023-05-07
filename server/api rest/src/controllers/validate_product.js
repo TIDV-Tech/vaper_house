@@ -8,18 +8,34 @@ const regisProduct = ( tipo_producto, nombre, descripcion, marca,cantidad, preci
 
     switch (param) {
       case "mayor":
-        message = {
-          status: true,
-          message: "Product entered into wholesale sales",
-          code: 200,
+        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || fecha_ingreso == "" || img == "" ) {
+          message = {
+            status: false,
+            message: "Fields cannot be left empty",
+            code: 202,
+          }
+        } else {
+          message = {
+            status: true,
+            message: "Product entered into wholesale sales",
+            code: 200,
+          }
         }
         break
 
       case "detal":
-        message = {
-          status: true,
-          message: "Product entered into retail sales",
-          code: 200,
+        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || fecha_ingreso == "" || img == "" ) {
+          message = {
+            status: false,
+            message: "Fields cannot be left empty",
+            code: 202,
+          }
+        } else {
+          message = {
+            status: true,
+            message: "Product entered into retail sales",
+            code: 200,
+          }
         }
         break
       default:
@@ -31,58 +47,67 @@ const regisProduct = ( tipo_producto, nombre, descripcion, marca,cantidad, preci
         break
     }
 
-	/* 	const products = [
-			tipo_producto,
+    return message
+  } catch (err) {
+    let message = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: err.message,
+    }
+    return message
+  }
+}
+
+const editProduct = ( id_product, tipo_producto, nombre, descripcion,marca, cantidad, precio, img, fecha_ingreso, product ) => {
+  try {
+    let message = {
+      status: true,
+      message: "There are no registered products",
+      code: 200,
+    }
+
+    const product = {
+      id_product,
+      tipo_producto,
       nombre,
       descripcion,
       marca,
       cantidad,
-			precio,
-      fecha_ingreso,
-      img
-		]
+      precio,
+      img,
+      fecha_ingreso
+    }
 
-		const proSearch = (pro, col) => {
-			return pro === col
-		}
-
-		const productSearch = products.find(product => (proSearch(product, col)))
-		console.log(productSearch) */
-
-		if (nombre == "") {
-			console.log('no se pueden dejar campos vacíos')
-		}
-
-    /* if (cantidad > 10) {
+    if ( id_product == "" || tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || fecha_ingreso == "" || img == "" ){
       message = {
-        status: true,
-        message: "Product entered into wholesale sales",
-        code: 200,
+        status: false,
+        message: "Fields cannot be left empty",
+        code: 202,
       }
-    } else if (cantidad <= 10) {
-      msg = {
-        status: true,
-        message: "Product entered into retail sales",
-        code: 200,
+    }
+    if (id_product != product.id_product) {
+      message = {
+        status: false,
+        message: "This product does not exist",
+        code: 202,
       }
     } else {
-      msg = {
-        status: false,
-        message: "There is an error in the product registration",
-        code: 500,
+      message = {
+        status: true,
+        message: "The product has been successfully modified",
+        code: 200,
+        data: product
       }
-    } */
+    }
+
     return message
   } catch (err) {
-    console.log(err)
-  }
-}
-
-const editProduct = (product) => {
-  try {
-    console.log(product)
-  } catch (err) {
-    console.log(err)
+    let message = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: err.message,
+    }
+    return message
   }
 }
 

@@ -22,19 +22,20 @@ router.get(_var.VIEW_PRO, async (req, res) => {
 
 router.post(_var.EDIT_PRO, async (req, res) => {
   try {
-    const { id_product, tipo_producto, nombre, descripcion, marca, cantidad, precio, img } = req.body 
+    const { id_product ,tipo_producto, nombre, descripcion, marca, cantidad, precio, img, fecha_ingreso } = req.body 
     const product = {
-      id_product,
-      tipo_producto,
-      nombre,
-      descripcion,
-      marca,
-      cantidad,
-      precio,
-      img
+      id_product : 1,
+      tipo_producto: "Vaper",
+      nombre: "vaper vapeador",
+      descripcion: "Esto es un vaper vapeador",
+      marca: "Vapea",
+      cantidad: 2,
+      precio: 100,
+      img: "https://i.pinimg.com/originals/8d/17/3",
+      fecha_ingreso: "2020-01-01"
     }
     
-    let prod = await controller.editProduct(product)
+    let prod = await controller.editProduct( id_product,tipo_producto, nombre, descripcion, marca, cantidad, precio, img, fecha_ingreso ,product)
     res.send(prod)
   } catch (err) { console.log(err) }
 })

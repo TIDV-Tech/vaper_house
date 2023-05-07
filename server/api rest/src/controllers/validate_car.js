@@ -50,7 +50,14 @@ const addCar = (obj) => {
       })
       return obj
     }
-  } catch (err) { console.log(err) }
+  } catch (err) { 
+    let message = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: err.message,
+    }
+    return message
+  }
 }
 
 module.exports = { addCar }

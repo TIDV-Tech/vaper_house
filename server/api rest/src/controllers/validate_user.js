@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
-const axios  = require('axios')
 
-const checkRegister = async (email, password) => {
+const checkRegister = async (fullName , email , dateBirth, password) => {
   try {
     let message = {
       status: true,
@@ -10,37 +9,40 @@ const checkRegister = async (email, password) => {
     }
   
     let validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    let validatePass =
-      /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+    let validatePass  = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
   
-    if (validateEmail.test(email) && validatePass.test(password)) {
-      message = {
-        code: 200,
-        status: true,
-        message: "Successful user registration"
-      }
-    } else if (!validateEmail.test(email) || !validatePass.test(password)) {
+    if (!validateEmail.test(email) || !validatePass.test(password)) {
       message = {
         code: 200,
         status: true,
         message: "You have an error in your email or password, try again",
-      }
-    } else {
+      } 
+    } else if (validateEmail.test(email) && validatePass.test(password)) {
+      //console.log('eo')
+      const hashP = bcrypt.hash(password, 10, (err, hash) => {
+        if (err) throw err
+        console.log('hola')
+      })
+      console.log(hashP)
+
       message = {
-        code: 500,
-        status: false,
-        message: "Something went wrong..."
+        code: 200,
+        status: true,
+        message: "Successful user registration",
+        //data: `email: ${email}, password: ${hash}`
       }
-    }
-  
-    bcrypt.hash(password, 10, (err, hash) => {
-      if (err) throw err
-      console.log(password)
-      console.log(`Esta es la password hasheada: ${hash}`)
-    })
-  
+      } 
+
+      console.log(message)
     return message
-  } catch (err) { console.log(err) }
+  } catch (err) { 
+    let message = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: err.message
+    }
+    return message
+  }
 }
 
 const checkLogin = async (correo, email, password) => {
@@ -89,10 +91,61 @@ const checkLogin = async (correo, email, password) => {
     }
   
     return message
-  } catch (err) { console.log(err) }
+  } catch (err) { 
+    let message = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: err.message
+    }
+    return message
+  }
+}
+
+const editUser = ( id_user , fullname , email , dateBirth , password , info ) => {
+	try {
+    let message = {
+      status: true,
+      message: "There is no registered user",
+      code: 200
+    }
+
+    const info = {
+      id_user,
+      fullname,
+      email,
+      dateBirth,
+      password,
+    }
+
+    if (id_user == "" || fullname == "" || email == "" || dateBirth == "" || password == "") {
+      message = {
+        status: false,
+        message: "Fields cannot be left empty",
+        code: 202,
+      }
+    }
+    if(id_user != info.id_user){
+      message = {
+        status: false,
+        message: "This user does not exist",
+        code: 202,
+      }
+    }
+    else{
+      message = {
+        status: true,
+        message: "The user has been successfully edited",
+        code: 200,
+        data: info
+      }
+    }
+
+    return message
+	} catch (err) { console.log(err) }
 }
 
 module.exports = {
   checkRegister,
   checkLogin,
+  editUser
 }
