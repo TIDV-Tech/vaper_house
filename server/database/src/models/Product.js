@@ -9,7 +9,7 @@ const productSchema = new Schema({
   rating: {type: Schema.Types.ObjectId},
   avaible: {type: Boolean, default: true},
   promotion: {type: Boolean, default: false},
-  quantity: {type: Number, required: true},
+  quantity: {type: Number, required: true, default: 0},
   price: {type: Number, default: 0},
   promotionPrice: {type: Number, default: 0}
 }, {
