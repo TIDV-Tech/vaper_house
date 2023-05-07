@@ -10,15 +10,20 @@ router.get(_var.ROOT, (req, res) => {
 
 router.post(_var.REGISTER, async (req, res) => {
 	try {
-		const { name , email , password } = req.body
-	/* 	axios.post('/register', {
-			name: 'prueba', 
-			email: 'prueba@gmail', 
-			password: 'prueba'
-		}) */
-		const validate = await controller.checkRegister(name , email , password)
+		const { name , email , date, password } = req.body
+
+		const validate = await controller.checkRegister(name , email, password)
+
+		const a = await axios.post('http://localhost:5001/register/user', {
+			fullName: name, 
+			email: email, 
+			dateBirth: new Date(date),
+			password: password
+		})
+		console.log(a)
+
 		return res.status(validate.code).json(validate)
-	} catch (err) { throw err }
+	} catch (err) { console.log(err.data) }
 })
 
 router.post(_var.LOGIN, async (req, res) => {
@@ -34,12 +39,6 @@ router.post(_var.LOGIN, async (req, res) => {
 		res.status(validateUser.code).json(validateUser)
 	} catch (err) { throw err}
 })
-
-/* axios.post('/register/user', {
-	name: 'name', 
-	email: 'email@email.com', 
-	password: 'password'
-}) */
 
 router.get(_var.VIEW_ALL_USER, async (req, res) => {
 	try {

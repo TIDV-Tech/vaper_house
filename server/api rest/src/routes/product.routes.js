@@ -19,7 +19,20 @@ router.get(_var.VIEW_PRO, async (req, res) => {
 
 router.post(_var.EDIT_PRO, async (req, res) => {
   try {
+    const { id_product, tipo_producto, nombre, descripcion, marca, cantidad, precio, img } = req.body 
+    const product = {
+      id_product,
+      tipo_producto,
+      nombre,
+      descripcion,
+      marca,
+      cantidad,
+      precio,
+      img
+    }
     
+    let prod = await controller.editProduct(product)
+    res.send(prod)
   } catch (err) {  throw err }
 })
 
