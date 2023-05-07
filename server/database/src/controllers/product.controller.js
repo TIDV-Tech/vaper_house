@@ -1,4 +1,5 @@
-import { Product }   from "../models/Product.js"
+import { Product }    from "../models/Product.js"
+import { Purchase }   from "../models/Purchase.js"
 
 const product_controller = {}
 
@@ -131,6 +132,38 @@ product_controller.findByMostRecent = async (req, res) => {
     lastFifteenDays       = new Date(lastFifteenDays)
     const products        = await Product.find({createdAt: {"$gte": new Date(lastFifteenDays), "$lte": new Date()}})
     response.data         = products
+    return res.status(response.status).json(response)
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
+  }
+}
+
+product_controller.findByRelated = async (req, res) => {
+  try {
+    let response = {
+      msg: "Here's the related products",
+      status: 200,
+      data: []
+    }
+    const { productId }   = req.body
+    const product         = await Product.findById(productId)
+    let productsByTypes   = await Product.find({type: product.type}) 
+    let productsByBrands  = await Product.find({brand: product.brand})
+    response.data = {
+      randomTypes: [
+        productsByTypes[Math.trunc(Math.random() * productsByTypes.length)], 
+        productsByTypes[Math.trunc(Math.random() * productsByTypes.length)]
+      ],
+      randomBrands: [
+        productsByBrands[Math.trunc(Math.random() * productsByBrands.length)], 
+        productsByBrands[Math.trunc(Math.random() * productsByBrands.length)]
+      ]
+    }
     return res.status(response.status).json(response)
   } catch (error) {
     let response = {
