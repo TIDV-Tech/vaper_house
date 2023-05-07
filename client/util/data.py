@@ -29,7 +29,7 @@ data = {
   'options': [
     {
       'name': 'Inicio',
-      'url': '/'
+      'url': '/home'
     },
     {
       'name': 'Dispositivos',
@@ -115,59 +115,60 @@ data = {
   'products': [
     {
       'id': 1,
-      'name': 'Titulo',
+      'name': 'LUXE 80',
       'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 10.00
     },
     {
       'id': 2,
-      'name': 'Tiulo',
+      'name': 'Air Factory Eliquid 100mL',
       'img': 'resources/products/descarga.jpeg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 10.00
+      'price': 30.00
     },
     {
       'id': 3,
       'name': 'Titulo',
       'img': 'resources/products/CBD_05_A.jpg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 10.00
+      'price': 9.99
     },
     {
       'id': 4,
       'name': 'Titulo',
       'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 10.00
+      'price': 15.00
     },
     {
-      'id': 1,
+      'id': 5,
       'name': 'Titulo',
       'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 10.00
+      'price': 11.00
     },
     {
-      'id': 2,
-      'name': 'Tiulo',
+      'id': 6,
+      'name': 'Vaper para machos pecho peluo',
       'img': 'resources/products/descarga.jpeg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 10.00
+      'price': 25.00
     },
     {
-      'id': 3,
-      'name': 'Titulo',
+      'id': 7,
+      'name': 'Titulo terriblemente largo',
+      'max': 5,
       'img': 'resources/products/CBD_05_A.jpg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 10.00
+      'price': 6.80
     },
     {
-      'id': 4,
+      'id': 8,
       'name': 'Titulo',
       'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 10.00
+      'price': 17.50
     },
   ],
   'info': ['¿Quiénes somos?', '¿Qué ofrecemos?', 'Contacto'],
@@ -187,15 +188,6 @@ data = {
   'direccion': 'Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a casa Matina',
   'contacto': 'vaperhouse.sc@gmail.com',
   'numeros': ['+58412-1729864', '+58414-7573307'],
-  'direccion': 'Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a cada Matina',
-  'contacto': 'vaperhouse.sc@gmail.com',
-  'numeros': ['+58412-1729864', '+58414-7573307'],
-  'descriptions': [
-    {
-      'name': 'Kylin M Pro RTA color tornasol',
-      'img': 'resources/product_description/vandy.jpg'
-    },
-  ]
 }
 
 messages = {

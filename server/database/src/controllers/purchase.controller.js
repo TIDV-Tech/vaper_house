@@ -45,7 +45,7 @@ purchase_controller.registerPurchase = async (req, res) => {
         return { products }
       }
     })
-    products = products[0].products
+    products        = products[0].products
     for(let i = 0; i < products.length; i++){
       const product = await Product.findById(products[i].toString())
       products[i]   = product
@@ -59,10 +59,10 @@ purchase_controller.registerPurchase = async (req, res) => {
       paymentMethod, 
       totalPrice: parseFloat(totalPrice)
     }
-    const purchaseSaved           = await new Purchase(data).save()
-    cart.products.length          = 0
-    cart.quantityProducts.length  = 0
-    const savedCart               = await cart.save()
+    const purchaseSaved     = await new Purchase(data).save()
+    cart.products           = []
+    cart.quantityProducts   = []
+    const savedCart         = await cart.save()
     response.data = {purchaseSaved, savedCart}
     return res.status(response.status).json(response) 
   } catch (error) {

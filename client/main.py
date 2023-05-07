@@ -17,17 +17,21 @@ def index ():
                           **data, \
                           message=messages['index'])
 
-@app.route('/marcas/')
+@app.route('/home')
+def home ():
+  return redirect('/')
+
+@app.route('/mayor/')
 def index2 ():
   return render_template('/pages/home_mayor.html', \
                           name='VentasMayor', \
                           **data, \
                           message=messages['mayor'])
 
-@app.route('/product/cart/<int:id_article>')
+@app.route('/producto/<int:id_article>')
 def index3 (id_article):
   return render_template('/pages/cart.html', \
                           name='DecripcionProducto', \
                           **data, \
-                          id=id_article, \
+                          id=id_article-1, \
                           message=messages['cart'])
