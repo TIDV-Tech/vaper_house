@@ -1,59 +1,95 @@
 const bcrypt = require('bcrypt')
+const axios  = require('axios')
 
-let msg = {
-  status: false,
-  message: "Error retrieving data",
-  data: [],
-  code: 500,
-}
-
-const checkRegister = async (name, email, password) => {
-  let validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  let validatePass =
-    /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
-
-  if (validateEmail.test(email) && validatePass.test(password)) {
-    msg = {
+const checkRegister = async (email, password) => {
+  try {
+    let message = {
       status: true,
-      message: "User registered succesfully",
-      code: 200,
+      message: "There is no registered user",
+      code: 200
     }
-  } else if (!validateEmail.test(email) || !validatePass.test(password)) {
-    msg = {
-      status: false,
-      message: "An error has occurred",
-      code: 500,
+  
+    let validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    let validatePass =
+      /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+  
+    if (validateEmail.test(email) && validatePass.test(password)) {
+      message = {
+        code: 200,
+        status: true,
+        message: "Successful user registration"
+      }
+    } else if (!validateEmail.test(email) || !validatePass.test(password)) {
+      message = {
+        code: 200,
+        status: true,
+        message: "You have an error in your email or password, try again",
+      }
+    } else {
+      message = {
+        code: 500,
+        status: false,
+        message: "Something went wrong..."
+      }
     }
-  }
-
-  bcrypt.hash(password, 10, (err, hash) => {
-    if (err) throw err
-    console.log(password)
-    console.log(`Esta es la password hasheada: ${hash}`)
-  })
-  return msg
+  
+    bcrypt.hash(password, 10, (err, hash) => {
+      if (err) throw err
+      console.log(password)
+      console.log(`Esta es la password hasheada: ${hash}`)
+    })
+  
+    return message
+  } catch (err) { throw err }
 }
 
 const checkLogin = async (correo, email, password) => {
-  bcrypt.hash(password, 10, (err, hash) => {
-    if (err) throw err
-    bcrypt.compare(password, hash, (err, comp) => {
-      if (err) throw err
-      console.log(`Comparacion exitosa: ${comp}`)
-      if (comp == true) console.log('Has iniciado sesion')
-      else console.log('Tienes un error, vuelve a intentarlo') 
-    })
+  try {
+    let message = {
+      status: true,
+      message: "There is no registered user",
+      code: 200
+    }
+  
+    const searchUsersEmail = (cor, email, password) => {
+      return cor.cor_elec === email && cor.clave === password
+    }
+  
+    let cor_find = correo.find(cor => searchUsersEmail(cor, email, password))
     
-    console.log(password)
-    console.log(`Esta es la password hasheada: ${hash}`)
-  })
-
-  for (i = 0; i < correo.length; i++) {
-    const e = correo[i]
-    if (e != email) {
-      console.log('No estas registrado')
-    } else if (e == email) { console.log(`Correcto ${email}`) }
-  }
+    if (cor_find == undefined) { 
+      message = {
+        code: 200,
+        status: false,
+        message: "Wrong email or password"
+      }
+    } else if (cor_find) {
+      if (email == cor_find.cor_elec){
+        message = {
+          code: 200,
+          status: true,
+          message: "Correct, you are logged in"
+        }
+      } 
+      if (password == cor_find.clave) {
+        bcrypt.hash(password, 10, (err, hash) => {
+          if (err) throw err
+          bcrypt.compare(password, hash, (err, comp) => {
+            if (err) throw err
+            console.log(`Esta es la password hasheada: ${hash}`)
+          })
+        })
+      } 
+    } else {
+      message = {
+        code: 200,
+        status: false,
+        message: "You are not registered"
+      }
+    }
+  
+    return message
+  } catch (err) { throw err }
 }
 
 module.exports = {

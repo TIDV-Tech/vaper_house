@@ -17,12 +17,8 @@ router.post(_var.ADDCAR, async(req,res)=>{
 			{id: 4, cantidad: 14}
 		]
 
-		const validate = funct.carValidate(id_product, product, cant_prod, obj)
-
-		/* const value 	 = funct.addCar(obj)
-		if(typeof value == 'object') { return res.json(value) }
-		res.json({status: true, message: "Archivo creado!", value}) */
-		res.send('Añadido al carrito')
+		const validate = await funct.carValidate(id_product, product, cant_prod, obj)
+		return res.status(validate.code).json(validate)
 	} catch (err) { throw err }
 })
 
