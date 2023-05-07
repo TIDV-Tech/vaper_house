@@ -5,16 +5,19 @@ const axios      = require("axios")
 const router     = Router()
 
 router.post(_var.REG_PRO, async (req, res) => {
+  try {
   //axios.post('/products', )
+  const { param } = req. params
   const { tipo_producto, nombre, descripcion, marca, cantidad, precio, img, fecha_ingreso } = req.body
-  let product = await controller.regisProduct(tipo_producto, nombre, descripcion, marca, cantidad, precio, fecha_ingreso, img)
+  let product = await controller.regisProduct(tipo_producto, nombre, descripcion, marca, cantidad, precio, fecha_ingreso, img, param)
   res.status(product.code).json(product)
+  } catch (err) { console.log(err) }
 })
 
 router.get(_var.VIEW_PRO, async (req, res) => {
   try {
     
-  } catch (err) {  throw err }
+  } catch (err) { console.log(err) }
 })
 
 router.post(_var.EDIT_PRO, async (req, res) => {
@@ -33,13 +36,13 @@ router.post(_var.EDIT_PRO, async (req, res) => {
     
     let prod = await controller.editProduct(product)
     res.send(prod)
-  } catch (err) {  throw err }
+  } catch (err) { console.log(err) }
 })
 
 router.post(_var.DELETE_PRO, async (req, res) => {
   try {
     
-  } catch (err) {  throw err }
+  } catch (err) { console.log(err) }
 })
 
 module.exports = router

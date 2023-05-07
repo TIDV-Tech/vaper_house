@@ -19,7 +19,7 @@ router.post(_var.ADDCAR, async(req,res)=>{
 
 		const validate = await funct.carValidate(id_product, product, cant_prod, obj)
 		return res.status(validate.code).json(validate)
-	} catch (err) { throw err }
+	} catch (err) { console.log(err) }
 })
 
 module.exports = router

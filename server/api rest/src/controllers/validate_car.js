@@ -50,7 +50,7 @@ const addCar = (obj) => {
       })
       return obj
     }
-  } catch (err) { throw err }
+  } catch (err) { console.log(err) }
 }
 
 module.exports = { addCar }

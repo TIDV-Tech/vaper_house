@@ -40,7 +40,7 @@ const checkRegister = async (email, password) => {
     })
   
     return message
-  } catch (err) { throw err }
+  } catch (err) { console.log(err) }
 }
 
 const checkLogin = async (correo, email, password) => {
@@ -89,7 +89,7 @@ const checkLogin = async (correo, email, password) => {
     }
   
     return message
-  } catch (err) { throw err }
+  } catch (err) { console.log(err) }
 }
 
 module.exports = {
