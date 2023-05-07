@@ -14,7 +14,93 @@
 {% endblock %}
 
 {% block products %}
-  {{ id }}
+  <section id="main">
+    <div class="product-description-container-cart">
+      <div class="container-img">
+        <img src="/static/{{ products[id].img }}" alt="">
+      </div>
+      <div class="container-info-product">
+        <div class="title-div">
+          <span class="title-product-description">{{ products[id].name }}</span>
+        </div>
+        <div class="price-div">
+          <span class="price-product-description">{{ products[id].price }}$</span>
+        </div>
+        <hr>
+        <div class="container-details-product">
+          <div class="form-group">
+            <div>
+              <label for="color">Color</label>
+              <select name="color" id="color">
+                <option value="Blanco" selected>Blanco</option>
+                <option value="Negro">Negro</option>
+                <option value="Gris">Gris</option>
+                <option value="Verde">Verde</option>
+              </select>
+            </div>
+            <div>
+              <label for="sabor">Sabor</label>
+              <select name="sabor" id="sabor">
+                <option value="Manzana" selected>Manzana</option>
+                <option value="Kiwi">Kiwi</option>
+                <option value="Mango">Mango</option>
+                <option value="Fresa">Fresa</option>
+              </select>
+            </div>
+            <div>
+              <label for="nicotina">Nicotina</label>
+              <select name="nicotina" id="nicotina">
+                <option value="3mg" selected>3mg</option>
+                <option value="5mg">5mg</option>
+                <option value="7mg">7mg</option>
+                <option value="10mg">10mg</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="container-add-cart">
+          <button class="btn-add-to-cart">
+            Añadir al carrito
+          </button>
+          <div class="container-quantity">
+            <input type="number" class="quantity" placeholder="cantidad" value="1" min="1" max="10">
+            <div class="btn-increment-decrement">
+              <input type="number" class="hidden" id="max" value="{{ products[id].max }}">
+              <i class="bx bxs-chevron-up" id="increment"></i>
+              <i class="bx bxs-chevron-down" id="decrement"></i>
+            </div>
+          </div>
+        </div>
+        <div class="container-description">
+          <div class="title-description">
+            <h4>Descripción</h4>
+            <i class="bx bxs-chevron-down" id="chev1"></i>
+          </div>
+          <div class="text-description">
+            <p>{{ products[id].description }}</p>
+          </div>
+        </div>
+        <div class="continaer-additional">
+          <div class="title-additional">
+            <h4>Información adicional</h4>
+            <i class="bx bxs-chevron-up" id="chev2"></i>
+          </div>
+          <div class="text-additional hidden">
+            {% if products[id].additional %}
+              <p>{{ products[id].additional }}</p>
+            {% else %}
+              <p>No hay información adicional de este producto</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="related-products">
+      <h2>Productos relacionados</h2>
+      {{ sections.products_section(products[0:4], show_content=True) }}
+    </div>
+  </section>
 {% endblock %}
 
 {% block footer %}

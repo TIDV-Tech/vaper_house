@@ -46,21 +46,22 @@
     {% for product in products %}
       <div class="products">
         <div class="product">
-          <figure>
-            <img src="/static/{{ product.img }}">
-          </figure>
-          {% if show_content %}
+          <a href="/producto/{{ product.id }}">
+            <figure>
+              <img src="/static/{{ product.img }}">
+            </figure>
+            {% if show_content %}
+              <div class="contenido">
+                <h3 title="{{ product.name }}">{{ product.name }}</h3>
+                {% if logged %}<span>{{ product.price }}$</span>{% endif %}
+                <h4>Añadir al carrito</h4>
+              </div>
+            {% else %}
             <div class="contenido">
-              <h3>{{ product.name }}</h3>
-              <p>{{ product.description }}</p>
-              {% if logged %}<span>{{ product.price }}$</span>{% endif %}
-              <a href="/product/{{ product.id }}">Añadir al carrito</a>
+              <h3 title="{{ product.name }}">{{ product.name }}</h3>
             </div>
-          {% else %}
-          <div class="contenido">
-            <h3>{{ product.name }}</h3>
-          </div>
-          {% endif %}
+            {% endif %}
+          </a>
         </div>
       </div>
     {% endfor %}
@@ -110,7 +111,9 @@
 {% macro header_section(base, saldo, user, options, warning_msg) %}
   <section id="header">
     <div class="hd1">
-      <img src="/static/{{ base }}" alt="Logo Vaper House" id="logo">
+      <a href="/home">
+        <img src="/static/{{ base }}" alt="Logo Vaper House" id="logo">
+      </a>
       <div>
         <i class='bx bx-menu icon' id="menu"></i>
       </div>
