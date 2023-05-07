@@ -1,13 +1,15 @@
 :root {
   /* Colors */
-  --black: #000000;
-  --white: #ffffff;
-  --light: #eeeeee;
-  --darkgray: #201818;
-  --gray2: #222020;
+  --black:     #000000;
+  --white:     #ffffff;
+  --light:     #eeeeee;
+  --darkgray:  #201818;
+  --gray2:     #222020;
+  --lightblue: #5a84e0;
+  --purple:    #cc07bc;
 
   /* Weight */
-  --ten: 10px;
+  --ten: 10px; 
   --twe: 20px;
   --thi: 30px;
   --fou: 40px;
@@ -30,5 +32,6 @@
   --fvw: 100vw;
   --fvh: 100vh;
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500&display=swap');

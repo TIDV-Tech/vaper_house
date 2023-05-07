@@ -141,6 +141,34 @@ data = {
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 10.00
     },
+    {
+      'id': 1,
+      'name': 'Titulo',
+      'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
+      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
+      'price': 10.00
+    },
+    {
+      'id': 2,
+      'name': 'Tiulo',
+      'img': 'resources/products/descarga.jpeg',
+      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
+      'price': 10.00
+    },
+    {
+      'id': 3,
+      'name': 'Titulo',
+      'img': 'resources/products/CBD_05_A.jpg',
+      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
+      'price': 10.00
+    },
+    {
+      'id': 4,
+      'name': 'Titulo',
+      'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
+      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
+      'price': 10.00
+    },
   ],
   'info': ['¿Quiénes somos?', '¿Qué ofrecemos?', 'Contacto'],
   'politica': ['Términos y condiciones', 'Políticas de seguridad', 'Políticas de Cookies'],

@@ -7,8 +7,8 @@
 
 body {
   color: var(--white);
-  min-width: var(--fvw);
-  min-height: var(--fvh);
+  width: var(--fvw);
+  height: var(--fvh);
   overflow-x: hidden;
 }
 
@@ -101,6 +101,7 @@ ul {
 ul > li {
   text-align: center;
   width: 10%;
+  font-size: 13px;
   color: var(--black);
   border-right: 1px solid var(--black);
   padding: 10px calc(var(--ten) + 5px);
@@ -115,12 +116,12 @@ li:hover {
 }
 
 #main {
-  width: (--r100);
-  margin: 0 10%;
+  max-width: (--fvw);
+  padding: 0 10%;
 }
 
 .warning {
-  margin: 5px;
+  padding: 5px;
   text-align: center;
   color: var(--black);
 }
@@ -162,7 +163,7 @@ li:hover {
   min-width: 350px;
 }
 
-@media screen and (max-width:991px) {
+@media screen and (max-width:1100px) {
   body { max-width: var(--fvw); }
   #menu { display: block; }
   #logo { display: none; }

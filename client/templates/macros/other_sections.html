@@ -9,27 +9,27 @@
 {% endmacro %}
 
 {% macro images_carousel(images) %}
+  <div
+    class="gallery js-flickity"
+    data-flickity-options='{
+      "wrapAround": true,
+      "freeScroll": true,
+      "autoPlay": true,
+      "autoPlay": 2500,
+      "draggable": true,
+      "selectedAttraction": 0.01,
+      "friction": 0.15,
+      "fullscreen": true,
+      "lazyLoad": 1
+    }'
+  >
+    {% for image in images %}
+      <div class="gallery-cell">
+        <img src="/static/resources/{{ image }}" alt="">
+      </div>
+    {% endfor %}
+  </div>
   <section id="main">
-    <div
-      class="gallery js-flickity"
-      data-flickity-options='{
-        "wrapAround": true,
-        "freeScroll": true,
-        "autoPlay": true,
-        "autoPlay": 2500,
-        "draggable": true,
-        "selectedAttraction": 0.01,
-        "friction": 0.15,
-        "fullscreen": true,
-        "lazyLoad": 1
-      }'
-    >
-      {% for image in images %}
-        <div class="gallery-cell">
-          <img src="/static/resources/{{ image }}" alt="">
-        </div>
-      {% endfor %}
-    </div>
 {% endmacro %}
 
 {% macro category_section(categories) %}
@@ -56,6 +56,10 @@
               {% if logged %}<span>{{ product.price }}$</span>{% endif %}
               <a href="/product/{{ product.id }}">Añadir al carrito</a>
             </div>
+          {% else %}
+          <div class="contenido">
+            <h3>{{ product.name }}</h3>
+          </div>
           {% endif %}
         </div>
       </div>
@@ -64,38 +68,41 @@
 {% endmacro %}
 
 {% macro more_section(info, politica, social) %}
-  <div class="info">
+  <div class="info f">
     <span>Información</span>
-    {% for inf in info %}<a>{{ inf }}</a><br>{% endfor %}
+    {% for inf in info %}<a href="#">{{ inf }}</a>{% endfor %}
   </div>
-  <div class="politica">
+  <div class="politica f">
     <span>Políticas</span>
-    {% for poli in politica %}<a>{{ poli }}</a><br>{% endfor %}
+    {% for poli in politica %}<a href="#">{{ poli }}</a>{% endfor %}
   </div>
-  <div class="pay">
+  <div class="pay f">
     <span>Métodos de Pago</span>
-    <p><i class='bx bx-credit-card bx-sm'></i></p>
-    <p><i class='bx bxl-visa bx-sm' ></i></p>
-    <p><i class='bx bxl-paypal bx-sm' ></i></p>
-    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m16.624 13.92l2.717 2.716l-7.353 7.353l-7.352-7.352l2.717-2.717l4.636 4.66l4.635-4.66zm4.637-4.636L24 12l-2.715 2.716L18.568 12l2.693-2.716zm-9.272 0l2.716 2.692l-2.717 2.717L9.272 12l2.716-2.715zm-9.273 0L5.41 12l-2.692 2.692L0 12l2.716-2.716zM11.99.01l7.352 7.33l-2.717 2.715l-4.636-4.636l-4.635 4.66l-2.717-2.716L11.989.011z"/></svg></p>
+    <div>
+      <p><i class="bx bx-credit-card bx-sm icon_f"></i></p>
+      <p><i class="bx bxl-visa bx-sm icon_f"></i></p>
+      <p><i class="bx bxl-paypal bx-sm icon_f"></i></p>
+      <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m16.624 13.92l2.717 2.716l-7.353 7.353l-7.352-7.352l2.717-2.717l4.636 4.66l4.635-4.66zm4.637-4.636L24 12l-2.715 2.716L18.568 12l2.693-2.716zm-9.272 0l2.716 2.692l-2.717 2.717L9.272 12l2.716-2.715zm-9.273 0L5.41 12l-2.692 2.692L0 12l2.716-2.716zM11.99.01l7.352 7.33l-2.717 2.715l-4.636-4.636l-4.635 4.66l-2.717-2.716L11.989.011z"/></svg></p>
+    </div>
   </div>
-  <div class="follow">
-    <span>Síguenos</span><br>
+  <div class="follow f">
+    <span>Síguenos</span>
     {% for soci in social %}
-      <a class="{{ soci.red }}">
-        <i class='{{ soci.ico }}''></i>
+      <a href="#" class="{{ soci.red }}">
+        <i class="{{ soci.ico }} icon_f"></i>
         {{ soci.dir }}
-      </a><br>
+      </a>
     {% endfor %}
   </div>
 {% endmacro %}
 
 {% macro address_and_contact(address, contact, numbers) %}
-  <p><i class='bx bx-map bx-sm'></i>{{ address }}</p>
-  <p><i class='bx bxl-gmail bx-sm'></i>{{ contact }}</p>
-  <p><i class='bx bx-phone bx-sm'></i>
+  <hr>
+  <p><i class="bx bx-map bx-sm icon_f"></i>{{ address }}</p>
+  <p><i class="bx bxl-gmail bx-sm icon_f"></i>{{ contact }}</p>
+  <p><i class="bx bx-phone bx-sm icon_f"></i>|
     {% for number in numbers %}
-      | {{ number }} |
+      {{ number }} |
     {% endfor %}
   </p>
 {% endmacro %}
