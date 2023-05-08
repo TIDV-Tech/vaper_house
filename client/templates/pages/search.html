@@ -1,0 +1,34 @@
+{% extends 'pages/base.html' %}
+{% import 'macros/import_files.html' as files %}
+{% import 'macros/other_sections.html' as sections %}
+
+{% block title %} {{ super() }} {% endblock %}
+
+{% block styles %}
+  {{ files.render_links(styles) }}
+  {{ files.link_external(external) }}
+{% endblock %}
+
+{% block header %}
+  {{ sections.header_section(logo.base, saldo, user, options, warning_msg) }}
+{% endblock %}
+
+{% block products %}
+  {% if params == None %}
+    <h2>No se encontró ningún producto relacionado</h2>
+  {% else %}
+    <h2>Hola putas</h2>
+  {% endif %}
+{% endblock %}
+
+{% block footer %}
+  {{ sections.footer(info, politica, social, direccion, contacto, numeros) }}
+{% endblock %}
+
+{% block modal %}
+  {{ sections.modal() }}
+{% endblock %}
+
+{% block scripts %}
+  {{ files.render_scripts(script) }}
+{% endblock %}
