@@ -5,6 +5,7 @@ const productSchema = new Schema({
   description: {type: String, required: true},
   type: {type: String, enum: ["Vaper", "Acondicionador", "Bateria", "Resistencia", "E-liquid", "Accesorio"]},
   brand: {type: String, required: true},
+  img: {type: String, required: true},
   reviews: {type: [Schema.Types.ObjectId]},
   rating: {type: Schema.Types.ObjectId},
   avaible: {type: Boolean, default: true},

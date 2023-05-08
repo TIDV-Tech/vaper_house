@@ -103,10 +103,14 @@ product_controller.findByFilter = async (req, res) => {
       data: []
     }
     const {filter} = req.body
-    const products = await Product.find(filter)
-    if(!products.length){
-      return res.status(response.status).json(response)
-    }
+    filter.map((elm,key) => {
+      let k = Object.keys(elm)
+      let m = filter[key][k]
+      let c = new RegExp(m)
+      filter[key][k] = c
+    })
+    const products = await Product.find({"$or": filter})
+    if(!products.length){ return res.status(response.status).json(response) }
     response.msg = "Here's the products" 
     response.data = products
     return res.status(response.status).json(response)
