@@ -22,14 +22,14 @@ def home ():
   return redirect('/')
 
 @app.route('/mayor/')
-def index2 ():
+def mayor ():
   return render_template('/pages/home_mayor.html', \
                           name='VentasMayor', \
                           **data, \
                           message=messages['mayor'])
 
 @app.route('/producto/<int:id_article>')
-def index3 (id_article):
+def producto (id_article):
   return render_template('/pages/cart.html', \
                           name='DecripcionProducto', \
                           **data, \
