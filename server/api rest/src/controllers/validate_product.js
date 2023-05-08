@@ -1,4 +1,4 @@
-const regisProduct = ( tipo_producto, nombre, descripcion, marca,cantidad, precio, fecha_ingreso, img, param ) => {
+const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, precio, promocion, param ) => {
   try {
     let message = {
       status: true,
@@ -8,7 +8,7 @@ const regisProduct = ( tipo_producto, nombre, descripcion, marca,cantidad, preci
 
     switch (param) {
       case "mayor":
-        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || fecha_ingreso == "" || img == "" ) {
+        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || promocion == ""  ) {
           message = {
             status: false,
             message: "Fields cannot be left empty",
@@ -24,7 +24,7 @@ const regisProduct = ( tipo_producto, nombre, descripcion, marca,cantidad, preci
         break
 
       case "detal":
-        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || fecha_ingreso == "" || img == "" ) {
+        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || promocion == "" ) {
           message = {
             status: false,
             message: "Fields cannot be left empty",

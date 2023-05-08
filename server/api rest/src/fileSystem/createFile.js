@@ -1,47 +1,65 @@
-const funct = require('../controllers/validate_car.js')
+const fs   = require("fs")
+const jwt  = require("jsonwebtoken")
+const _var = require("../global/var.js")
 
-const carValidate = (id_product, product, cant_prod, obj) => {
+const addCar = (obj) => {
+  
   try {
+    const exists = fs.existsSync("car.json")
+
+    if (exists) {
+      fs.readFile("car.json", "utf-8", (err, data) => {
+        if (err) {
+          console.log("error: ", err)
+        } else {
+          let prueba = JSON.parse(data)
+  
+          jwt.verify(prueba, _var.KEY, function (err, decoded) {
+            if (err) throw err
+            let new_info = obj.info[0]
+  
+            let info = decoded.info[0]
+            const send = decoded.info.push(new_info)
+  
+            jwt.sign(decoded, _var.KEY, { algorithm: "HS256" }, (err, token) => {
+              if (err) throw err
+  
+              fs.writeFileSync("car.json", JSON.stringify(token), (err) => {
+                if (err) throw err
+                console.log("Informacion ingresada exitosamente")
+                console.log(token)
+  
+              })
+              jwt.verify(token, _var.KEY, function (err, decoded) {
+                if (err) throw err
+                console.log(decoded)
+              })
+            })
+          })
+  
+        }
+      })
+    }
+    if (!exists) {
+      console.log(obj.info[0])
+      jwt.sign(obj, _var.KEY, { algorithm: "HS256" }, (err, token) => {
+        if (err) throw err
+        fs.writeFileSync("car.json", JSON.stringify(token), (err) => {
+          if (err) throw err
+          console.log(info)
+        })
+        
+      })
+      return obj
+    }
+  } catch (err) { 
     let message = {
-      code: 200,
-      status: true,
-      msg: "There are no registered products"
+      msg: "Something went wrong...",
+      status: 400,
+      error: err.message,
     }
-  
-    function searchProd(prod , id_product){
-      return prod.id === id_product
-    }
-  
-    let prod_find = product.find(prod => searchProd(prod, id_product))
-   
-    if(!prod_find){
-      message = {
-        code: 200,
-        status: true, 
-        msg: "Product not found" 
-      }
-    } else if(cant_prod > prod_find.cantidad){
-      message = { 
-        code: 200,
-        status: false, 
-        msg: "This quantity of products is not found" 
-      }
-    } else if(prod_find && cant_prod <= prod_find.cantidad){
-      message = { 
-        code: 200,
-        status: true, 
-        msg: `The product has been found id_prod: ${prod_find.id}, cant_prod: ${prod_find.cantidad}`
-      }
-    }else{
-      message = {
-        code: 500,
-        status: false,
-        msg: "Something went wrong"
-      }
-    }
-  
     return message
-  } catch (err) { throw err }
+  }
 }
 
-module.exports = { carValidate }
+module.exports = { addCar }
