@@ -10,71 +10,89 @@ router.get(_var.ROOT, (req, res) => {
 
 router.post(_var.REGISTER, async (req, res) => {
 	try {
-		const { fullName , email , dateBirth, password } = req.body
+		const { userId, fullName , email , dateBirth, password } = req.body
 
 		const validate = await controller.checkRegister( fullName , email , dateBirth, password )
-		//console.log(validate)
-		/* const info = await axios.post('http://localhost:5001/register/user', {
-			fullName: name, 
-			email: email, 
-			dateBirth: new Date(date),
-			password: password
-		})
-		console.log(info) */
+		res.status(validate.code).json(validate)
 
-		return res.status(validate.code).json(validate)
-	} catch (err) { console.log(err.data) }
+		const info = await axios.post('http://localhost:5001/register/user', {
+			userId: userId,
+		 	fullName: validate.data.fullName, 
+		 	email: validate.data.email,  
+		 	dateBirth: new Date(validate.data.dateBirth),
+		 	password: validate.data.password
+		 })
+		 console.log(info) 
+	
+	} catch (err) { 
+		console.log(err)
+	}
 })
 
 router.post(_var.LOGIN, async (req, res) => {
 	try {
 		const { email, password } = req.body
-		const correo = [
-			{cor_elec: "chacon@root.com", clave: "chacon"},
-			{cor_elec: "prueba@root.com", clave: "prueba"},
-			{cor_elec: "user@root.com",   clave: "user"}
-		]
 
-		let validateUser = await controller.checkLogin(correo, email, password)
+		const response = await axios.get('http://localhost:5001/users', {
+			params: {
+				email: email,
+				password: password
+			}
+		})
+
+		let info = response.data.data
+
+		let validateUser = await controller.checkLogin(email, password , info)
 		res.status(validateUser.code).json(validateUser)
-	} catch (err) { console.log(err) }
+	} catch (err) { 
+		console.log(err) 
+		res.status(500).json({ message: 'Error in the request to the registration API' })
+	}
 })
 
 router.get(_var.VIEW_ALL_USER, async (req, res) => {
 	try {
-    const { id } = req.query
-    const user = await controller.viewUser(id)
-    res.send(user)
+    const users = await axios.get('http://localhost:5001/users')
+		res.send(users.data)
   } catch (err) { console.log(err) }
 })
 
-router.get(_var.VIEW_USER, async (req, res) => {
+router.post(_var.VIEW_USER, async (req, res) => {
 	try {
-    const { id } = req.query
-    const user = await controller.viewUser(id)
-    res.send(user)
+    
   } catch (err) { console.log(err) }
 })
 
 
 router.post(_var.EDIT_USER, async (req, res) => {
 	try {
-		const { id_user , fullname , email , dateBirth , password } = req.body 
-		const info = {
-		  id_user: 1,
-		  fullname: "Diego A Cabrera M",
-		  email: "kenaa@example.com",
-		  dateBirth: "1990-01-01",
-		  password: "123456"
+		const { userId, newData } = req.body 
+		const obj = {
+		  userId,
+			newData
 		}
 		
-		let user = await controller.editUser( id_user , fullname, email, dateBirth, password , info )
-		res.send(user)
+		const editUser = await axios.post('http://localhost:5001/update/user', obj)
+		.then((result) => {
+			res.send({ "msg": "Updated successfully!", "status": 200, "data": obj })
+		}).catch((err) => {
+			console.log(err)
+		})
+		/* let user = await controller.editUser( id_user , fullname, email, dateBirth, password , info )
+		res.send(user) */
 	  } catch (err) { console.log(err) }	
 })
 
 router.get(_var.DELETE_USER, async (req, res) => {
-
+	try {
+		const { userId } = req.body
+		const deleteUser = await axios.post('http://localhost:5001/delete/user', { userId })
+		.then((result) => {
+      res.send({ "msg": "Deleted successfully!", "status": 200, "data": userId })
+    }).catch((err) => {
+      console.log(err)
+    })
+	} catch (err) { console.log(err) }
 })
 
-module.exports = router
+module.exports = router

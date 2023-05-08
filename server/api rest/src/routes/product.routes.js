@@ -6,43 +6,56 @@ const router     = Router()
 
 router.post(_var.REG_PRO, async (req, res) => {
   try {
-  //axios.post('/products', )
   const { param } = req. params
-  const { tipo_producto, nombre, descripcion, marca, cantidad, precio, img, fecha_ingreso } = req.body
-  let product = await controller.regisProduct(tipo_producto, nombre, descripcion, marca, cantidad, precio, fecha_ingreso, img, param)
+  const { productId, nombre, descripcion, tipo_producto, marca, cantidad, precio, promocion } = req.body
+  axios.post('http://localhost:5001/register/product', {
+    productId: productId,
+    name: nombre,
+    description: descripcion,
+    type: tipo_producto,
+    brand: marca,
+    quantity: cantidad,
+    price: precio,
+    promotionPrice: promocion
+  })
+  
+  let product = await controller.regisProduct(tipo_producto, nombre, descripcion, marca, cantidad, precio, promocion, param)
   res.status(product.code).json(product)
   } catch (err) { console.log(err) }
 })
 
 router.get(_var.VIEW_PRO, async (req, res) => {
   try {
-    
+    const product = await axios.get('http://localhost:5001/products')
+    res.send(product.data)
   } catch (err) { console.log(err) }
 })
 
 router.post(_var.EDIT_PRO, async (req, res) => {
   try {
-    const { id_product ,tipo_producto, nombre, descripcion, marca, cantidad, precio, img, fecha_ingreso } = req.body 
-    const product = {
-      id_product : 1,
-      tipo_producto: "Vaper",
-      nombre: "vaper vapeador",
-      descripcion: "Esto es un vaper vapeador",
-      marca: "Vapea",
-      cantidad: 2,
-      precio: 100,
-      img: "https://i.pinimg.com/originals/8d/17/3",
-      fecha_ingreso: "2020-01-01"
+    const { productId, newData } = req.body 
+    const obj = {
+      productId,
+      newData
     }
-    
-    let prod = await controller.editProduct( id_product,tipo_producto, nombre, descripcion, marca, cantidad, precio, img, fecha_ingreso ,product)
-    res.send(prod)
+
+    const editProduct = axios.post('http://localhost:5001/update/product', obj)
+    .then((result) => {
+      res.send({ "msg": "Product updated successfully!",
+    "status": 200, "data": obj })
+    })
+    .catch((err) => { console.log(err) })
   } catch (err) { console.log(err) }
 })
 
 router.post(_var.DELETE_PRO, async (req, res) => {
   try {
-    
+    const { productId } = req.body
+    const deleteProduct = axios.post('http://localhost:5001/delete/product', { productId })
+    .then((result) => {
+      res.send({ "msg": "Product deleted successfully", "status": 200, "data": productId })
+    })
+    .catch((err) => { console.log(err) })
   } catch (err) { console.log(err) }
 })
 
