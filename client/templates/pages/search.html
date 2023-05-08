@@ -14,6 +14,7 @@
 {% endblock %}
 
 {% block products %}
+  {{ search.data }}
   {% if params == None %}
     <h2>No se encontró ningún producto relacionado</h2>
   {% else %}
