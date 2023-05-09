@@ -103,6 +103,7 @@ product_controller.findByFilter = async (req, res) => {
       data: []
     }
     const {filter} = req.body
+    console.log(filter)
     const products = await Product.find(filter)
     if(!products.length){
       return res.status(response.status).json(response)
