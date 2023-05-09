@@ -286,3 +286,12 @@ messages = {
   'login':  'Accede a tu cuenta',
   'regist': 'Crea una cuenta',
 }
+
+pages = [
+  'Error404',
+  'VentasDetal',
+  'VentasMayor',
+  'Acceso',
+  'DecripcionProducto',
+  'Busqueda',
+]
