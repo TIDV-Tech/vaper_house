@@ -13,19 +13,13 @@
   {{ sections.header_section(logo.base, saldo, user, options, warning_msg) }}
 {% endblock %}
 
-{% block carousel %}
-  {{ sections.images_carousel(images) }}
-{% endblock %}
-
-{% block categories %}
-    <div class="categories-container">
-      {{ sections.category_section(categories) }}
-    </div>
-  </section>
-{% endblock %}
-
 {% block products %}
-  {{ sections.products_section(products, show_content=True) }}
+  {{ search.data }}
+  {% if params == None %}
+    <h2>No se encontró ningún producto relacionado</h2>
+  {% else %}
+    <h2>Hola putas</h2>
+  {% endif %}
 {% endblock %}
 
 {% block footer %}

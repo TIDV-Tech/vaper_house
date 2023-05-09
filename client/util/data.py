@@ -191,8 +191,9 @@ data = {
 }
 
 messages = {
-  'error': 'Error: Página no encontrada',
-  'index': 'Bienvenido - Encuentra todo para tu vapeo',
-  'mayor': 'Bienvenido - Ventas al mayor',
-  'cart':  'Carrito de ventas',
+  'error':  'Error: Página no encontrada',
+  'index':  'Bienvenido - Encuentra todo para tu vapeo',
+  'mayor':  'Bienvenido - Ventas al mayor',
+  'cart':   'Carrito de ventas',
+  'search': 'Resultados de tu busqueda',
 }

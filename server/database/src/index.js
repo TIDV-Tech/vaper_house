@@ -1,4 +1,5 @@
 import "dotenv/config"
+import cors                 from 'cors'
 import express              from "express"
 import { user_router }      from "./routes/user.routes.js"
 import { product_router }   from "./routes/product.routes.js"
@@ -18,5 +19,9 @@ app.use(product_router)
 app.use(review_router)
 app.use(purchase_router)
 app.use(cart_router)
+app.use(cors({
+  origin: '*',
+  methods: ['get', 'post']
+}))
 
 app.listen(port, () => console.log(`DB microservice running on ${url}:${port}`))

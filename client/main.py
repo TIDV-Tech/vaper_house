@@ -1,5 +1,6 @@
 from flask     import *
 from util.data import *
+import requests
 
 app = Flask(__name__)
 
@@ -28,10 +29,34 @@ def mayor ():
                           **data, \
                           message=messages['mayor'])
 
-@app.route('/producto/<int:id_article>')
-def producto (id_article):
+@app.route('/producto/<int:id_article>', methods=['GET'])
+def product (id_article):
   return render_template('/pages/cart.html', \
                           name='DecripcionProducto', \
                           **data, \
                           id=id_article-1, \
                           message=messages['cart'])
+
+@app.route('/buscar', methods=['GET'])
+def search ():
+  if request.args:
+    search = request.args['search']
+
+    filtro = {
+      "filter": [
+        {"name": search},
+        {"description": search},
+        {"brand": search},
+        {"type": search}
+      ]
+    }
+
+    data_search = requests.post('http://localhost:5001/product', json=filtro)
+
+    return render_template('/pages/search.html', \
+                            name='Busqueda', \
+                            **data, \
+                            search=data_search.text, \
+                            message=messages['search'])
+  else:
+    return redirect('/home')
