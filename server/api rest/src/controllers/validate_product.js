@@ -58,49 +58,17 @@ const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, prec
   }
 }
 
-const editProduct = ( id_product, tipo_producto, nombre, descripcion,marca, cantidad, precio, img, fecha_ingreso, product ) => {
+const editProducts = ( newData ) => {
   try {
-    let message = {
-      status: true,
-      message: "There are no registered products",
-      code: 200,
-    }
-
-    const product = {
-      id_product,
-      tipo_producto,
-      nombre,
-      descripcion,
-      marca,
-      cantidad,
-      precio,
-      img,
-      fecha_ingreso
-    }
-
-    if ( id_product == "" || tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || fecha_ingreso == "" || img == "" ){
-      message = {
+    if ( newData.name == "" || newData.description == "" || newData.type == "" || newData.brand == "" || newData.img == "" || newData.quantity == "" || newData.price == "" || newData.promotionPrice == "" ){
+      let message = {
         status: false,
         message: "Fields cannot be left empty",
         code: 202,
       }
-    }
-    if (id_product != product.id_product) {
-      message = {
-        status: false,
-        message: "This product does not exist",
-        code: 202,
-      }
-    } else {
-      message = {
-        status: true,
-        message: "The product has been successfully modified",
-        code: 200,
-        data: product
-      }
-    }
 
-    return message
+      return message 
+    }
   } catch (err) {
     let message = {
       msg: "Something went wrong...",
@@ -113,5 +81,5 @@ const editProduct = ( id_product, tipo_producto, nombre, descripcion,marca, cant
 
 module.exports = {
   regisProduct,
-  editProduct,
+  editProducts,
 }
