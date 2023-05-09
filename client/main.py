@@ -29,6 +29,21 @@ def mayor ():
                           **data, \
                           message=messages['mayor'])
 
+@app.route('/acceder', methods=['GET'])
+def acceso ():
+  if request.args:
+    page = request.args['page']
+    msg = messages['regist']
+    msg = messages['login'] if page == 'login' else msg
+
+    return render_template('/pages/acceso.html', \
+                            name='Acceso', \
+                            **data, \
+                            page=page, \
+                            message=msg)
+  else:
+    return redirect('/home')
+
 @app.route('/producto/<int:id_article>', methods=['GET'])
 def product (id_article):
   return render_template('/pages/cart.html', \
@@ -56,7 +71,7 @@ def search ():
     return render_template('/pages/search.html', \
                             name='Busqueda', \
                             **data, \
-                            search=data_search.text, \
+                            search=data_search.json(), \
                             message=messages['search'])
   else:
     return redirect('/home')
