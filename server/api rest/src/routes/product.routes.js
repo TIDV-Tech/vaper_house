@@ -7,13 +7,14 @@ const router     = Router()
 router.post(_var.REG_PRO, async (req, res) => {
   try {
   const { param } = req. params
-  const { productId, nombre, descripcion, tipo_producto, marca, cantidad, precio, promocion } = req.body
+  const { productId, nombre, descripcion, tipo_producto, marca, img, cantidad, precio, promocion } = req.body
   axios.post('http://localhost:5001/register/product', {
     productId: productId,
     name: nombre,
     description: descripcion,
     type: tipo_producto,
     brand: marca,
+    img: img,
     quantity: cantidad,
     price: precio,
     promotionPrice: promocion
@@ -27,7 +28,10 @@ router.post(_var.REG_PRO, async (req, res) => {
 router.get(_var.VIEW_PRO, async (req, res) => {
   try {
     const product = await axios.get('http://localhost:5001/products')
-    res.send(product.data)
+    .then((result) => {
+      res.send(product.data)
+    })
+    .catch((err) => { console.log(err) })
   } catch (err) { console.log(err) }
 })
 
@@ -39,12 +43,25 @@ router.post(_var.EDIT_PRO, async (req, res) => {
       newData
     }
 
-    const editProduct = axios.post('http://localhost:5001/update/product', obj)
-    .then((result) => {
-      res.send({ "msg": "Product updated successfully!",
-    "status": 200, "data": obj })
-    })
-    .catch((err) => { console.log(err) })
+    const product = await controller.editProducts(newData)
+    if (product) {
+      return(res.status(product.code).json(product))
+    } 
+      const editProduct = axios.post('http://localhost:5001/update/product', obj)
+      .then((result) => {
+        res.send({ 
+          msg: "Product updated successfully!",
+          status: 200, 
+          data: obj 
+        })
+      })
+      .catch((err) => { 
+        res.send({
+          msg: "Something went wrong...",
+          status: 400, 
+          error: 'Cast to ObjectId failed for value "" (type string) at path "_id" for model "product"'
+        }) 
+      })
   } catch (err) { console.log(err) }
 })
 

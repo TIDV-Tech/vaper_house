@@ -1,4 +1,4 @@
-const carValidate = (products , obj) => {
+const carValidate = (car, productId, quantityProducts) => {
   try {
     let message = {
       code: 200,
@@ -6,28 +6,49 @@ const carValidate = (products , obj) => {
       msg: "There are no registered products"
     }
 
-    let id_product = obj.info[0].id_product  
-    let cant_prod = obj.info[0].cant_prod
+    for (let i = 0; i < car.length; i++) {
+      const e = car[i]
+      console.log(e.quantity)
+      if (productId === e._id && quantityProducts > e.quantity) {
+        message = {
+          code: 200,
+          status: false,
+          msg: `This quantity of products is not found ${e.name}}`
+        }
+      } else if(productId === e._id && quantityProducts <= e.quantity) {
+        let cant = quantityProducts - e.quantity
+        if (cant > 0) {
+          console.log('no')
+        } 
+        message = {
+          code: 200,
+          status: true,
+          msg: "Product added to shopping cart successfully"
+        }
+      }
+    }
 
-    function searchProd(prod , id_product){
-      return prod.id === id_product
+    /* function searchProd(prod , car){
+      return prod.quantity === car
     }
   
-    let prod_find = products.find(prod => searchProd(prod, id_product))
+    let prod_find = car.find(prod => searchProd(prod, car))
+    console.log(prod_find) */
    
-    if(!prod_find){
+    /* if(!prod_find){
       message = {
         code: 200,
         status: true, 
         msg: "Product not found" 
       }
-    } else if(cant_prod > prod_find.cantidad){
-      message = { 
+    } else if( quantityProducts < car.quantity ){
+      /* message = { 
         code: 200,
         status: false, 
         msg: "This quantity of products is not found" 
-      }
-    } else if (prod_find && cant_prod <= prod_find.cantidad){
+      } 
+      console.log('no')
+    } /*else if (prod_find && cant_prod <= prod_find.cantidad){
       message = { 
         code: 200,
         status: true, 
@@ -40,10 +61,17 @@ const carValidate = (products , obj) => {
         status: false,
         msg: "Something went wrong"
       }
-    }
+    }*/
   
     return message
-  } catch (err) { throw err }
+  } catch (err) { 
+      let message = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: err.message,
+    }
+    return message 
+  }
 }
 
-module.exports = { carValidate }
+module.exports = { carValidate }
