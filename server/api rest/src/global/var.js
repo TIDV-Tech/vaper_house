@@ -32,6 +32,9 @@ const ADDCAR             = process.env.ADD_CAR
 // JSONWEBTOKEN
 const KEY                = process.env.KEY
 
+// DATABASE
+const CONNECT_DB         = process.env.CONNECT_DATABASE
+
 module.exports = {
 	URL, PORT,
 	ROOT, REGISTER, LOGIN, 
@@ -39,5 +42,6 @@ module.exports = {
 	REG_PRO, VIEW_PRO, VIEW_ALL_PRO,EDIT_PRO, DELETE_PRO,
 	GENERATE_PURCHASES, GENERATE_INVOICE,
 	ADDCAR,
-	KEY
+	KEY,
+	CONNECT_DB
 }

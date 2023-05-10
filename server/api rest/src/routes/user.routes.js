@@ -9,31 +9,41 @@ router.get(_var.ROOT, (req, res) => {
 })
 
 router.post(_var.REGISTER, async (req, res) => {
-	try {
-		const { userId, fullName , email , dateBirth, password } = req.body
+  try {
+    const { userId, fullName, email, dateBirth, password } = req.body
 
-		const validate = await controller.checkRegister( fullName , email , dateBirth, password )
-		res.status(validate.code).json(validate)
+    const users = await axios.get(`${_var.CONNECT_DB}users`)
+		const inf   = users.data.data
 
-		const info = await axios.post('http://localhost:5001/register/user', {
-			userId: userId,
-		 	fullName: validate.data.fullName, 
-		 	email: validate.data.email,  
-		 	dateBirth: new Date(validate.data.dateBirth),
-		 	password: validate.data.password
-		 })
-		 console.log(info) 
-	
-	} catch (err) { 
-		console.log(err)
-	}
+		const user = inf.find(u => u.email === email)
+		if (user) {
+			res.status(400).json({ message: 'Email already exists' })
+		} else {
+			const validate = await controller.checkRegister( fullName , email , dateBirth, password )
+			const info = await axios.post(`${_var.CONNECT_DB}register/user`, {
+				userId: userId,
+				fullName: validate.data.fullName,
+				email: validate.data.email,
+				dateBirth: new Date(validate.data.dateBirth),
+				password: validate.data.password
+			})
+			res.status(validate.code).json(validate)
+		}
+  } catch (err) {
+    handleError(err, res)
+  }
 })
+
+async function handleError(err, res) {
+  console.error(err)
+  res.status(500).json({ error: 'Internal server error' })
+}
 
 router.post(_var.LOGIN, async (req, res) => {
 	try {
 		const { email, password } = req.body
 
-		const response = await axios.get('http://localhost:5001/users', {
+		const response = await axios.get(`${_var.CONNECT_DB}users`, {
 			params: {
 				email: email,
 				password: password
@@ -52,9 +62,9 @@ router.post(_var.LOGIN, async (req, res) => {
 
 router.get(_var.VIEW_ALL_USER, async (req, res) => {
 	try {
-    const users = await axios.get('http://localhost:5001/users')
+    const users = await axios.get(`${_var.CONNECT_DB}users`)
 		.then((result) => {
-			res.send(users.data)
+			res.send(result.data)
 		})
 		.catch((err) => { console.log(err) })
   } catch (err) { console.log(err) }
@@ -62,40 +72,63 @@ router.get(_var.VIEW_ALL_USER, async (req, res) => {
 
 router.post(_var.VIEW_USER, async (req, res) => {
 	try {
-    
+    const { filter } = req.body
+
+		const user = await axios.post(`${_var.CONNECT_DB}user`, { filter })
+		.then((result) => {
+			res.send(result.data)
+		})
+		.catch((err) => {
+			console.log(err)
+		})
   } catch (err) { console.log(err) }
 })
-
 
 router.post(_var.EDIT_USER, async (req, res) => {
 	try {
 		const { userId, newData } = req.body 
-		const obj = {
-		  userId,
-			newData
-		}
 		
-		const editUser = await axios.post('http://localhost:5001/update/user', obj)
+		const edit = await controller.editUser(newData)
+		if (edit.code === 202) {
+			res.send(res.status(edit.code).json(edit))
+		} else if(edit.code === 200) {
+			const editUser = await axios.post(`${_var.CONNECT_DB}update/user`, {
+			userId: userId,
+      newData: {
+				fullName: edit.data.fullName,
+        email: edit.data.email,
+        dateBirth: new Date(edit.data.dateBirth),
+        password: edit.data.password
+			}
+		})
 		.then((result) => {
-			res.send({ "msg": "Updated successfully!", "status": 200, "data": obj })
-		}).catch((err) => {
+			res.send({
+				msg: result.data.msg, 
+				status: result.data.status, 
+				data: edit.data
+			})
+		})
+		.catch((err) => {
 			console.log(err)
 		})
-		/* let user = await controller.editUser( id_user , fullname, email, dateBirth, password , info )
-		res.send(user) */
-	  } catch (err) { console.log(err) }	
+		}
+
+	} catch (err) { console.log(err) }	
 })
 
 router.get(_var.DELETE_USER, async (req, res) => {
 	try {
 		const { userId } = req.body
-		const deleteUser = await axios.post('http://localhost:5001/delete/user', { userId })
+		const deleteUser = await axios.post(`${_var.CONNECT_DB}delete/user`, { userId })
 		.then((result) => {
-      res.send({ "msg": "Deleted successfully!", "status": 200, "data": userId })
-    }).catch((err) => {
-      console.log(err)
-    })
+			console.log(result)
+      res.send({
+				msg: result.data.msg,
+				status: result.data.status,
+				data: userId
+			})
+    }).catch((err) => { console.log(err) })
 	} catch (err) { console.log(err) }
 })
 
-module.exports = router
+module.exports = router
