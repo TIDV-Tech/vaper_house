@@ -26,8 +26,11 @@ data = {
       'css': [
         'root.css',
         '404.min.css',
-        'main.min.css'
-        'footer.min.css'
+        'main.min.css',
+        'footer.min.css',
+      ],
+      'js': [
+        'search.js',
       ]
     },
     'VentasDetal': {
@@ -36,14 +39,15 @@ data = {
         'flickity.min.css',
         'carousel.min.css',
         'main.min.css',
-        'categories.css',
+        'categories.min.css',
         'products.min.css',
         'modal.min.css',
-        'footer.min.css'
+        'footer.min.css',
       ],
       'js': [
         'flickity.min.js',
-        'confirm_age.js'
+        'confirm_age.js',
+        'search.js',
       ]
     },
     'VentasMayor': {
@@ -55,23 +59,25 @@ data = {
         'categories2.css',
         'products.min.css',
         'modal.min.css',
-        'footer.min.css'
+        'footer.min.css',
       ],
       'js': [
         'flickity.min.js',
-        'confirm_age.js'
+        'confirm_age.js',
+        'search.js',
       ]
     },
     'Acceso': {
       'css': [
+        'root.css',
         'font-awesome/css/font-awesome.min.css',
         'acceso-util.min.css',
-        'acceso.min.css'
+        'acceso.min.css',
       ],
       'js': [
         'jquery.min.js',
         'tilt.jquery.min.js',
-        'acceso.js'
+        'acceso.js',
       ]
     },
     'DecripcionProducto': {
@@ -80,11 +86,12 @@ data = {
         'main.min.css',
         'modal.min.css',
         'products.min.css',
-        'footer.min.css'
+        'footer.min.css',
       ],
       'js': [
         'confirm_age.js',
-        'product.js'
+        'product.js',
+        'search.js',
       ]
     },
     'Busqueda': {
@@ -93,11 +100,12 @@ data = {
         'main.min.css',
         'modal.min.css',
         'products.min.css',
-        'footer.min.css'
+        'footer.min.css',
+        'search.min.css',
       ],
       'js': [
         'confirm_age.js',
-        'search.js'
+        'search.js',
       ]
     },
   },

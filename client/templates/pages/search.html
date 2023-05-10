@@ -5,7 +5,7 @@
 {% block title %} {{ super() }} {% endblock %}
 
 {% block styles %}
-  {{ files.render_links(styles) }}
+  {{ files.render_links(sheets[name]['css']) }}
   {{ files.link_external(external) }}
 {% endblock %}
 
@@ -14,14 +14,53 @@
 {% endblock %}
 
 {% block products %}
-  {{ search }}
   {% if search['data'] %}
-  <div class="container-search">
-    <h2>Hola putas</h2>
-  </div>
+    <div class="container-main">
+      <h1 class="busqueda">Resultados de la busqueda: <i>{{ q }}</i></h1><br>
+      <p class="resu">Mostrando {{ cnt }} resultados</p>
+      <hr>
+      <p class="line"></p>
+
+      <div class="container-search">
+        {% for element in search['data'] %}
+          <a href="#">
+            <div class="element">
+              <div class="top-left">
+                Vaper
+              </div>
+              <div class="image">
+                <img src="/static/{{ products[1]['img'] }}" alt="">
+              </div>
+              <div class="title">
+                <h3>{{ element.name }}</h3>
+                <h5>[ {{ element.brand }} ]</h5>
+              </div>
+              <div class="description">
+                <p>{{ element.description }}</p>
+              </div>
+              <div class="price">
+                {% if element.promotion %}
+                  <span class="subrayado">${{ element.price }}</span>
+                  <span class="price-promo">${{ element.promotionPrice }}</span>
+                {% else %}
+                  <span class="price">${{ element.price }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
   {% else %}
-    {{ name }}
-    <h2>No se encontró ningún producto relacionado</h2>
+    <div class="container-main">
+      <h1 class="busqueda center">No se encontró ningún resultado relacionado a: <i>{{ q }}</i></h1><br>
+      <p class="resu center">Intenta con otra palabra clave</p>
+      <hr>
+      <p class="line"></p>
+
+      <h1 class="busqueda center">Otros productos relacionados:</h1><br>
+      {{ sections.products_section(products, show_content=True) }}
+    </div>
   {% endif %}
 {% endblock %}
 
@@ -34,5 +73,5 @@
 {% endblock %}
 
 {% block scripts %}
-  {{ files.render_scripts(script) }}
+  {{ files.render_scripts(sheets[name]['js']) }}
 {% endblock %}

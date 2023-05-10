@@ -35,3 +35,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500&display=swap');
+
+::-webkit-scrollbar {
+  background-color: white;
+  width: 8px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb { 
+  background-color: rgb(161, 161, 161);
+  border-radius: 10px;
+}

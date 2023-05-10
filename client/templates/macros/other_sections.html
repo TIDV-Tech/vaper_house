@@ -121,7 +121,7 @@
     <div class="hd2">
       <div class="hd2_up">
         <div class="hd2_up_left">
-          <input type="search" placeholder="Encuentra todo para tu vapeo...">
+          <input type="search" id="search_val" placeholder="Encuentra todo para tu vapeo...">
           <i class='bx bx-search'></i>
         </div>
         <div class="hd2_up_right">
@@ -171,7 +171,7 @@
 {% endmacro %}
 
 {% macro modal() %}
-  <div class="modal_bg">
+  <div class="modal_bg" style="display: none;">
     <div class="loader"></div>
     <div class="modal_content">
       <h1>ADVERTENCIA</h1>
