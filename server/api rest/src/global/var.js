@@ -18,7 +18,8 @@ const DELETE_USER        = process.env.DELETE_USER
 // - PRODUCTS
 const REG_PRO            = process.env.REG_PRO
 const VIEW_PRO           = process.env.VIEW_PRO
-const VIEW_ALL_PRO       = process.env.VIEW_ALL_PRO
+const VIEW_PRO_LIMIT     = process.env.VIEW_PRO_LIMIT
+const VIEW_PRODUCTS     = process.env.VIEW_PRODUCTS 
 const EDIT_PRO           = process.env.EDIT_PRO
 const DELETE_PRO         = process.env.DELETE_PRO
 
@@ -39,7 +40,7 @@ module.exports = {
 	URL, PORT,
 	ROOT, REGISTER, LOGIN, 
 	VIEW_USER, VIEW_ALL_USER,EDIT_USER, DELETE_USER,
-	REG_PRO, VIEW_PRO, VIEW_ALL_PRO,EDIT_PRO, DELETE_PRO,
+	REG_PRO, VIEW_PRO, VIEW_PRO_LIMIT, VIEW_PRODUCTS , EDIT_PRO, DELETE_PRO,
 	GENERATE_PURCHASES, GENERATE_INVOICE,
 	ADDCAR,
 	KEY,

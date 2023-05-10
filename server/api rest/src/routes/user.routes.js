@@ -71,14 +71,18 @@ router.get(_var.VIEW_ALL_USER, async (req, res) => {
 
 router.post(_var.VIEW_USER, async (req, res) => {
 	try {
-    const { filter } = req.body
+    const { userId } = req.body
 
-		const user = await axios.post(`${_var.CONNECT_DB}user`, { filter })
+		const user = await axios.post(`${_var.CONNECT_DB}user/id`, { userId } )
 		.then((result) => {
-			res.send(result.data)
+			res.send({
+				msg: result.data.msg,
+				status: result.data.status,
+				data: userId
+			})
 		})
 		.catch((err) => {
-			console.log(err)
+			res.send(err.response.data)
 		})
   } catch (err) { console.log(err) }
 })

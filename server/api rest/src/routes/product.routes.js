@@ -25,13 +25,29 @@ router.post(_var.REG_PRO, async (req, res) => {
   } catch (err) { console.log(err) }
 })
 
-router.get(_var.VIEW_ALL_PRO, async (req, res) => {
+router.get(_var.VIEW_PRO_LIMIT, async (req, res) => {
   try {
-    const products = await axios.get(`${_var.CONNECT_DB}products`)
+    const { limit } = req.body
+    const products = await axios.post(`${_var.CONNECT_DB}products`,
+    {limit})
     .then((result) => {
       res.send(result.data)
     })
-    .catch((err) => { console.log(err) })
+    .catch((err) => { 
+      res.send(err.response)
+    })
+  } catch (err) { console.log(err) }
+})
+
+router.get(_var.VIEW_PRODUCTS, async (req, res) => {
+  try {
+    const product = await axios.get(`${_var.CONNECT_DB}products/recent`)
+    .then((result) => {
+      res.send(result.data)
+    })
+    .catch((err) => {
+      res.send(err.response)
+    })
   } catch (err) { console.log(err) }
 })
 
@@ -39,12 +55,12 @@ router.post(_var.VIEW_PRO, async (req, res) => {
   try {
     const { filter } = req.body
 
-    const product = await axios.post(`${_var.CONNECT_DB}product`, {filter})
+    const product = await axios.post(`${_var.CONNECT_DB}product/filter`, { filter })
     .then((result) => {
-      res.send(result.data.data)
+      res.send(result.data)
     })
     .catch((err) => {
-      console.log(err)
+      res.send(err.response)
     })
   } catch (err) { console.log(err) }
 })
@@ -64,17 +80,13 @@ router.post(_var.EDIT_PRO, async (req, res) => {
       const editProduct = axios.post(`${_var.CONNECT_DB}update/product`, obj)
       .then((result) => {
         res.send({ 
-          msg: "Product updated successfully!",
-          status: 200, 
+          msg: result.data.msg,
+          status: result.data.status, 
           data: obj 
         })
       })
       .catch((err) => { 
-        res.send({
-          msg: "Something went wrong...",
-          status: 400, 
-          error: 'Cast to ObjectId failed for value "" (type string) at path "_id" for model "product"'
-        }) 
+        res.send(res.send(err.response)) 
       })
   } catch (err) { console.log(err) }
 })
@@ -84,9 +96,15 @@ router.post(_var.DELETE_PRO, async (req, res) => {
     const { productId } = req.body
     const deleteProduct = axios.post(`${_var.CONNECT_DB}delete/product`, { productId })
     .then((result) => {
-      res.send({ "msg": "Product deleted successfully", "status": 200, "data": productId })
+      res.send({ 
+        msg: result.data.msg, 
+        status: result.data.status,
+        data: productId 
+      })
     })
-    .catch((err) => { console.log(err) })
+    .catch((err) => { 
+      res.send(err.response)
+    })
   } catch (err) { console.log(err) }
 })
 
