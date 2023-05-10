@@ -55,8 +55,6 @@ const checkLogin = async (email, password , info) => {
 
     const user = info.find(u => u.email === email)
 
-    
-
     if (user === undefined) {
       message = {
         code: 200,
@@ -64,8 +62,15 @@ const checkLogin = async (email, password , info) => {
         message: "Incorrect email or password",
       }
     }
+    if (email == "" || password == "") {
+      message = {
+        status: false,
+        message: "Fields cannot be left empty",
+        code: 202,
+      }
+    }
     if (user) {
-      const compPasword    = await bcrypt.compare(password, user.password)
+      const compPasword = await bcrypt.compare(password, user.password)
       if (compPasword === false) {
         message = {
           code: 200,
@@ -81,10 +86,9 @@ const checkLogin = async (email, password , info) => {
         }
       } 
     }
-    
+
     return message
   } catch (error) { 
-    console.error(error)
     return {
       success: false,
       message: "Something went wrong...",
@@ -93,47 +97,36 @@ const checkLogin = async (email, password , info) => {
   }
 }
 
-const editUser = ( id_user , fullname , email , dateBirth , password , info ) => {
+const editUser = async ( newData ) => {
 	try {
-    let message = {
-      status: true,
-      message: "There is no registered user",
-      code: 200
-    }
-
-    const info = {
-      id_user,
-      fullname,
-      email,
-      dateBirth,
-      password,
-    }
-
-    if (id_user == "" || fullname == "" || email == "" || dateBirth == "" || password == "") {
-      message = {
+    if ( newData.fullName == "" || newData.email == "" || newData.dateBirth == "" || newData.password == "" ) {
+      let message = {
         status: false,
         message: "Fields cannot be left empty",
         code: 202,
       }
-    }
-    if(id_user != info.id_user){
-      message = {
-        status: false,
-        message: "This user does not exist",
-        code: 202,
-      }
-    }
-    else{
-      message = {
-        status: true,
-        message: "The user has been successfully edited",
-        code: 200,
-        data: info
-      }
-    }
 
-    return message
-	} catch (err) { console.log(err) }
+      return message
+    }
+    if (newData.password) {
+      const pass = await bcrypt.hash(newData.password, 10)
+      let message = {
+        code: 200,
+        status: true,
+        message: "Successful user registration",
+        data: {
+          fullName: newData.fullName,
+          email: newData.email,
+          dateBirth: newData.dateBirth,
+          password: pass
+        }
+      }
+
+      return message
+    }
+	} catch (err) { 
+    console.log(err)
+  }
 }
 
 module.exports = {

@@ -14,6 +14,7 @@ def page_not_found(e):
 
 @app.route(ROOT)
 def index ():
+  print(ROOT, PRODUCT, ACCESS)
   return render_template('/pages/home_detal.html', \
                           name=pages[1], \
                           **data, \
@@ -66,13 +67,15 @@ def search ():
         {"type": search}
       ]
     }
-
-    data_search = requests.post('http://localhost:5001/product', json=filtro)
-
+    
+    data_search = requests.post(DATABASE+PRD_END, json=filtro).json()
+    
     return render_template('/pages/search.html', \
                             name=pages[5], \
                             **data, \
-                            search=data_search.json(), \
+                            search=data_search, \
+                            q=search, \
+                            cnt=len(data_search['data']), \
                             message=messages['search'])
   else:
     return redirect(HOME)

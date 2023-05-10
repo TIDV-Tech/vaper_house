@@ -5,7 +5,7 @@
 {% block title %} {{ super() }} {% endblock %}
 
 {% block styles %}
-  {{ files.render_links(styles) }}
+  {{ files.render_links(sheets[name]['css']) }}
   {{ files.link_external(external) }}
 {% endblock %}
 
@@ -31,4 +31,8 @@
 
 {% block footer %}
   {{ sections.footer(info, politica, social, direccion, contacto, numeros) }}
+{% endblock %}
+
+{% block scripts %}
+  {{ files.render_scripts(sheets[name]['js']) }}
 {% endblock %}

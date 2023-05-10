@@ -24,7 +24,11 @@
           <span class="title-product-description">{{ products[id].name }}</span>
         </div>
         <div class="price-div">
-          <span class="price-product-description">{{ products[id].price }}$</span>
+          {% if user %}
+            <span class="price-product-description">{{ products[id].price }}$</span>
+          {% else %}
+            <span class="price-product-description"><a href="/acceso?page=login">Accede para ver los precios</a></span>
+          {% endif %}
         </div>
         <hr>
         <div class="container-details-product">

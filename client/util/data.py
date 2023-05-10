@@ -26,9 +26,9 @@ data = {
       'css': [
         'root.css',
         '404.min.css',
-        'main.min.css'
-        'footer.min.css'
-      ]
+        'main.min.css',
+        'footer.min.css',
+      ],
     },
     'VentasDetal': {
       'css': [
@@ -36,14 +36,14 @@ data = {
         'flickity.min.css',
         'carousel.min.css',
         'main.min.css',
-        'categories.css',
+        'categories.min.css',
         'products.min.css',
         'modal.min.css',
-        'footer.min.css'
+        'footer.min.css',
       ],
       'js': [
         'flickity.min.js',
-        'confirm_age.js'
+        'confirm_age.min.js',
       ]
     },
     'VentasMayor': {
@@ -55,23 +55,24 @@ data = {
         'categories2.css',
         'products.min.css',
         'modal.min.css',
-        'footer.min.css'
+        'footer.min.css',
       ],
       'js': [
         'flickity.min.js',
-        'confirm_age.js'
+        'confirm_age.min.js',
       ]
     },
     'Acceso': {
       'css': [
+        'root.css',
         'font-awesome/css/font-awesome.min.css',
         'acceso-util.min.css',
-        'acceso.min.css'
+        'acceso.min.css',
       ],
       'js': [
         'jquery.min.js',
         'tilt.jquery.min.js',
-        'acceso.js'
+        'acceso.js',
       ]
     },
     'DecripcionProducto': {
@@ -80,11 +81,11 @@ data = {
         'main.min.css',
         'modal.min.css',
         'products.min.css',
-        'footer.min.css'
+        'footer.min.css',
       ],
       'js': [
-        'confirm_age.js',
-        'product.js'
+        'confirm_age.min.js',
+        'product.js',
       ]
     },
     'Busqueda': {
@@ -93,16 +94,16 @@ data = {
         'main.min.css',
         'modal.min.css',
         'products.min.css',
-        'footer.min.css'
+        'footer.min.css',
+        'search.min.css',
       ],
       'js': [
-        'confirm_age.js',
-        'search.js'
+        'confirm_age.min.js',
       ]
     },
   },
   'saldo': 0.00,
-  'user': 'Acceder',
+  'user': '',
   'warning_msg': '''Advertencia: Prohibida la venta a menores de 18 años.
     Algunos productos contienen nicotina, una sustancia
     altamente adictiva''',

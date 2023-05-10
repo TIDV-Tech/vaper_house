@@ -9,7 +9,7 @@ router.post(_var.ADDCAR, async(req,res)=>{
 	try {
 		const { userId, productId, quantityProducts } = req.body
 		
-		const allProduct = await axios.get('http://localhost:5001/products')
+		const allProduct = await axios.get(`${_var.CONNECT_DB}products`)
 		.then((result) => {
 			let car = result.data.data
 			const validate = funct.carValidate(car, productId, quantityProducts)
@@ -19,7 +19,7 @@ router.post(_var.ADDCAR, async(req,res)=>{
 			console.log(err)	
 		})
 
-		const product = await axios.post('http://localhost:5001/add/cart', {
+		const product = await axios.post(`${_var.CONNECT_DB}add/cart`, {
 			userId,
       productId,
 			quantityProducts
