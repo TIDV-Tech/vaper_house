@@ -14,11 +14,14 @@
 {% endblock %}
 
 {% block products %}
-  {{ search.data }}
-  {% if params == None %}
-    <h2>No se encontró ningún producto relacionado</h2>
-  {% else %}
+  {{ search }}
+  {% if search['data'] %}
+  <div class="container-search">
     <h2>Hola putas</h2>
+  </div>
+  {% else %}
+    {{ name }}
+    <h2>No se encontró ningún producto relacionado</h2>
   {% endif %}
 {% endblock %}
 

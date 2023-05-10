@@ -53,7 +53,10 @@ router.post(_var.LOGIN, async (req, res) => {
 router.get(_var.VIEW_ALL_USER, async (req, res) => {
 	try {
     const users = await axios.get('http://localhost:5001/users')
-		res.send(users.data)
+		.then((result) => {
+			res.send(users.data)
+		})
+		.catch((err) => { console.log(err) })
   } catch (err) { console.log(err) }
 })
 

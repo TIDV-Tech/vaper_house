@@ -1,0 +1,17 @@
+{% extends 'pages/base.html' %}
+{% import 'macros/import_files.html' as files %}
+{% import 'macros/acceso.html' as macros %}
+
+{% block title %} {{ super() }} {% endblock %}
+
+{% block styles %}
+  {{ files.render_links(sheets[name]['css']) }}
+{% endblock %}
+
+{% block products %}
+  {{ macros.main(page) }}
+{% endblock %}
+
+{% block scripts %}
+  {{ files.render_scripts(sheets[name]['js']) }}
+{% endblock %}

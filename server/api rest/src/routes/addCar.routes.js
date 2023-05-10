@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const axios      = require('axios')
 const _var       = require('../global/var.js')
 const funct      = require('../controllers/validate_car.js')
 const added      = require('../fileSystem/createFile.js')
@@ -6,29 +7,29 @@ const router     = Router()
 
 router.post(_var.ADDCAR, async(req,res)=>{
 	try {
-		const { id_user, id_product, cant_prod } = req.body
-		const obj = {
-			info: [{id_user, id_product, cant_prod}]
-		}
+		const { userId, productId, quantityProducts } = req.body
+		
+		const allProduct = await axios.get('http://localhost:5001/products')
+		.then((result) => {
+			let car = result.data.data
+			const validate = funct.carValidate(car, productId, quantityProducts)
+			res.status(validate.code).json(validate)
+		})
+		.catch((err) => {
+			console.log(err)	
+		})
 
-		const products  = [
-			{id: 1, cantidad: 10},
-			{id: 2, cantidad: 12},
-			{id: 3, cantidad: 13},
-			{id: 4, cantidad: 14}
-		]
-
-		const validate = await funct.carValidate(products , obj)
-		if(validate.code == 200) {
+		const product = await axios.post('http://localhost:5001/add/cart', {
+			userId,
+      productId,
+			quantityProducts
+		})
+		
+		/* if(validate.code == 200) {
 			const add = await added.addCar(obj)
 			res.status(validate.code).json(validate)
-		}
-
-		// // console.log(add)
-
-		
-
+		} */
 	} catch (err) { console.log(err) }
 })
 
-module.exports = router
+module.exports = router

@@ -20,9 +20,89 @@ data = {
   ],
   'styles': [link for link in links if '.' in link],
   'script': [script for script in scripts if '.' in script],
-  'images':  [file for file in files if '.' in file],
-  'saldo': 15.99,
-  'user': 'Andi M',
+  'images': [file for file in files if '.' in file],
+  'sheets': {
+    'Error404': {
+      'css': [
+        'root.css',
+        '404.min.css',
+        'main.min.css'
+        'footer.min.css'
+      ]
+    },
+    'VentasDetal': {
+      'css': [
+        'root.css',
+        'flickity.min.css',
+        'carousel.min.css',
+        'main.min.css',
+        'categories.css',
+        'products.min.css',
+        'modal.min.css',
+        'footer.min.css'
+      ],
+      'js': [
+        'flickity.min.js',
+        'confirm_age.js'
+      ]
+    },
+    'VentasMayor': {
+      'css': [
+        'root.css',
+        'flickity.min.css',
+        'carousel.min.css',
+        'main.min.css',
+        'categories2.css',
+        'products.min.css',
+        'modal.min.css',
+        'footer.min.css'
+      ],
+      'js': [
+        'flickity.min.js',
+        'confirm_age.js'
+      ]
+    },
+    'Acceso': {
+      'css': [
+        'font-awesome/css/font-awesome.min.css',
+        'acceso-util.min.css',
+        'acceso.min.css'
+      ],
+      'js': [
+        'jquery.min.js',
+        'tilt.jquery.min.js',
+        'acceso.js'
+      ]
+    },
+    'DecripcionProducto': {
+      'css': [
+        'root.css',
+        'main.min.css',
+        'modal.min.css',
+        'products.min.css',
+        'footer.min.css'
+      ],
+      'js': [
+        'confirm_age.js',
+        'product.js'
+      ]
+    },
+    'Busqueda': {
+      'css': [
+        'root.css',
+        'main.min.css',
+        'modal.min.css',
+        'products.min.css',
+        'footer.min.css'
+      ],
+      'js': [
+        'confirm_age.js',
+        'search.js'
+      ]
+    },
+  },
+  'saldo': 0.00,
+  'user': 'Acceder',
   'warning_msg': '''Advertencia: Prohibida la venta a menores de 18 años.
     Algunos productos contienen nicotina, una sustancia
     altamente adictiva''',
@@ -116,6 +196,7 @@ data = {
     {
       'id': 1,
       'name': 'LUXE 80',
+      'max': 6,
       'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 10.00
@@ -123,6 +204,7 @@ data = {
     {
       'id': 2,
       'name': 'Air Factory Eliquid 100mL',
+      'max': 7,
       'img': 'resources/products/descarga.jpeg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 30.00
@@ -130,6 +212,7 @@ data = {
     {
       'id': 3,
       'name': 'Titulo',
+      'max': 15,
       'img': 'resources/products/CBD_05_A.jpg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 9.99
@@ -137,6 +220,7 @@ data = {
     {
       'id': 4,
       'name': 'Titulo',
+      'max': 3,
       'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 15.00
@@ -144,6 +228,7 @@ data = {
     {
       'id': 5,
       'name': 'Titulo',
+      'max': 2,
       'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 11.00
@@ -151,6 +236,7 @@ data = {
     {
       'id': 6,
       'name': 'Vaper para machos pecho peluo',
+      'max': 5,
       'img': 'resources/products/descarga.jpeg',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 25.00
@@ -166,6 +252,7 @@ data = {
     {
       'id': 8,
       'name': 'Titulo',
+      'max': 3,
       'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
       'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
       'price': 17.50
@@ -196,4 +283,15 @@ messages = {
   'mayor':  'Bienvenido - Ventas al mayor',
   'cart':   'Carrito de ventas',
   'search': 'Resultados de tu busqueda',
+  'login':  'Accede a tu cuenta',
+  'regist': 'Crea una cuenta',
 }
+
+pages = [
+  'Error404',
+  'VentasDetal',
+  'VentasMayor',
+  'Acceso',
+  'DecripcionProducto',
+  'Busqueda',
+]

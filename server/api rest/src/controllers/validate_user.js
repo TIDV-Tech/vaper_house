@@ -45,7 +45,7 @@ const checkRegister = async (fullName, email, dateBirth, password) => {
   }
 }
 
-/* const checkLogin = async (email, password , info) => {
+const checkLogin = async (email, password , info) => {
   try {
     let message = {
       status: true,
@@ -53,83 +53,35 @@ const checkRegister = async (fullName, email, dateBirth, password) => {
       code: 200
     }
 
-    const pass = await bcrypt.hash(password, 10)
-    console.log(pass)
+    const user = info.find(u => u.email === email)
 
-    const searchUsersEmail = (cor, email, pass) => {
-      return cor.email === email && cor.pass === pass
-    }
-  
-    let cor_find = info.find(cor => searchUsersEmail(cor, email, pass))
-    console.log(cor_find)
+    
 
-    if (cor_find == undefined) { 
+    if (user === undefined) {
       message = {
         code: 200,
-        status: false,
-        message: "Wrong email or password"
+        status: true,
+        message: "Incorrect email or password",
       }
-    } else if (cor_find) {
-      if (email !== cor_find.email){
+    }
+    if (user) {
+      const compPasword    = await bcrypt.compare(password, user.password)
+      if (compPasword === false) {
         message = {
           code: 200,
           status: true,
-          message: "email no esta"
+          message: "Incorrect password",
+        }
+      }
+      if (user && compPasword === true) {
+        message = {
+          success: true,
+          message: "Correct, you are logged in",
+          code: 200
         }
       } 
-     if (pass !== cor_find.pass) {
-      message =  {
-        code: 200,
-        status: true,
-        message: "pass no esta"
-      }
-    } 
-    if (email == cor_find && pass == cor_find.pass) {
-      message = {
-        code: 200,
-        status: true,
-        message: "Correct, you are logged in"
-      }
     }
-    }
-    return message
-  } catch (err) { 
-    let message = {
-      msg: "Something went wrong...",
-      status: 400,
-      error: err.message
-    }
-    return message
-  }
-} */
-const checkLogin = async (email, password , info) => {
-  try {
-    console.log(info)
-
-    let message = {
-      status: true,
-      message: "There is no registered user",
-      code: 200
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10)
-    const compPasword    = await bcrypt.compare(password, hashedPassword)
-    const user = info.find(u => u.email === email && u.password === hashedPassword)
-    console.log(info[5].password.hashedPassword)
-
-    if (user) {
-      message = {
-        success: true,
-        message: "Correct, you are logged in",
-        code: 200
-      }
-    } else {
-      message = {
-        success: false,
-        message: "Wrong email or password",
-        code: 200
-    }
-  }
+    
     return message
   } catch (error) { 
     console.error(error)
@@ -187,5 +139,5 @@ const editUser = ( id_user , fullname , email , dateBirth , password , info ) =>
 module.exports = {
   checkRegister,
   checkLogin,
-  editUser
+  editUser
 }
