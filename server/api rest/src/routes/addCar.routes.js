@@ -9,7 +9,7 @@ router.post(_var.ADDCAR, async(req,res)=>{
 	try {
 		const { userId, productId, quantityProducts } = req.body
 		
-		const allProduct = await axios.get(`${_var.CONNECT_DB}products`)
+		const allProduct = await axios.get(`${_var.CONNECT_DB}products/recent`)
 		.then((result) => {
 			let car = result.data.data
 			const validate = funct.carValidate(car, productId, quantityProducts)
