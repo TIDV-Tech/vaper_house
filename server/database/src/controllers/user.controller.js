@@ -67,6 +67,7 @@ user_controller.findById = async(req, res) => {
       }
       return res.status(response.status).json(response)
     }
+    response.data = user
     return res.status(response.status).json(response)
   } catch (error) {
     let response = {

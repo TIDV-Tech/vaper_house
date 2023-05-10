@@ -6,19 +6,13 @@ const PORT               = process.env.PORT
 
 // ROUTES
 // - USER
-const ROOT               = process.env.ROOT
 const REGISTER           = process.env.REGISTER
 const LOGIN              = process.env.LOGIN
-
-const VIEW_USER          = process.env.VIEW_USER
-const VIEW_ALL_USER      = process.env.VIEW_ALL_USER
 const EDIT_USER          = process.env.EDIT_USER
 const DELETE_USER        = process.env.DELETE_USER
 
 // - PRODUCTS
 const REG_PRO            = process.env.REG_PRO
-const VIEW_PRO           = process.env.VIEW_PRO
-const VIEW_ALL_PRO       = process.env.VIEW_ALL_PRO
 const EDIT_PRO           = process.env.EDIT_PRO
 const DELETE_PRO         = process.env.DELETE_PRO
 
@@ -37,9 +31,8 @@ const CONNECT_DB         = process.env.CONNECT_DATABASE
 
 module.exports = {
 	URL, PORT,
-	ROOT, REGISTER, LOGIN, 
-	VIEW_USER, VIEW_ALL_USER,EDIT_USER, DELETE_USER,
-	REG_PRO, VIEW_PRO, VIEW_ALL_PRO,EDIT_PRO, DELETE_PRO,
+	REGISTER, LOGIN, EDIT_USER, DELETE_USER,
+	REG_PRO, EDIT_PRO, DELETE_PRO,
 	GENERATE_PURCHASES, GENERATE_INVOICE,
 	ADDCAR,
 	KEY,

@@ -119,6 +119,7 @@ product_controller.findById = async(req, res) => {
       }
       return res.status(response.status).json(response)
     }
+    response.data = product
     return res.status(response.status).json(response)
   } catch (error) {
     let response = {
@@ -137,17 +138,32 @@ product_controller.findByFilter = async (req, res) => {
       status: 200,
       data: []
     }
-    const {filter} = req.body
-    filter.map((elm,key) => {
-      let k = Object.keys(elm)
-      let m = filter[key][k]
-      let c = new RegExp(m)
-      filter[key][k] = c
-    })
-    const products = await Product.find({"$or": filter})
-    if(!products.length){ return res.status(response.status).json(response) }
+    const {filter}    = req.body
+    let foundProducts = []
+    if(filter.length){
+      filter.map((elm,key) => {
+        if(typeof elm == "string"){
+          let k = Object.keys(elm)
+          let m = filter[key][k]
+          let c = new RegExp(m)
+          filter[key][k] = c
+        }
+      })
+      foundProducts = await Product.find({"$or": filter})
+    }else{
+      if(typeof filter == "string"){
+        let k = Object.keys(filter)
+        let m = filter[k]
+        let c = new RegExp(m)
+        filter[k] = c
+        k = k[0]
+        foundProducts = await Product.find({[k]: {$regex: c}})
+      }
+      foundProducts = await Product.find(filter)
+    }
+    if(!foundProducts.length){ return res.status(response.status).json(response) }
     response.msg = "Here's the products" 
-    response.data = products
+    response.data = foundProducts
     return res.status(response.status).json(response)
   } catch (error) {
     let response = {
