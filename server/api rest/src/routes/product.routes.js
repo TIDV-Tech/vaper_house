@@ -25,46 +25,6 @@ router.post(_var.REG_PRO, async (req, res) => {
   } catch (err) { console.log(err) }
 })
 
-router.get(_var.VIEW_PRO_LIMIT, async (req, res) => {
-  try {
-    const { limit } = req.body
-    const products = await axios.post(`${_var.CONNECT_DB}products`,
-    {limit})
-    .then((result) => {
-      res.send(result.data)
-    })
-    .catch((err) => { 
-      res.send(err.response)
-    })
-  } catch (err) { console.log(err) }
-})
-
-router.get(_var.VIEW_PRODUCTS, async (req, res) => {
-  try {
-    const product = await axios.get(`${_var.CONNECT_DB}products/recent`)
-    .then((result) => {
-      res.send(result.data)
-    })
-    .catch((err) => {
-      res.send(err.response)
-    })
-  } catch (err) { console.log(err) }
-})
-
-router.post(_var.VIEW_PRO, async (req, res) => {
-  try {
-    const { filter } = req.body
-
-    const product = await axios.post(`${_var.CONNECT_DB}product/filter`, { filter })
-    .then((result) => {
-      res.send(result.data)
-    })
-    .catch((err) => {
-      res.send(err.response)
-    })
-  } catch (err) { console.log(err) }
-})
-
 router.post(_var.EDIT_PRO, async (req, res) => {
   try {
     const { productId, newData } = req.body 

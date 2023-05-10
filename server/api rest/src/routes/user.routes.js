@@ -4,10 +4,6 @@ const controller = require('../controllers/validate_user.js')
 const axios      = require('axios')
 const router     = Router()
 
-router.get(_var.ROOT, (req, res) => {
-	res.send("Hello World")	
-})
-
 router.post(_var.REGISTER, async (req, res) => {
   try {
     const { fullName, email, dateBirth, password } = req.body
@@ -59,34 +55,6 @@ router.post(_var.LOGIN, async (req, res) => {
 	}
 })
 
-router.get(_var.VIEW_ALL_USER, async (req, res) => {
-	try {
-    const users = await axios.get(`${_var.CONNECT_DB}users`)
-		.then((result) => {
-			res.send(result.data)
-		})
-		.catch((err) => { console.log(err) })
-  } catch (err) { console.log(err) }
-})
-
-router.post(_var.VIEW_USER, async (req, res) => {
-	try {
-    const { userId } = req.body
-
-		const user = await axios.post(`${_var.CONNECT_DB}user/id`, { userId } )
-		.then((result) => {
-			res.send({
-				msg: result.data.msg,
-				status: result.data.status,
-				data: userId
-			})
-		})
-		.catch((err) => {
-			res.send(err.response.data)
-		})
-  } catch (err) { console.log(err) }
-})
-
 router.post(_var.EDIT_USER, async (req, res) => {
 	try {
 		const { userId, newData } = req.body 
@@ -124,7 +92,6 @@ router.get(_var.DELETE_USER, async (req, res) => {
 		const { userId } = req.body
 		const deleteUser = await axios.post(`${_var.CONNECT_DB}delete/user`, { userId })
 		.then((result) => {
-			console.log(result)
       res.send({
 				msg: result.data.msg,
 				status: result.data.status,
