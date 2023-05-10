@@ -29,9 +29,6 @@ data = {
         'main.min.css',
         'footer.min.css',
       ],
-      'js': [
-        'search.js',
-      ]
     },
     'VentasDetal': {
       'css': [
@@ -47,7 +44,6 @@ data = {
       'js': [
         'flickity.min.js',
         'confirm_age.min.js',
-        'search.js',
       ]
     },
     'VentasMayor': {
@@ -64,7 +60,6 @@ data = {
       'js': [
         'flickity.min.js',
         'confirm_age.min.js',
-        'search.js',
       ]
     },
     'Acceso': {
@@ -91,7 +86,6 @@ data = {
       'js': [
         'confirm_age.min.js',
         'product.js',
-        'search.js',
       ]
     },
     'Busqueda': {
@@ -105,12 +99,11 @@ data = {
       ],
       'js': [
         'confirm_age.min.js',
-        'search.js',
       ]
     },
   },
   'saldo': 0.00,
-  'user': 'Acceder',
+  'user': '',
   'warning_msg': '''Advertencia: Prohibida la venta a menores de 18 años.
     Algunos productos contienen nicotina, una sustancia
     altamente adictiva''',

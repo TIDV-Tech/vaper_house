@@ -121,8 +121,12 @@
     <div class="hd2">
       <div class="hd2_up">
         <div class="hd2_up_left">
-          <input type="search" id="search_val" placeholder="Encuentra todo para tu vapeo...">
-          <i class='bx bx-search'></i>
+          <form class="form_search" action="/buscar">
+            <input type="search" name="search" placeholder="Encuentra todo para tu vapeo...">
+            <button type="submit" class="submit_search">
+              <i class='bx bx-search'></i>
+            </button>
+          </form>
         </div>
         <div class="hd2_up_right">
           <div>
@@ -148,8 +152,13 @@
             </div>
           </div>
           <div>
-            <span>{{ user }}</span>
-            <i class='bx bxs-user-circle icon'></i>
+            {% if user %}
+              <span>{{ user }}</span>
+              <i class='bx bxs-user-circle icon'></i>
+            {% else %}
+              <span><a href="/acceso?page=login">Acceder</a></span>
+              <i class='bx bxs-user-circle icon'></i>
+            {% endif %}
           </div>
         </div>
       </div>

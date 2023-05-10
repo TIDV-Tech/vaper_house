@@ -67,9 +67,9 @@ def search ():
         {"type": search}
       ]
     }
-
-    data_search = requests.post('http://localhost:5001/product', json=filtro).json()
-
+    
+    data_search = requests.post(DATABASE+PRD_END, json=filtro).json()
+    
     return render_template('/pages/search.html', \
                             name=pages[5], \
                             **data, \

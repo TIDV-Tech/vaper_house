@@ -23,7 +23,7 @@
 
       <div class="container-search">
         {% for element in search['data'] %}
-          <a href="#">
+          <a href="/producto/{{ element._id }}">
             <div class="element">
               <div class="top-left">
                 Vaper
@@ -39,11 +39,13 @@
                 <p>{{ element.description }}</p>
               </div>
               <div class="price">
-                {% if element.promotion %}
-                  <span class="subrayado">${{ element.price }}</span>
-                  <span class="price-promo">${{ element.promotionPrice }}</span>
-                {% else %}
-                  <span class="price">${{ element.price }}</span>
+                {% if user %}
+                  {% if element.promotion %}
+                    <span class="subrayado">${{ element.price }}</span>
+                    <span class="price-promo">${{ element.promotionPrice }}</span>
+                  {% else %}
+                    <span class="price">${{ element.price }}</span>
+                  {% endif %}
                 {% endif %}
               </div>
             </div>
