@@ -1,6 +1,7 @@
-from flask     import *
-from util.data import *
-from util.var  import *
+from flask            import *
+from util.data        import *
+from util.var         import *
+from util.controllers import *
 import requests
 
 app = Flask(__name__)
@@ -14,15 +15,13 @@ def page_not_found(e):
 
 @app.route(ROOT)
 def index ():
-  print(ROOT, PRODUCT, ACCESS)
+  if 'data_user' in session:
+    data['user'] = session['data_user']
+
   return render_template('/pages/home_detal.html', \
                           name=pages[1], \
                           **data, \
                           message=messages['index'])
-
-@app.route(HOME)
-def home ():
-  return redirect(ROOT)
 
 @app.route(MAYOR)
 def mayor ():
@@ -35,8 +34,8 @@ def mayor ():
 def acceso ():
   if request.args:
     page = request.args['page']
-    msg  = messages['regist']
-    msg  = messages['login'] if page == 'login' else msg
+    msg  = messages[page]
+    msg  = messages[page] if page == 'login' else msg
 
     return render_template('/pages/acceso.html', \
                             name=pages[3], \
@@ -44,7 +43,56 @@ def acceso ():
                             page=page, \
                             message=msg)
   else:
-    return redirect(HOME)
+    return render_template('/pages/acceso.html', \
+                            name=pages[3], \
+                            **data, \
+                            page='login', \
+                            message=messages['login'])
+  
+@app.route('/manage/<string:obj>/<string:action>')
+def manage (action, obj):
+  if request.args:
+    match obj:
+      case 'user':
+        """
+          User CRUD
+        """
+        match action:
+          case 'register':
+            """
+              Different use cases for CRUD
+              - Register a new User
+            """
+            name  = request.args['name']
+            birth = request.args['birthdate']
+            email = request.args['email']
+            passw = request.args['password']
+
+            nUser = register_user(name,birth,email,passw)
+
+            if nUser['message'] == 'Email already exists':
+              return redirect(ACCESS)
+            else:
+              session['data_user'] = nUser['data']
+              return redirect(ROOT)
+        
+          case 'login':
+            """
+              Login a User
+            """
+            email = request.args['email']
+            passw = request.args['password']
+
+            User = login_user(email,passw)
+
+            if User['message'] == 'Incorrect password':
+              return redirect(ACCESS)
+            else:
+              session['data_user'] = nUser['data']
+              return redirect(ROOT)
+
+  else:
+    return redirect(ACCESS)
 
 @app.route(PRODUCT, methods=['GET'])
 def product (id_product):
@@ -78,4 +126,4 @@ def search ():
                             cnt=len(data_search['data']), \
                             message=messages['search'])
   else:
-    return redirect(HOME)
+    return redirect(ROOT)
