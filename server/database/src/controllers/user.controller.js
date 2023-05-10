@@ -50,6 +50,34 @@ user_controller.findUsers = async (req, res) => {
   }
 }
 
+user_controller.findById = async(req, res) => {
+  try {
+    let response = {
+      msg: "Here's the user",
+      status: 200,
+      data: {}
+    }
+    const { userId } = req.body
+    const user       = await User.findById(userId)
+    if(!user){
+      response = {
+        msg: "user not found",
+        status: 400,
+        data: {}
+      }
+      return res.status(response.status).json(response)
+    }
+    return res.status(response.status).json(response)
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
+  }
+}
+
 user_controller.findByFilter = async (req, res) => {
   try {
     let response = {

@@ -132,6 +132,9 @@ Purchase.watch().on("change", event => {
       const cart    = await Cart.findById(userId)
       const product = await Product.findById(productId)
       await Product.findByIdAndUpdate(productId, {quantity: product.quantity - cart.quantityProducts[index]})
+      if(product.quantity == 0){
+        await Product.findByIdAndUpdate(productId, {avaible: false})
+      }
     })
   }
 })
