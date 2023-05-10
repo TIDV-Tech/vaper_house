@@ -1,5 +1,4 @@
 import { Product }    from "../models/Product.js"
-import { Purchase }   from "../models/Purchase.js"
 
 const product_controller = {}
 
@@ -12,8 +11,11 @@ product_controller.saveProduct = async (req, res) => {
     }
     const data          = req.body
     const newProduct    = new Product(data)
-    const productFound  = await Product.findOne({name: newProduct.name}) 
+    const productFound  = await Product.findOne({$and:[{name: newProduct.name}, {type: newProduct.type}, {brand: newProduct.brand}]}) 
     if(productFound){
+      if(!productFound.avaible){
+        await Product.updateOne({name: newProduct.name}, {avaible: true})
+      }
       await Product.updateOne({name: newProduct.name}, {$inc: {quantity: 1}})
       response = {
         msg: "Product updated successfully",
@@ -78,13 +80,46 @@ product_controller.findProducts = async (req, res) => {
       status: 200,
       data: []
     }
-    const products = await Product.find().lean()
+    const { limit } = req.body
+    let products = []
+    if(!limit){
+      products = await Product.find().lean()
+    }
+    products = await Product.find().limit(limit).lean()
     if(!products.length){
       return res.status(response.status).json(response)
     }
     response.msg  = "Here's the products" 
     response.data = products
     res.status(response.status).json(response)
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
+  }
+}
+
+product_controller.findById = async(req, res) => {
+  try {
+    let response = {
+      msg: "Here's the product",
+      status: 200,
+      data: {}
+    }
+    const { productId } = req.body
+    const product       = await Product.findById(productId)
+    if(!product){
+      response = {
+        msg: "Product not found",
+        status: 400,
+        data: {}
+      }
+      return res.status(response.status).json(response)
+    }
+    return res.status(response.status).json(response)
   } catch (error) {
     let response = {
       msg: "Something went wrong...",
@@ -179,6 +214,34 @@ product_controller.findByRelated = async (req, res) => {
   }
 }
 
+product_controller.findRandom = async(req, res) => {
+  try {
+    let response = {
+      msg: "Here's the random products!",
+      status: 200,
+      data: []
+    }
+    const products      = await Product.find()
+    let randomProducts  = []
+    for(let i = 0; i < products.length; i++){
+      if(i == 11){
+        i = products.length
+      }
+      randomProducts.push(products[Math.trunc(Math.random() * products.length)])
+    }
+    response.data = randomProducts
+    res.status(response.status).json(response)
+
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
+  }
+}
+
 product_controller.updateProduct = async (req, res) => {
   try {
     let response = {
@@ -188,6 +251,39 @@ product_controller.updateProduct = async (req, res) => {
     const { productId, newData } = req.body
     await Product.findByIdAndUpdate(productId, newData)
     res.status(response.status).json(response)
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    return res.status(response.status).json(response)
+  }
+}
+
+product_controller.updateProducts = async(req, res) => {
+  try {
+    let response = {
+      msg: "The products are upgraded successfully",
+      status: 200
+    }
+    const { filter, newData } = req.body
+    const result = await Product.updateMany(filter, newData)
+    if(result.matchedCount == 0){
+      response = {
+        msg: "Wrong filter",
+        status: 400
+      }
+      return res.status(response.status).json(response)
+    }
+    if(result.modifiedCount == 0){
+      response = {
+        msg: "Wrong data",
+        status: 400
+      }
+      return res.status(response.status).json(response)
+    }
+    return res.status(response.status).json(response)
   } catch (error) {
     let response = {
       msg: "Something went wrong...",

@@ -7,3 +7,4 @@
 /static/resources/products/*png
 /static/resources/products/*svg
 /util/__pycache__
+.env
