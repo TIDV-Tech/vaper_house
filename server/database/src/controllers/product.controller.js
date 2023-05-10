@@ -119,6 +119,7 @@ product_controller.findById = async(req, res) => {
       }
       return res.status(response.status).json(response)
     }
+    response.data = product
     return res.status(response.status).json(response)
   } catch (error) {
     let response = {
