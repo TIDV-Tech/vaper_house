@@ -46,7 +46,7 @@ data = {
       ],
       'js': [
         'flickity.min.js',
-        'confirm_age.js',
+        'confirm_age.min.js',
         'search.js',
       ]
     },
@@ -63,7 +63,7 @@ data = {
       ],
       'js': [
         'flickity.min.js',
-        'confirm_age.js',
+        'confirm_age.min.js',
         'search.js',
       ]
     },
@@ -89,7 +89,7 @@ data = {
         'footer.min.css',
       ],
       'js': [
-        'confirm_age.js',
+        'confirm_age.min.js',
         'product.js',
         'search.js',
       ]
@@ -104,7 +104,7 @@ data = {
         'search.min.css',
       ],
       'js': [
-        'confirm_age.js',
+        'confirm_age.min.js',
         'search.js',
       ]
     },
