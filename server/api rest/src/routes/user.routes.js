@@ -10,7 +10,7 @@ router.get(_var.ROOT, (req, res) => {
 
 router.post(_var.REGISTER, async (req, res) => {
   try {
-    const { userId, fullName, email, dateBirth, password } = req.body
+    const { fullName, email, dateBirth, password } = req.body
 
     const users = await axios.get(`${_var.CONNECT_DB}users`)
 		const inf   = users.data.data
@@ -21,7 +21,6 @@ router.post(_var.REGISTER, async (req, res) => {
 		} else {
 			const validate = await controller.checkRegister( fullName , email , dateBirth, password )
 			const info = await axios.post(`${_var.CONNECT_DB}register/user`, {
-				userId: userId,
 				fullName: validate.data.fullName,
 				email: validate.data.email,
 				dateBirth: new Date(validate.data.dateBirth),
