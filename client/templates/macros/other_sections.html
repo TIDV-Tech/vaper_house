@@ -53,8 +53,8 @@
             {% if show_content %}
               <div class="contenido">
                 <h3 title="{{ product.name }}">{{ product.name }}</h3>
-                {% if logged %}<span>{{ product.price }}$</span>{% endif %}
-                <h4>Añadir al carrito</h4>
+                <span>${{ product.price }}</span><br>
+                <h4>Ver producto</h4>
               </div>
             {% else %}
             <div class="contenido">
@@ -153,8 +153,8 @@
           </div>
           <div>
             {% if user %}
-              <span>{{ user.fullName }}</span>
-              <i class='bx bxs-user-circle icon'></i>
+              <span>{{ user[0].fullName }}</span>
+              <a href="/logout"><i class='bx bxs-user-circle icon'></i></a>
             {% else %}
               <span><a href="/acceso?page=login">Acceder</a></span>
               <i class='bx bxs-user-circle icon'></i>
