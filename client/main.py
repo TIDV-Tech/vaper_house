@@ -5,6 +5,7 @@ from util.controllers import *
 import requests
 
 app = Flask(__name__)
+app.secret_key = SECRET
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -16,12 +17,19 @@ def page_not_found(e):
 @app.route(ROOT)
 def index ():
   if 'data_user' in session:
+    print(session)
     data['user'] = session['data_user']
+  else:
+    data['user'] = {}
 
   return render_template('/pages/home_detal.html', \
                           name=pages[1], \
                           **data, \
                           message=messages['index'])
+
+@app.route(HOME)
+def home ():
+  return redirect(ROOT)
 
 @app.route(MAYOR)
 def mayor ():
@@ -49,7 +57,7 @@ def acceso ():
                             page='login', \
                             message=messages['login'])
   
-@app.route('/manage/<string:obj>/<string:action>')
+@app.route(MANAGE, methods=['GET'])
 def manage (action, obj):
   if request.args:
     match obj:
@@ -69,11 +77,14 @@ def manage (action, obj):
             passw = request.args['password']
 
             nUser = register_user(name,birth,email,passw)
+            print(nUser)
 
             if nUser['message'] == 'Email already exists':
               return redirect(ACCESS)
             else:
-              session['data_user'] = nUser['data']
+              d = list()
+              d.append(nUser['data'])
+              session['data_user'] = d
               return redirect(ROOT)
         
           case 'login':
@@ -88,7 +99,7 @@ def manage (action, obj):
             if User['message'] == 'Incorrect password':
               return redirect(ACCESS)
             else:
-              session['data_user'] = nUser['data']
+              session['data_user'] = User['data']
               return redirect(ROOT)
 
   else:
@@ -127,3 +138,8 @@ def search ():
                             message=messages['search'])
   else:
     return redirect(ROOT)
+  
+@app.route(LOGOUT)
+def logout():
+  session.pop('data_user', None)
+  return redirect(ROOT)

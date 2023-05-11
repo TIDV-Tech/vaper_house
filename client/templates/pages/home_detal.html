@@ -25,7 +25,12 @@
 {% endblock %}
 
 {% block products %}
-  {{ sections.products_section(products, show_content=True) }}
+  {% if user %}
+    {% set x = True %}
+  {% else %}
+    {% set x = False %}
+  {% endif %}
+  {{ sections.products_section(products, show_content=x) }}
 {% endblock %}
 
 {% block footer %}

@@ -16,13 +16,13 @@ router.post(_var.REGISTER, async (req, res) => {
 			res.status(400).json({ message: 'Email already exists' })
 		} else {
 			const validate = await controller.checkRegister( fullName , email , dateBirth, password )
-			console.log(validate)
 			const info = await axios.post(`${_var.CONNECT_DB}register/user`, {
 				fullName: validate.data.fullName,
 				email: validate.data.email,
 				dateBirth: new Date(validate.data.dateBirth),
 				password: validate.data.password
 			})
+			delete validate.data.password
 			res.status(validate.code).json(validate)
 		}
   } catch (err) {
@@ -39,17 +39,25 @@ router.post(_var.LOGIN, async (req, res) => {
 	try {
 		const { email, password } = req.body
 
-		const response = await axios.get(`${_var.CONNECT_DB}users`, {
-			params: {
-				email: email,
-				password: password
+		const response = await axios.post(`${_var.CONNECT_DB}user/filter`, {
+			filter: {
+				email,
 			}
 		})
 
 		let info = response.data.data
 
 		let validateUser = await controller.checkLogin(email, password , info)
-		res.status(validateUser.code).json(validateUser)
+		delete info[0].password
+		
+		let returnedData = {
+			...validateUser,
+			data: [
+				...info
+			]
+		}
+		
+		res.status(validateUser.code).json(returnedData)
 	} catch (err) { 
 		console.log(err) 
 		res.status(500).json({ message: 'Error in the request to the registration API' })
