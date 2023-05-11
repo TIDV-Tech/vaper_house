@@ -89,7 +89,7 @@ user_controller.findByFilter = async (req, res) => {
     const {filter} = req.body
     const users = await User.find(filter)
     if(!users.length){
-      res.status(response.status).json(response)
+      return res.status(response.status).json(response)
     }
     response.msg = "Here's the users"
     response.data = users
