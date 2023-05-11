@@ -8,8 +8,11 @@ const checkRegister = async (fullName, email, dateBirth, password) => {
       code: 200
     }
 
-    let validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    let validatePass = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+    let validateEmail = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/
+    let validatePass = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,}$/
+
+    console.log(validateEmail.test(email))
+    console.log(validatePass.test(password))
 
     if (!validateEmail.test(email) || !validatePass.test(password)) {
       message = {

@@ -103,14 +103,14 @@ data = {
     },
   },
   'saldo': 0.00,
-  'user': '',
+  'user': {},
   'warning_msg': '''Advertencia: Prohibida la venta a menores de 18 años.
     Algunos productos contienen nicotina, una sustancia
     altamente adictiva''',
   'options': [
     {
       'name': 'Inicio',
-      'url': '/home'
+      'url': '/'
     },
     {
       'name': 'Dispositivos',
@@ -279,13 +279,13 @@ data = {
 }
 
 messages = {
-  'error':  'Error: Página no encontrada',
-  'index':  'Bienvenido - Encuentra todo para tu vapeo',
-  'mayor':  'Bienvenido - Ventas al mayor',
-  'cart':   'Carrito de ventas',
-  'search': 'Resultados de tu busqueda',
-  'login':  'Accede a tu cuenta',
-  'regist': 'Crea una cuenta',
+  'error':    'Error: Página no encontrada',
+  'index':    'Bienvenido - Encuentra todo para tu vapeo',
+  'mayor':    'Bienvenido - Ventas al mayor',
+  'cart':     'Carrito de ventas',
+  'search':   'Resultados de tu busqueda',
+  'login':    'Accede a tu cuenta',
+  'register': 'Crea una cuenta',
 }
 
 pages = [

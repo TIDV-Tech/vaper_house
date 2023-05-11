@@ -7,7 +7,7 @@ const router     = Router()
 router.post(_var.REGISTER, async (req, res) => {
   try {
     const { fullName, email, dateBirth, password } = req.body
-
+		console.log({ fullName, email, dateBirth, password })
     const users = await axios.get(`${_var.CONNECT_DB}users`)
 		const inf   = users.data.data
 
@@ -16,6 +16,7 @@ router.post(_var.REGISTER, async (req, res) => {
 			res.status(400).json({ message: 'Email already exists' })
 		} else {
 			const validate = await controller.checkRegister( fullName , email , dateBirth, password )
+			console.log(validate)
 			const info = await axios.post(`${_var.CONNECT_DB}register/user`, {
 				fullName: validate.data.fullName,
 				email: validate.data.email,
