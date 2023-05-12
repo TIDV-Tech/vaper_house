@@ -41,14 +41,15 @@
   {% endfor %}
 {% endmacro %}
 
-{% macro products_section(products, show_content, logged) %}
+{% macro products_section(products, show_content, title) %}
+  <h2 class="title_section_product">{{ title }}</h2>
   <section id="products">
     {% for product in products %}
       <div class="products">
         <div class="product">
-          <a href="/producto/{{ product.id }}">
+          <a href="/producto/{{ product._id }}">
             <figure>
-              <img src="/static/{{ product.img }}">
+              <img src="/static/resources/products/6e575250e436fd98da66a14db8cf53f5.jpg">
             </figure>
             {% if show_content %}
               <div class="contenido">

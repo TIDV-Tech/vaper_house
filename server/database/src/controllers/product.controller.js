@@ -183,12 +183,10 @@ product_controller.findByFilter = async (req, res) => {
     let foundProducts = []
     if(filter.length){
       filter.map((elm,key) => {
-        if(typeof elm == "string"){
-          let k = Object.keys(elm)
-          let m = filter[key][k]
-          let c = new RegExp(m)
-          filter[key][k] = c
-        }
+        let k = Object.keys(elm)
+        let m = filter[key][k]
+        let c = new RegExp('^'+m+'$')
+        filter[key][k] = c
       })
       foundProducts = await Product.find({"$or": filter})
     }else{

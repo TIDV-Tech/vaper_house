@@ -72,7 +72,7 @@ data = {
       'js': [
         'jquery.min.js',
         'tilt.jquery.min.js',
-        'acceso.js',
+        'acceso.min.js',
       ]
     },
     'DecripcionProducto': {
@@ -85,7 +85,7 @@ data = {
       ],
       'js': [
         'confirm_age.min.js',
-        'product.js',
+        'product.min.js',
       ]
     },
     'Busqueda': {
@@ -193,72 +193,10 @@ data = {
       'img': 'resources/categories2/resistencias.jpg'
     },
   ],
-  'products': [
-    {
-      'id': 1,
-      'name': 'LUXE 80',
-      'max': 6,
-      'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 10.00
-    },
-    {
-      'id': 2,
-      'name': 'Air Factory Eliquid 100mL',
-      'max': 7,
-      'img': 'resources/products/descarga.jpeg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 30.00
-    },
-    {
-      'id': 3,
-      'name': 'Titulo',
-      'max': 15,
-      'img': 'resources/products/CBD_05_A.jpg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 9.99
-    },
-    {
-      'id': 4,
-      'name': 'Titulo',
-      'max': 3,
-      'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 15.00
-    },
-    {
-      'id': 5,
-      'name': 'Titulo',
-      'max': 2,
-      'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 11.00
-    },
-    {
-      'id': 6,
-      'name': 'Vaper para machos pecho peluo',
-      'max': 5,
-      'img': 'resources/products/descarga.jpeg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 25.00
-    },
-    {
-      'id': 7,
-      'name': 'Titulo terriblemente largo',
-      'max': 5,
-      'img': 'resources/products/CBD_05_A.jpg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 6.80
-    },
-    {
-      'id': 8,
-      'name': 'Titulo',
-      'max': 3,
-      'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 17.50
-    },
-  ],
+  'promotions': [],
+  'new_products': [],
+  'products': [],
+  'related_products': [],
   'info': ['¿Quiénes somos?', '¿Qué ofrecemos?', 'Contacto'],
   'politica': ['Términos y condiciones', 'Políticas de seguridad', 'Políticas de Cookies'],
   'social': [

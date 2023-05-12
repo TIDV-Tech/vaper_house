@@ -1,5 +1,5 @@
-{% extends 'pages/base.html' %}
-{% import 'macros/import_files.html' as files %}
+{% extends 'pages/base.min.html' %}
+{% import 'macros/import_files.min.html' as files %}
 {% import 'macros/other_sections.html' as sections %}
 
 {% block title %} {{ super() }} {% endblock %}
@@ -30,7 +30,9 @@
   {% else %}
     {% set x = False %}
   {% endif %}
-  {{ sections.products_section(products, show_content=x) }}
+  {{ sections.products_section(promotions, show_content=x, title='Promociones') }}
+  {{ sections.products_section(new_products, show_content=x, title='Nuevos productos') }}
+  {{ sections.products_section(products, show_content=x, title='Otros productos') }}
 {% endblock %}
 
 {% block footer %}
