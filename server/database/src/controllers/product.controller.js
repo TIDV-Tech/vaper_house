@@ -149,7 +149,7 @@ product_controller.findByFilter = async (req, res) => {
       })
       foundProducts = await Product.find({"$or": filter})
     }else{
-      if(typeof filter == "string"){
+      if(typeof Object.values(filter)[0] == "string"){
         let k = Object.keys(filter)
         let m = filter[k]
         let c = new RegExp(m)
