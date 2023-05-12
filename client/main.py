@@ -9,7 +9,7 @@ app.secret_key = SECRET
 
 @app.errorhandler(404)
 def page_not_found(e):
-  return render_template('/pages/404.html', \
+  return render_template('/pages/404.min.html', \
                          name=pages[0], \
                          **data, \
                          message=messages['error'])
