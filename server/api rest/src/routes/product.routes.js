@@ -7,8 +7,8 @@ const router     = Router()
 router.post(_var.REG_PRO, async (req, res) => {
   try {
     const { param } = req. params
-    const { nombre, descripcion, tipo_producto, marca, color, nicotine, flavor, img, cantidad, precio, promocion } = req.body
-  axios.post(`${_var.CONNECT_DB}register/product`, {
+    const { nombre, descripcion, tipo_producto, marca, color, nicotine, flavor, category, img, cantidad, precio, promocion } = req.body
+  const prod = await axios.post(`${_var.CONNECT_DB}register/product`, {
       name: nombre,
       description: descripcion,
       type: tipo_producto,
@@ -16,13 +16,14 @@ router.post(_var.REG_PRO, async (req, res) => {
       color: color,
       nicotine: nicotine,
       flavor: flavor,
+      category: category,
       img: img,
       quantity: cantidad,
       price: precio,
       promotionPrice: promocion
     })
   
-    let product = await controller.regisProduct(tipo_producto, nombre, descripcion, marca, cantidad, color, nicotine, flavor, precio, promocion, param)
+    let product = controller.regisProduct(tipo_producto, nombre, descripcion, marca, cantidad, color, nicotine, flavor, category, precio, promocion, param)
     res.status(product.code).json(product)
   } catch (err) { console.log(err) }
 })
@@ -35,11 +36,11 @@ router.post(_var.EDIT_PRO, async (req, res) => {
       newData
     }
 
-    const product = await controller.editProducts(newData)
+    const product = controller.editProducts(newData)
     if (product) {
       return(res.status(product.code).json(product))
     } 
-      const editProduct = axios.post(`${_var.CONNECT_DB}update/product`, obj)
+      const editProduct = await axios.post(`${_var.CONNECT_DB}update/product`, obj)
       .then((result) => {
         res.send({ 
           msg: result.data.msg,
@@ -50,7 +51,8 @@ router.post(_var.EDIT_PRO, async (req, res) => {
       .catch((err) => { 
         res.send({
           msg: err.response.data.msg,
-          status: err.response.data.status
+          status: err.response.data.status,
+          error: err.response.data.error
         })
       })
   } catch (err) { console.log(err) }
@@ -59,7 +61,7 @@ router.post(_var.EDIT_PRO, async (req, res) => {
 router.post(_var.DELETE_PRO, async (req, res) => {
   try {
     const { productId } = req.body
-    const deleteProduct = axios.post(`${_var.CONNECT_DB}delete/product`, { productId })
+    const deleteProduct = await axios.post(`${_var.CONNECT_DB}delete/product`, { productId })
     .then((result) => {
       res.send({ 
         msg: result.data.msg, 

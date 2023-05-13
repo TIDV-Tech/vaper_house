@@ -8,7 +8,7 @@ const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, colo
 
     switch (param) {
       case "mayor":
-        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || promocion == ""  ) {
+        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || color == "" || nicotine == "" || flavor == "" || precio == "" || promocion == "" ) {
           message = {
             status: false,
             message: "Fields cannot be left empty",
