@@ -24,15 +24,18 @@ data = {
   'sheets': {
     'Error404': {
       'css': [
-        'root.css',
+        'root.min.css',
         '404.min.css',
         'main.min.css',
         'footer.min.css',
       ],
+      'js': [
+        'toggle_menu.min.js',
+      ]
     },
     'VentasDetal': {
       'css': [
-        'root.css',
+        'root.min.css',
         'flickity.min.css',
         'carousel.min.css',
         'main.min.css',
@@ -42,29 +45,31 @@ data = {
         'footer.min.css',
       ],
       'js': [
+        'toggle_menu.min.js',
         'flickity.min.js',
         'confirm_age.min.js',
       ]
     },
     'VentasMayor': {
       'css': [
-        'root.css',
+        'root.min.css',
         'flickity.min.css',
         'carousel.min.css',
         'main.min.css',
-        'categories2.css',
+        'categories2.min.css',
         'products.min.css',
         'modal.min.css',
         'footer.min.css',
       ],
       'js': [
+        'toggle_menu.min.js',
         'flickity.min.js',
         'confirm_age.min.js',
       ]
     },
     'Acceso': {
       'css': [
-        'root.css',
+        'root.min.css',
         'font-awesome/css/font-awesome.min.css',
         'acceso-util.min.css',
         'acceso.min.css',
@@ -77,20 +82,21 @@ data = {
     },
     'DecripcionProducto': {
       'css': [
-        'root.css',
+        'root.min.css',
         'main.min.css',
         'modal.min.css',
         'products.min.css',
         'footer.min.css',
       ],
       'js': [
+        'toggle_menu.min.js',
         'confirm_age.min.js',
         'product.min.js',
       ]
     },
     'Busqueda': {
       'css': [
-        'root.css',
+        'root.min.css',
         'main.min.css',
         'modal.min.css',
         'products.min.css',
@@ -98,6 +104,7 @@ data = {
         'search.min.css',
       ],
       'js': [
+        'toggle_menu.min.js',
         'confirm_age.min.js',
       ]
     },
@@ -114,39 +121,93 @@ data = {
     },
     {
       'name': 'Dispositivos',
-      'url': '/dispositivo'
+      'url': '/'
     },
     {
       'name': 'Atomizadores',
-      'url': '/atomizador'
+      'url': '/'
     },
     {
       'name': 'E-Liquids',
-      'url': '/eliquid'
+      'url': '/'
     },
     {
       'name': 'Salt Nic',
-      'url': '/saltnic'
+      'url': '/'
     },
     {
       'name': 'Accesorios',
-      'url': '/accesorio'
+      'url': '/'
     },
     {
       'name': 'Puffs',
-      'url': '/puff'
+      'url': '/'
     },
     {
       'name': 'Promociones',
-      'url': '/promocion'
+      'url': '/'
     },
     {
       'name': 'Destacado',
-      'url': '/destacado'
+      'url': '/'
     },
     {
       'name': 'Contacto',
-      'url': '/contacto'
+      'url': '/'
+    }
+  ],
+  'responsiveOptions': [
+    {
+      'name': 'Inicio',
+      'url': '/'
+    },
+    {
+      'name': 'Ventas al mayor',
+      'url': '/'
+    },
+    {
+      'name': 'Dispositivos',
+      'url': '/'
+    },
+    {
+      'name': 'Atomizadores',
+      'url': '/'
+    },
+    {
+      'name': 'E-Liquids',
+      'url': '/'
+    },
+    {
+      'name': 'Salt Nic',
+      'url': '/'
+    },
+    {
+      'name': 'Accesorios',
+      'url': '/'
+    },
+    {
+      'name': 'Puffs',
+      'url': '/'
+    },
+    {
+      'name': 'Promociones',
+      'url': '/'
+    },
+    {
+      'name': 'Destacado',
+      'url': '/'
+    },
+    {
+      'name': 'Contacto',
+      'url': '/'
+    },
+    {
+      'name': 'Carrito',
+      'url': '/'
+    },
+    {
+      'name': 'Perfil',
+      'url': '/'
     }
   ],
   'categories': [
@@ -202,11 +263,13 @@ data = {
   'social': [
     {
       'red': 'facebook',
+      'url': 'https://m.facebook.com/VaperHousesc/',
       'ico': 'bx bxl-facebook-circle bx-sm',
-      'dir': 'Vaper House Café'
+      'dir': 'Vaper House'
     },
     {
       'red': 'instagram',
+      'url': 'https://instagram.com/vaperhouse.vzla?igshid=YmMyMTA2M2Y=',
       'ico': 'bx bxl-instagram bx-sm',
       'dir': 'vaperhouse.vzla'
     },

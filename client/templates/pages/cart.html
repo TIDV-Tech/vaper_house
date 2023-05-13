@@ -102,7 +102,12 @@
     <hr>
     <div class="related-products">
       <h2>Productos relacionados</h2>
-      {{ sections.products_section(related_products, show_content=True) }}
+      {% if user %}
+        {% set x = True %}
+      {% else %}
+        {% set x = False %}
+      {% endif %}
+      {{ sections.products_section(related_products, show_content=x) }}
     </div>
   </section>
 {% endblock %}
