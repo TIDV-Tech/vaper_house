@@ -41,10 +41,6 @@ def index ():
                           **data, \
                           message=messages['index'])
 
-@app.route(HOME)
-def home ():
-  return redirect(ROOT)
-
 @app.route(MAYOR)
 def mayor ():
   return render_template('/pages/home_mayor.html', \

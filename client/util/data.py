@@ -24,7 +24,7 @@ data = {
   'sheets': {
     'Error404': {
       'css': [
-        'root.css',
+        'root.min.css',
         '404.min.css',
         'main.min.css',
         'footer.min.css',
@@ -35,7 +35,7 @@ data = {
     },
     'VentasDetal': {
       'css': [
-        'root.css',
+        'root.min.css',
         'flickity.min.css',
         'carousel.min.css',
         'main.min.css',
@@ -52,11 +52,11 @@ data = {
     },
     'VentasMayor': {
       'css': [
-        'root.css',
+        'root.min.css',
         'flickity.min.css',
         'carousel.min.css',
         'main.min.css',
-        'categories2.css',
+        'categories2.min.css',
         'products.min.css',
         'modal.min.css',
         'footer.min.css',
@@ -69,7 +69,7 @@ data = {
     },
     'Acceso': {
       'css': [
-        'root.css',
+        'root.min.css',
         'font-awesome/css/font-awesome.min.css',
         'acceso-util.min.css',
         'acceso.min.css',
@@ -82,7 +82,7 @@ data = {
     },
     'DecripcionProducto': {
       'css': [
-        'root.css',
+        'root.min.css',
         'main.min.css',
         'modal.min.css',
         'products.min.css',
@@ -96,7 +96,7 @@ data = {
     },
     'Busqueda': {
       'css': [
-        'root.css',
+        'root.min.css',
         'main.min.css',
         'modal.min.css',
         'products.min.css',
@@ -265,7 +265,7 @@ data = {
       'red': 'facebook',
       'url': 'https://m.facebook.com/VaperHousesc/',
       'ico': 'bx bxl-facebook-circle bx-sm',
-      'dir': 'Vaper House Café'
+      'dir': 'Vaper House'
     },
     {
       'red': 'instagram',

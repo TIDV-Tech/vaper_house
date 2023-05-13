@@ -123,7 +123,7 @@
 {% macro header_section(base, saldo, user, options, warning_msg) %}
   <section id="header">
     <div class="hd1">
-      <a href="/home">
+      <a href="/">
         <img src="/static/{{ base }}" alt="Logo Vaper House" id="logo">
       </a>
       <div>
@@ -188,8 +188,8 @@
     class="warning"
     behavior="scroll"
     direction="left"
-    scrolldelay="100"
-    scrollamount="15"
+    scrolldelay="2"
+    scrollamount="5"
   >
     {{ warning_msg }}
   </marquee>
