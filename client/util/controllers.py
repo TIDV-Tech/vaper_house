@@ -1,5 +1,5 @@
 import requests
-from var import *
+from util.var import *
 
 def register_user(name,birth,email,passw):
   data = {
@@ -18,5 +18,5 @@ def login_user(email,passw):
     "password": passw
   }
 
-  r = requests.post('http://localhost:4000/login', json=data).json()
+  r = requests.post(API_REST+LOG_USR_END, json=data).json()
   return r
