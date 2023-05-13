@@ -1,12 +1,52 @@
-const carValidate = (car, productId, quantityProducts) => {
+const axios = require('axios')
+const _var  = require("../global/var.js")
+
+const carValidate = (car, productId, quantityProducts, prod, cant) => {
   try {
     let message = {
       code: 200,
       status: true,
       msg: "There are no registered products"
     }
+    //console.log(car[0].quantity) 
+    let quan = car[0].quantity
 
-    for (let i = 0; i < car.length; i++) {
+    const addCart = car.map((q, _i, _arr) => {
+      if (productId === q._id && quantityProducts > quan) {
+        message = {
+          code: 202,
+          status: false,
+          msg: "This quantity of products is not found"
+        }
+      } else if (productId === q._id && quantityProducts <= quan) {
+        let cant = quan - quantityProducts
+        const m = cant 
+        console.log(m)
+        const c = axios.post(`${_var.CONNECT_DB}update/product`, cant)
+        .then((result) => {
+          console.log(result.data.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        //console.log(q.quantity > cant)
+        if(quantityProducts > q.quantity && quan) {
+          console.log('no')
+          message = {
+            code: 202,
+            status: false,
+            msg: "This product is out of stock"
+          }
+        }
+        message = {
+          code: 200,
+          status: true,
+          msg: "Product added to shopping cart successfully"
+        }
+      }
+    })
+
+    /* for (let i = 0; i < car.length; i++) {
       const e = car[i]
       console.log(e.quantity)
       if (productId === e._id && quantityProducts > e.quantity) {
@@ -26,7 +66,7 @@ const carValidate = (car, productId, quantityProducts) => {
           msg: "Product added to shopping cart successfully"
         }
       }
-    }
+    } */
 
     /* function searchProd(prod , car){
       return prod.quantity === car
