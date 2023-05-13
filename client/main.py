@@ -74,47 +74,45 @@ def acceso ():
 @app.route(MANAGE, methods=['GET'])
 def manage (action, obj):
   if request.args:
-    match obj:
-      case 'user':
+    if obj == 'user':
+      """
+        User CRUD
+      """
+      if action == 'register':
         """
-          User CRUD
+          Different use cases for CRUD
+          - Register a new User
         """
-        match action:
-          case 'register':
-            """
-              Different use cases for CRUD
-              - Register a new User
-            """
-            name  = request.args['name']
-            birth = request.args['birthdate']
-            email = request.args['email']
-            passw = request.args['password']
+        name  = request.args['name']
+        birth = request.args['birthdate']
+        email = request.args['email']
+        passw = request.args['password']
 
-            nUser = register_user(name,birth,email,passw)
-            print(nUser)
+        nUser = register_user(name,birth,email,passw)
+        print(nUser)
 
-            if nUser['message'] == 'Email already exists':
-              return redirect(ACCESS)
-            else:
-              d = list()
-              d.append(nUser['data'])
-              session['data_user'] = d
-              return redirect(ROOT)
+        if nUser['message'] == 'Email already exists':
+          return redirect(ACCESS)
+        else:
+          d = list()
+          d.append(nUser['data'])
+          session['data_user'] = d
+          return redirect(ROOT)
         
-          case 'login':
-            """
-              Login a User
-            """
-            email = request.args['email']
-            passw = request.args['password']
+      elif action == 'login':
+        """
+          Login a User
+        """
+        email = request.args['email']
+        passw = request.args['password']
 
-            User = login_user(email,passw)
+        User = login_user(email,passw)
 
-            if User['message'] == 'Incorrect password':
-              return redirect(ACCESS)
-            else:
-              session['data_user'] = User['data']
-              return redirect(ROOT)
+        if User['message'] == 'Incorrect password':
+          return redirect(ACCESS)
+        else:
+          session['data_user'] = User['data']
+          return redirect(ROOT)
 
   else:
     return redirect(ACCESS)
