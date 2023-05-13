@@ -17,6 +17,14 @@ review_controller.getReviews = async (req, res) => {
           foreignField: "_id",
           as: "user_review"
         }
+      },
+      {
+        $lookup: {
+          from: "products",
+          localField: "productId",
+          foreignField: "_id",
+          as: "product_review"
+        }
       }
     ])
     if(!reviews.length){
@@ -24,8 +32,8 @@ review_controller.getReviews = async (req, res) => {
       return res.status(response.status).json(response)
     }
     reviews = reviews.map(review => {
-      const {_id, description, rating, createdAt, updatedAt, user_review} = review
-      return {_id, description, rating, createdAt, updatedAt, user_review}
+      const {_id, description, rating, createdAt, updatedAt, user_review, product_review} = review
+      return {_id, description, rating, createdAt, updatedAt, user_review, product_review}
     })
     response.data = reviews
     return res.status(response.status).json(response)
