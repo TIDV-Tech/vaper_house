@@ -9,7 +9,7 @@ app.secret_key = SECRET
 
 @app.errorhandler(404)
 def page_not_found(e):
-  return render_template('/pages/404.html', \
+  return render_template('/pages/404.min.html', \
                          name=pages[0], \
                          **data, \
                          message=messages['error'])
@@ -22,14 +22,24 @@ def index ():
   else:
     data['user'] = {}
 
+  promoFilter = {
+    "filter": {
+      "promotion": True
+    }
+  }
+    
+  data_promotions_search     = requests.post(DATABASE+PRD_FIL_END, json=promoFilter).json()
+  data_newProducts_search    = requests.get(DATABASE+PRS_RCN_END).json()
+  data_randomProducts_search = requests.get(DATABASE+PRS_RND_END).json()
+
+  data['promotions']   = data_promotions_search['data'][0:4]
+  data['new_products'] = data_newProducts_search['data'][0:4]
+  data['products']     = data_randomProducts_search['data'][0:8]
+
   return render_template('/pages/home_detal.html', \
                           name=pages[1], \
                           **data, \
                           message=messages['index'])
-
-@app.route(HOME)
-def home ():
-  return redirect(ROOT)
 
 @app.route(MAYOR)
 def mayor ():
@@ -60,57 +70,68 @@ def acceso ():
 @app.route(MANAGE, methods=['GET'])
 def manage (action, obj):
   if request.args:
-    match obj:
-      case 'user':
+    if obj == 'user':
+      """
+        User CRUD
+      """
+      if action == 'register':
         """
-          User CRUD
+          Different use cases for CRUD
+          - Register a new User
         """
-        match action:
-          case 'register':
-            """
-              Different use cases for CRUD
-              - Register a new User
-            """
-            name  = request.args['name']
-            birth = request.args['birthdate']
-            email = request.args['email']
-            passw = request.args['password']
+        name  = request.args['name']
+        birth = request.args['birthdate']
+        email = request.args['email']
+        passw = request.args['password']
 
-            nUser = register_user(name,birth,email,passw)
-            print(nUser)
+        nUser = register_user(name,birth,email,passw)
+        print(nUser)
 
-            if nUser['message'] == 'Email already exists':
-              return redirect(ACCESS)
-            else:
-              d = list()
-              d.append(nUser['data'])
-              session['data_user'] = d
-              return redirect(ROOT)
+        if nUser['message'] == 'Email already exists':
+          return redirect(ACCESS)
+        else:
+          d = list()
+          d.append(nUser['data'])
+          session['data_user'] = d
+          return redirect(ROOT)
         
-          case 'login':
-            """
-              Login a User
-            """
-            email = request.args['email']
-            passw = request.args['password']
+      elif action == 'login':
+        """
+          Login a User
+        """
+        email = request.args['email']
+        passw = request.args['password']
 
-            User = login_user(email,passw)
+        User = login_user(email,passw)
 
-            if User['message'] == 'Incorrect password':
-              return redirect(ACCESS)
-            else:
-              session['data_user'] = User['data']
-              return redirect(ROOT)
+        if User['message'] == 'Incorrect password':
+          return redirect(ACCESS)
+        else:
+          session['data_user'] = User['data']
+          return redirect(ROOT)
 
   else:
     return redirect(ACCESS)
 
 @app.route(PRODUCT, methods=['GET'])
 def product (id_product):
+  idProduct = {"productId": id_product}
+
+  data_product    = requests.post(DATABASE+PRD_BID_END, json=idProduct).json()
+  related_product = requests.post(DATABASE+PRD_REL_END, json=idProduct).json()
+
+  data['products'].clear()
+  data['products'].append(data_product['data'])
+  data['related_products'].clear()
+  related1 = list(related_product['data']['randomBrands'])
+  related2 = list(related_product['data']['randomTypes'])
+  related1.extend(related2)
+  data['related_products'] = related1
+
   return render_template('/pages/cart.html', \
                           name=pages[4], \
                           **data, \
-                          id=id_product-1, \
+                          id=0, \
                           message=messages['cart'])
 
 @app.route(SEARCH, methods=['GET'])
@@ -127,8 +148,9 @@ def search ():
       ]
     }
     
-    data_search = requests.post(DATABASE+PRD_END, json=filtro).json()
-    
+    data_search = requests.post(DATABASE+PRD_FIL_END, json=filtro).json()
+    print(data_search)
+
     return render_template('/pages/search.html', \
                             name=pages[5], \
                             **data, \

@@ -1,5 +1,5 @@
-{% extends 'pages/base.html' %}
-{% import 'macros/import_files.html' as files %}
+{% extends 'pages/base.min.html' %}
+{% import 'macros/import_files.min.html' as files %}
 {% import 'macros/other_sections.html' as sections %}
 
 {% block title %} {{ super() }} {% endblock %}
@@ -17,7 +17,7 @@
   <section id="main">
     <div class="product-description-container-cart">
       <div class="container-img">
-        <img src="/static/{{ products[id].img }}" alt="">
+        <img src="/static/resources/products/6e575250e436fd98da66a14db8cf53f5.jpg">
       </div>
       <div class="container-info-product">
         <div class="title-div">
@@ -102,7 +102,12 @@
     <hr>
     <div class="related-products">
       <h2>Productos relacionados</h2>
-      {{ sections.products_section(products[0:4], show_content=True) }}
+      {% if user %}
+        {% set x = True %}
+      {% else %}
+        {% set x = False %}
+      {% endif %}
+      {{ sections.products_section(related_products, show_content=x) }}
     </div>
   </section>
 {% endblock %}

@@ -125,18 +125,4 @@ purchase_controller.showPurchases = async (req, res) => {
   }
 }
 
-Purchase.watch().on("change", event => {
-  if(event.operationType == "insert"){
-    event.fullDocument.products.forEach(async (productId, index) => {
-      const userId  = event.fullDocument.user 
-      const cart    = await Cart.findById(userId)
-      const product = await Product.findById(productId)
-      await Product.findByIdAndUpdate(productId, {quantity: product.quantity - cart.quantityProducts[index]})
-      if(product.quantity == 0){
-        await Product.findByIdAndUpdate(productId, {avaible: false})
-      }
-    })
-  }
-})
-
 export { purchase_controller }

@@ -73,8 +73,13 @@ cart_controller.addToCart = async (req, res) => {
     const cart          = await Cart.findById(userId)
     const productOnCart = cart.products.find(product => product.toString() == productId.toString())
     if(productOnCart){
-      const index       = cart.products.indexOf(productOnCart.toString())
+      const index         = cart.products.indexOf(productOnCart.toString())
       cart.quantityProducts[index] += quantityProducts
+      const productFound = await Product.findById(productId.toString())
+      await Product.findByIdAndUpdate(productId, {quantity: productFound.quantity - quantityProducts})
+      if(productFound.quantity == 0){
+        await Product.findByIdAndUpdate(productId, {avaible: false})
+      }
       const savedCart   = await cart.save()
       response = {
         msg: "updated the product quantity successfully!",
@@ -94,8 +99,13 @@ cart_controller.addToCart = async (req, res) => {
     }
     cart.products.push(productId)
     cart.quantityProducts.push(quantityProducts)
+    const index = cart.quantityProducts.length - 1
+    await Product.findByIdAndUpdate(productId, {quantity: productFound.quantity - cart.quantityProducts[index]})
+    if(productFound.quantity == 0){
+      await Product.findByIdAndUpdate(productId, {avaible: false})
+    }
     const savedCart = await cart.save()
-    response.data = savedCart
+    response.data   = savedCart
     res.status(response.status).json(response)
   } catch (error) {
     let response = {
@@ -119,13 +129,15 @@ cart_controller.removeToCart = async (req, res) => {
     const productId                     = cart.products.find(id => id.toString() === productToRemoveId)
     if(!productId){
       response = {
-        msg: "There's nothing on the cart to remove or product not found!",
+        msg: "The product's not found on the cart!",
         status: 400,
         data: {}
       }
       return res.status(response.status).json(response) 
     }
-    const productIndex                  = cart.products.indexOf(productId.toString())
+    const productIndex  = cart.products.indexOf(productId.toString())
+    const productFound  = await Product.findById(productId)
+    await Product.findByIdAndUpdate(productId, {quantity: productFound.quantity + cart.quantityProducts[productIndex]})
     cart.products.splice(productIndex, 1)
     cart.quantityProducts.splice(productIndex, 1)
     const savedCart = await cart.save()

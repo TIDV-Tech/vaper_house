@@ -24,15 +24,18 @@ data = {
   'sheets': {
     'Error404': {
       'css': [
-        'root.css',
+        'root.min.css',
         '404.min.css',
         'main.min.css',
         'footer.min.css',
       ],
+      'js': [
+        'toggle_menu.min.js',
+      ]
     },
     'VentasDetal': {
       'css': [
-        'root.css',
+        'root.min.css',
         'flickity.min.css',
         'carousel.min.css',
         'main.min.css',
@@ -42,29 +45,31 @@ data = {
         'footer.min.css',
       ],
       'js': [
+        'toggle_menu.min.js',
         'flickity.min.js',
         'confirm_age.min.js',
       ]
     },
     'VentasMayor': {
       'css': [
-        'root.css',
+        'root.min.css',
         'flickity.min.css',
         'carousel.min.css',
         'main.min.css',
-        'categories2.css',
+        'categories2.min.css',
         'products.min.css',
         'modal.min.css',
         'footer.min.css',
       ],
       'js': [
+        'toggle_menu.min.js',
         'flickity.min.js',
         'confirm_age.min.js',
       ]
     },
     'Acceso': {
       'css': [
-        'root.css',
+        'root.min.css',
         'font-awesome/css/font-awesome.min.css',
         'acceso-util.min.css',
         'acceso.min.css',
@@ -72,25 +77,26 @@ data = {
       'js': [
         'jquery.min.js',
         'tilt.jquery.min.js',
-        'acceso.js',
+        'acceso.min.js',
       ]
     },
     'DecripcionProducto': {
       'css': [
-        'root.css',
+        'root.min.css',
         'main.min.css',
         'modal.min.css',
         'products.min.css',
         'footer.min.css',
       ],
       'js': [
+        'toggle_menu.min.js',
         'confirm_age.min.js',
-        'product.js',
+        'product.min.js',
       ]
     },
     'Busqueda': {
       'css': [
-        'root.css',
+        'root.min.css',
         'main.min.css',
         'modal.min.css',
         'products.min.css',
@@ -98,6 +104,7 @@ data = {
         'search.min.css',
       ],
       'js': [
+        'toggle_menu.min.js',
         'confirm_age.min.js',
       ]
     },
@@ -114,39 +121,93 @@ data = {
     },
     {
       'name': 'Dispositivos',
-      'url': '/dispositivo'
+      'url': '/'
     },
     {
       'name': 'Atomizadores',
-      'url': '/atomizador'
+      'url': '/'
     },
     {
       'name': 'E-Liquids',
-      'url': '/eliquid'
+      'url': '/'
     },
     {
       'name': 'Salt Nic',
-      'url': '/saltnic'
+      'url': '/'
     },
     {
       'name': 'Accesorios',
-      'url': '/accesorio'
+      'url': '/'
     },
     {
       'name': 'Puffs',
-      'url': '/puff'
+      'url': '/'
     },
     {
       'name': 'Promociones',
-      'url': '/promocion'
+      'url': '/'
     },
     {
       'name': 'Destacado',
-      'url': '/destacado'
+      'url': '/'
     },
     {
       'name': 'Contacto',
-      'url': '/contacto'
+      'url': '/'
+    }
+  ],
+  'responsiveOptions': [
+    {
+      'name': 'Inicio',
+      'url': '/'
+    },
+    {
+      'name': 'Ventas al mayor',
+      'url': '/'
+    },
+    {
+      'name': 'Dispositivos',
+      'url': '/'
+    },
+    {
+      'name': 'Atomizadores',
+      'url': '/'
+    },
+    {
+      'name': 'E-Liquids',
+      'url': '/'
+    },
+    {
+      'name': 'Salt Nic',
+      'url': '/'
+    },
+    {
+      'name': 'Accesorios',
+      'url': '/'
+    },
+    {
+      'name': 'Puffs',
+      'url': '/'
+    },
+    {
+      'name': 'Promociones',
+      'url': '/'
+    },
+    {
+      'name': 'Destacado',
+      'url': '/'
+    },
+    {
+      'name': 'Contacto',
+      'url': '/'
+    },
+    {
+      'name': 'Carrito',
+      'url': '/'
+    },
+    {
+      'name': 'Perfil',
+      'url': '/'
     }
   ],
   'categories': [
@@ -193,82 +254,22 @@ data = {
       'img': 'resources/categories2/resistencias.jpg'
     },
   ],
-  'products': [
-    {
-      'id': 1,
-      'name': 'LUXE 80',
-      'max': 6,
-      'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 10.00
-    },
-    {
-      'id': 2,
-      'name': 'Air Factory Eliquid 100mL',
-      'max': 7,
-      'img': 'resources/products/descarga.jpeg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 30.00
-    },
-    {
-      'id': 3,
-      'name': 'Titulo',
-      'max': 15,
-      'img': 'resources/products/CBD_05_A.jpg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 9.99
-    },
-    {
-      'id': 4,
-      'name': 'Titulo',
-      'max': 3,
-      'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 15.00
-    },
-    {
-      'id': 5,
-      'name': 'Titulo',
-      'max': 2,
-      'img': 'resources/products/6e575250e436fd98da66a14db8cf53f5.jpg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 11.00
-    },
-    {
-      'id': 6,
-      'name': 'Vaper para machos pecho peluo',
-      'max': 5,
-      'img': 'resources/products/descarga.jpeg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 25.00
-    },
-    {
-      'id': 7,
-      'name': 'Titulo terriblemente largo',
-      'max': 5,
-      'img': 'resources/products/CBD_05_A.jpg',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 6.80
-    },
-    {
-      'id': 8,
-      'name': 'Titulo',
-      'max': 3,
-      'img': 'resources/products/draw_svg20210507-22909-pboesy.svg.png',
-      'description': 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias commodi temporibus provident porro itaque saepe, quo repellat quod.',
-      'price': 17.50
-    },
-  ],
+  'promotions': [],
+  'new_products': [],
+  'products': [],
+  'related_products': [],
   'info': ['¿Quiénes somos?', '¿Qué ofrecemos?', 'Contacto'],
   'politica': ['Términos y condiciones', 'Políticas de seguridad', 'Políticas de Cookies'],
   'social': [
     {
       'red': 'facebook',
+      'url': 'https://m.facebook.com/VaperHousesc/',
       'ico': 'bx bxl-facebook-circle bx-sm',
-      'dir': 'Vaper House Café'
+      'dir': 'Vaper House'
     },
     {
       'red': 'instagram',
+      'url': 'https://instagram.com/vaperhouse.vzla?igshid=YmMyMTA2M2Y=',
       'ico': 'bx bxl-instagram bx-sm',
       'dir': 'vaperhouse.vzla'
     },

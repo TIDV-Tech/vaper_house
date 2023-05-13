@@ -8,6 +8,17 @@
   </nav>
 {% endmacro %}
 
+{% macro navbar_responsive(options) %}
+  <div class="desplegable">
+    {% for option in options %}
+      <a href="{{ option.url }}" class="option_desplegable">
+        {{ option.name }}
+        <i class='bx bxs-chevron-down'></i>
+      </a>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
 {% macro images_carousel(images) %}
   <div
     class="gallery js-flickity"
@@ -41,14 +52,15 @@
   {% endfor %}
 {% endmacro %}
 
-{% macro products_section(products, show_content, logged) %}
+{% macro products_section(products, show_content, title) %}
+  <h2 class="title_section_product">{{ title }}</h2>
   <section id="products">
     {% for product in products %}
       <div class="products">
         <div class="product">
-          <a href="/producto/{{ product.id }}">
+          <a href="/producto/{{ product._id }}">
             <figure>
-              <img src="/static/{{ product.img }}">
+              <img src="/static/resources/products/6e575250e436fd98da66a14db8cf53f5.jpg">
             </figure>
             {% if show_content %}
               <div class="contenido">
@@ -89,7 +101,7 @@
   <div class="follow f">
     <span>Síguenos</span>
     {% for soci in social %}
-      <a href="#" class="{{ soci.red }}">
+      <a href="{{ soci.url }}" class="{{ soci.red }}" target="_blank">
         <i class="{{ soci.ico }} icon_f"></i>
         {{ soci.dir }}
       </a>
@@ -111,7 +123,7 @@
 {% macro header_section(base, saldo, user, options, warning_msg) %}
   <section id="header">
     <div class="hd1">
-      <a href="/home">
+      <a href="/">
         <img src="/static/{{ base }}" alt="Logo Vaper House" id="logo">
       </a>
       <div>
@@ -168,12 +180,16 @@
     </div>
   </section>
 
+  <div class="navbar_responsive hidden">
+    {{ navbar_responsive(options) }}
+  </div>
+
   <marquee
     class="warning"
     behavior="scroll"
     direction="left"
-    scrolldelay="100"
-    scrollamount="15"
+    scrolldelay="2"
+    scrollamount="5"
   >
     {{ warning_msg }}
   </marquee>
@@ -201,4 +217,52 @@
       {{ address_and_contact(direccion, contacto, numeros) }}
     </div>
   </section>
+{% endmacro %}
+
+{% macro wherearewe() %}
+  <div class="wherearewe">
+    <div class="black">
+      <div class="location">
+        <img src="/static/resources/location/wherearewe.jpg">
+        <h1>Visitanos en</h1>
+      </div>
+      <div class="delivery">
+        <div class="s1">
+          <i class='bx bx-store-alt'></i>
+          <div>
+            <p>
+              <h1>1 - <i>Explora nuestros productos</i></h1><hr><br>
+  
+              Navega por los productos y categorías, si tienes alguna duda,
+              haz click en el botón de Whatsapp y realiza todas las preguntas
+              que tengas, estaremos atentos para responder cualquier duda!.
+            </p>
+          </div>
+        </div>
+        <div class="s2">
+          <i class='bx bx-dollar-circle'></i>
+          <div>
+            <p>
+              <h1>2 - <i>Completa tu compra</i></h1><hr><br>
+  
+              Al finalizar tu compra, el sistema te llevará directamente a
+              nuestro Whatsapp para una atención directa!.
+            </p>
+          </div>
+        </div>
+        <div class="s3">
+          <i class='bx bxs-truck'></i>
+          <div>
+            <p>
+              <h1>3 - <i>Retira tu compra</i></h1><hr><br>
+  
+              También contamos con delivery (costo desde $1 dependiendo del
+              destino) o acércate a nuestro mapa y dirigete a nuestra tienda
+              fisica!.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endmacro %}

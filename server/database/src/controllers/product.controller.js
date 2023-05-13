@@ -81,16 +81,57 @@ product_controller.findProducts = async (req, res) => {
       data: []
     }
     const { limit } = req.body
-    let products = []
+    let products  = await Product.aggregate([
+      {
+        $lookup: {
+          from: "categories",
+          localField: "category",
+          foreignField: "_id",
+          as: "category_product"
+        }
+      },
+      {
+        $lookup: {
+          from: "reviews",
+          let: {
+            reviewId: "$reviews"
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $in: ["$_id", "$$reviewId"] }
+              }
+            }
+          ],
+          as: "reviews_products"
+        }
+      }
+    ])
+    let limitedProducts = []
     if(!limit){
-      products = await Product.find().lean()
-    }
-    products = await Product.find().limit(limit).lean()
-    if(!products.length){
-      return res.status(response.status).json(response)
+      products = products.map(product => {
+        const { _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product, reviews_products } = product
+        return { _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product, reviews_products }
+      })
+      if(!products.length){
+        return res.status(response.status).json(response)
+      }
+      response.data = products
+    }else{
+      for(let i = 1; i <= limit; i++){
+        if(i <= limit){
+          const { _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product, reviews_products } = products[i]
+          limitedProducts.push({ _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product, reviews_products }) 
+        }else{
+          break
+        }
+      }
+      if(!limitedProducts.length){
+        return res.status(response.status).json(response)
+      }
+      response.data = limitedProducts
     }
     response.msg  = "Here's the products" 
-    response.data = products
     res.status(response.status).json(response)
   } catch (error) {
     let response = {
@@ -142,12 +183,10 @@ product_controller.findByFilter = async (req, res) => {
     let foundProducts = []
     if(filter.length){
       filter.map((elm,key) => {
-        if(typeof elm == "string"){
-          let k = Object.keys(elm)
-          let m = filter[key][k]
-          let c = new RegExp(m)
-          filter[key][k] = c
-        }
+        let k = Object.keys(elm)
+        let m = filter[key][k]
+        let c = new RegExp('^'+m+'$')
+        filter[key][k] = c
       })
       foundProducts = await Product.find({"$or": filter})
     }else{
