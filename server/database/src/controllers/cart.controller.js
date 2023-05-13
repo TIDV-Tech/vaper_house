@@ -76,7 +76,6 @@ cart_controller.addToCart = async (req, res) => {
       const index         = cart.products.indexOf(productOnCart.toString())
       cart.quantityProducts[index] += quantityProducts
       const productFound = await Product.findById(productId.toString())
-      console.log(productFound)
       await Product.findByIdAndUpdate(productId, {quantity: productFound.quantity - quantityProducts})
       if(productFound.quantity == 0){
         await Product.findByIdAndUpdate(productId, {avaible: false})
