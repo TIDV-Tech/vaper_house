@@ -13,8 +13,6 @@ const carValidate = (car, productId, quantityProducts) => {
         msg: "This product is out of stock",
       }
     } else if (productId === car._id && quantityProducts <= car.quantity) {
-      let cant = quantityProducts - car.quantity
-      console.log(cant)
       message = {
         code: 200,
         status: true,

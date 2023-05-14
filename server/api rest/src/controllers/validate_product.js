@@ -1,4 +1,4 @@
-const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, color, nicotine, flavor, precio, promocion, param ) => {
+const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, color, nicotine, flavor ,precio, promocion, param ) => {
   try {
     let message = {
       status: true,

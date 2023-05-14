@@ -23,7 +23,7 @@ router.post(_var.REG_PRO, async (req, res) => {
       promotionPrice: promocion
     })
   
-    let product = controller.regisProduct(tipo_producto, nombre, descripcion, marca, cantidad, color, nicotine, flavor, category, precio, promocion, param)
+    let product = controller.regisProduct(tipo_producto, nombre, descripcion, marca, cantidad, color, nicotine, flavor,  precio, promocion, param)
     res.status(product.code).json(product)
   } catch (err) { console.log(err) }
 })
