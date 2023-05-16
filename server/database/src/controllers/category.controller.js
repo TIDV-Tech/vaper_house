@@ -46,5 +46,43 @@ category_controller.registerCategory = async(req, res) => {
   }
 }
 
+category_controller.updateCategory = async (req, res) => {
+  try {
+    let response = {
+      msg: "Updated successfully!",
+      status: 200
+    }
+    const { categoryId, newData } = req.body
+    await Category.findByIdAndUpdate(categoryId, newData)
+    res.status(response.status).json(response) 
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    res.status(response.status).json(response) 
+  }
+}
+
+category_controller.deleteCategory = async (req, res) => {
+  try {
+    let response = {
+      msg: "Deleted successfully!",
+      status: 200
+    }
+    const { categoryId } = req.body
+    await Category.findByIdAndDelete(categoryId)
+    res.status(response.status).json(response) 
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    res.status(response.status).json(response) 
+  }
+}
+
 export { category_controller }
 
