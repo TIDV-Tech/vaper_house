@@ -1,6 +1,5 @@
 const { Router } = require("express")
 const _var       = require("../global/var.js")
-const controller = require("../controllers/validate_purchase.js")
 const axios      = require("axios")
 const router     = Router()
 
@@ -16,6 +15,7 @@ router.post(_var.GENERATE_PURCHASES, async (req, res) => {
 			let data = result.data.data
 			const invoice = [
 				{
+					"invoice": "FACTURA",
 					"Proveedor": {
 						"companyName": "VAPER HOUSE",
 						"address": "Barrio Obrero carrera 20 entre calles 13 y 14, diagonal al Cine Pirineos, frente a casa Matina"
