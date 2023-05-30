@@ -111,8 +111,7 @@ data = {
     'Administrador': {
       'css': [
         'root.min.css',
-        'main.min.css',
-        'footer.min.css',
+        'admin.min.css',
       ]
     }
   },

@@ -12,3 +12,44 @@
 {% block header %}
   {{ sections.header_admin(logo.base) }}
 {% endblock %}
+
+{% block products %}
+  <section id="main">
+    <a href="#" class="option purple">
+      <i class='bx bx-user-circle icon-opt'></i>
+      <h1>Usuarios registrados</h1>
+    </a>
+    <a href="#" class="option lightblue">
+      <i class='bx bx-cart-alt icon-opt'></i>
+      <h1>Explorar ventas</h1>
+    </a>
+    <a href="#" class="option blue">
+      <i class='bx bx-edit icon-opt'></i>
+      <h1>Manejar productos</h1>
+    </a>
+    <a href="#" class="option darkblue">
+      <i class='bx bx-calendar icon-opt'></i>
+      <h1>Fechas de entrega</h1>
+    </a>
+    <a href="#" class="option orange">
+      <i class='bx bx-bar-chart-alt-2 icon-opt'></i>
+      <h1>Finanzas</h1>
+    </a>
+    <a href="#" class="option red">
+      <i class='bx bx-purchase-tag icon-opt'></i>
+      <h1>Productos más vendidos</h1>
+    </a>
+    <a href="#" class="option magenta">
+      <i class='bx bx-trash icon-opt'></i>
+      <h1>Productos eliminados</h1>
+    </a>
+    <a href="#" class="option blueviolet">
+      <i class='bx bx-message-dots icon-opt'></i>
+      <h1>Valoraciones</h1>
+    </a>
+    <a href="#" class="option gray">
+      <i class='bx bx-user-plus icon-opt'></i>
+      <h1>Crear nuevo usuario</h1>
+    </a>
+  </section>
+{% endblock %}
