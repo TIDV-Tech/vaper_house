@@ -216,6 +216,62 @@ data = {
       'url': '/'
     }
   ],
+  'adminOptions': [
+    {
+      'color': 'purple',
+      'icon': 'bx bx-user-circle',
+      'name': 'Usuarios registrados',
+      'url': '#'
+    },
+    {
+      'color': 'lightblue',
+      'icon': 'bx bx-cart-alt',
+      'name': 'Explorar ventas',
+      'url': '#'
+    },
+    {
+      'color': 'blue',
+      'icon': 'bx bx-edit',
+      'name': 'Manejar productos',
+      'url': '#'
+    },
+    {
+      'color': 'darkblue',
+      'icon': 'bx bx-calendar',
+      'name': 'Fechas de entrega',
+      'url': '#'
+    },
+    {
+      'color': 'orange',
+      'icon': 'bx bx-bar-chart-alt-2',
+      'name': 'Finanzas',
+      'url': '#'
+    },
+    {
+      'color': 'red',
+      'icon': 'bx bx-purchase-tag',
+      'name': 'Productos más vendidos',
+      'url': '#'
+    },
+    {
+      'color': 'magenta',
+      'icon': 'bx bx-trash',
+      'name': 'Productos eliminados',
+      'url': '#'
+    },
+    {
+      'color': 'blueviolet',
+      'icon': 'bx bx-message-dots',
+      'name': 'Valoraciones',
+      'url': '#'
+    },
+    {
+      'color': 'gray',
+      'icon': 'bx bx-user-plus',
+      'name': 'Crear nuevo usuario',
+      'url': '#'
+    },
+  ],
   'categories': [
     {
       'name': 'Lo más nuevo',
