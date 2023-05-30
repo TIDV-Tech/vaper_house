@@ -1,0 +1,14 @@
+{% extends 'pages/base.min.html' %}
+{% import 'macros/import_files.min.html' as files %}
+{% import 'macros/other_sections.min.html' as sections %}
+
+{% block title %} {{ super() }} {% endblock %}
+
+{% block styles %}
+  {{ files.render_links(sheets[name]['css']) }}
+  {{ files.link_external(external) }}
+{% endblock %}
+
+{% block header %}
+  {{ sections.header_admin(logo.base) }}
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'pages/base.min.html' %}
 {% import 'macros/import_files.min.html' as files %}
-{% import 'macros/other_sections.html' as sections %}
+{% import 'macros/other_sections.min.html' as sections %}
 
 {% block title %} {{ super() }} {% endblock %}
 
@@ -19,21 +19,13 @@
 
 {% block categories %}
     <div class="categories-container">
-      {{ sections.category_section(categories) }}
+      {{ sections.category_section(categories2) }}
     </div>
   </section>
 {% endblock %}
 
 {% block products %}
-  {% if user %}
-    {% set x = True %}
-  {% else %}
-    {% set x = False %}
-  {% endif %}
-  {{ sections.products_section(promotions, show_content=x, title='Promociones') }}
-  {{ sections.products_section(new_products, show_content=x, title='Nuevos productos') }}
-  {{ sections.products_section(products, show_content=x, title='Otros productos') }}
-  {{ sections.wherearewe() }}
+  {{ sections.products_section(products, show_content=False) }}
 {% endblock %}
 
 {% block footer %}

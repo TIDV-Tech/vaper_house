@@ -108,6 +108,13 @@ data = {
         'confirm_age.min.js',
       ]
     },
+    'Administrador': {
+      'css': [
+        'root.min.css',
+        'main.min.css',
+        'footer.min.css',
+      ]
+    }
   },
   'saldo': 0.00,
   'user': {},
@@ -287,6 +294,7 @@ messages = {
   'search':   'Resultados de tu busqueda',
   'login':    'Accede a tu cuenta',
   'register': 'Crea una cuenta',
+  'admin':    'Administrador'
 }
 
 pages = [
@@ -296,4 +304,5 @@ pages = [
   'Acceso',
   'DecripcionProducto',
   'Busqueda',
+  'Administrador',
 ]

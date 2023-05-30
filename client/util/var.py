@@ -11,6 +11,7 @@ PRODUCT  = os.getenv('PRODUCT')
 SEARCH   = os.getenv('SEARCH')
 SECRET   = os.getenv('SECRET')
 LOGOUT   = os.getenv('LOGOUT')
+ADMIN    = os.getenv('ADMIN')
 
 # SERVER
 DATABASE = os.getenv('DATABASE')

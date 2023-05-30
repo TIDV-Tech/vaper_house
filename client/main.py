@@ -36,14 +36,14 @@ def index ():
   data['new_products'] = data_newProducts_search['data'][0:4]
   data['products']     = data_randomProducts_search['data'][0:8]
 
-  return render_template('/pages/home_detal.html', \
+  return render_template('/pages/home_detal.min.html', \
                           name=pages[1], \
                           **data, \
                           message=messages['index'])
 
 @app.route(MAYOR)
 def mayor ():
-  return render_template('/pages/home_mayor.html', \
+  return render_template('/pages/home_mayor.min.html', \
                           name=pages[2], \
                           **data, \
                           message=messages['mayor'])
@@ -55,13 +55,13 @@ def acceso ():
     msg  = messages[page]
     msg  = messages[page] if page == 'login' else msg
 
-    return render_template('/pages/acceso.html', \
+    return render_template('/pages/acceso.min.html', \
                             name=pages[3], \
                             **data, \
                             page=page, \
                             message=msg)
   else:
-    return render_template('/pages/acceso.html', \
+    return render_template('/pages/acceso.min.html', \
                             name=pages[3], \
                             **data, \
                             page='login', \
@@ -128,7 +128,7 @@ def product (id_product):
   related1.extend(related2)
   data['related_products'] = related1
 
-  return render_template('/pages/cart.html', \
+  return render_template('/pages/cart.min.html', \
                           name=pages[4], \
                           **data, \
                           id=0, \
@@ -151,7 +151,7 @@ def search ():
     data_search = requests.post(DATABASE+PRD_FIL_END, json=filtro).json()
     print(data_search)
 
-    return render_template('/pages/search.html', \
+    return render_template('/pages/search.min.html', \
                             name=pages[5], \
                             **data, \
                             search=data_search, \
@@ -160,6 +160,13 @@ def search ():
                             message=messages['search'])
   else:
     return redirect(ROOT)
+  
+@app.route(ADMIN)
+def admin ():
+  return render_template('/pages/admin.min.html', \
+                          name=pages[6], \
+                          **data, \
+                          message=messages['admin'])
   
 @app.route(LOGOUT)
 def logout():
