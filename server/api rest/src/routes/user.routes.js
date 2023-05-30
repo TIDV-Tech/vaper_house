@@ -47,6 +47,15 @@ router.post(_var.LOGIN, async (req, res) => {
 
 		let info = response.data.data
 
+		if (email == "" || info[0] === undefined) {
+      let msg = {
+        code: 202,
+        status: true,
+        message: "Something is wrong with your email",
+      }
+			res.status(msg.code).json(msg)
+    }
+
 		let validateUser = await controller.checkLogin(email, password , info)
 		delete info[0].password
 		
@@ -59,7 +68,6 @@ router.post(_var.LOGIN, async (req, res) => {
 		
 		res.status(validateUser.code).json(returnedData)
 	} catch (err) { 
-		console.log(err) 
 		res.status(500).json({ message: 'Error in the request to the registration API' })
 	}
 })

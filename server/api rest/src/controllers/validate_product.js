@@ -1,4 +1,4 @@
-const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, precio, promocion, param ) => {
+const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, color, nicotine, flavor ,precio, promocion, param ) => {
   try {
     let message = {
       status: true,
@@ -8,7 +8,7 @@ const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, prec
 
     switch (param) {
       case "mayor":
-        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || promocion == ""  ) {
+        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || color == "" || nicotine == "" || flavor == "" || precio == "" || promocion == "" ) {
           message = {
             status: false,
             message: "Fields cannot be left empty",
@@ -24,7 +24,7 @@ const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, prec
         break
 
       case "detal":
-        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || precio == "" || promocion == "" ) {
+        if ( tipo_producto == "" || nombre == "" || descripcion == "" || marca == "" || cantidad == "" || color == "" || nicotine == "" || flavor == "" || precio == "" || promocion == "" ) {
           message = {
             status: false,
             message: "Fields cannot be left empty",
@@ -60,7 +60,7 @@ const regisProduct = ( tipo_producto, nombre, descripcion, marca, cantidad, prec
 
 const editProducts = ( newData ) => {
   try {
-    if ( newData.name == "" || newData.description == "" || newData.type == "" || newData.brand == "" || newData.img == "" || newData.quantity == "" || newData.price == "" || newData.promotionPrice == "" ){
+    if ( newData.name == "" || newData.description == "" || newData.type == "" || newData.brand == "" || newData.color == "" || newData.nicotine == "" || newData.flavor == "" || newData.img == "" || newData.quantity == "" || newData.price == "" || newData.promotionPrice == "" ){
       let message = {
         status: false,
         message: "Fields cannot be left empty",

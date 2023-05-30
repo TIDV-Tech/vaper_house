@@ -45,7 +45,7 @@ const checkRegister = async (fullName, email, dateBirth, password) => {
   }
 }
 
-const checkLogin = async (email, password , info) => {
+const checkLogin = async (email, password , info, res) => {
   try {
     let message = {
       status: true,
@@ -55,19 +55,13 @@ const checkLogin = async (email, password , info) => {
 
     const user = info.find(u => u.email === email)
 
-    if (user === undefined) {
-      message = {
-        code: 200,
-        status: true,
-        message: "Incorrect email or password",
-      }
-    }
-    if (email == "" || password == "") {
-      message = {
+    if (password == "") {
+      let msg = {
         status: false,
         message: "Fields cannot be left empty",
         code: 202,
       }
+      return msg
     }
     if (user) {
       const compPasword = await bcrypt.compare(password, user.password)
