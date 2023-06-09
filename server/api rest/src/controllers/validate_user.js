@@ -17,6 +17,8 @@ const checkRegister = async (fullName, email, dateBirth, password) => {
         status: true,
         message: "You have an error in your email or password, try again",
       }
+
+      return message
     } else if (validateEmail.test(email) && validatePass.test(password)) {
       const pass = await bcrypt.hash(password, 10)
 
@@ -71,6 +73,7 @@ const checkLogin = async (email, password , info, res) => {
           status: true,
           message: "Incorrect password",
         }
+        return message
       }
       if (user && compPasword === true) {
         message = {
@@ -78,6 +81,7 @@ const checkLogin = async (email, password , info, res) => {
           message: "Correct, you are logged in",
           code: 200
         }
+        return message
       } 
     }
 

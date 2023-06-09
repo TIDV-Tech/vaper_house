@@ -16,14 +16,20 @@ router.post(_var.REGISTER, async (req, res) => {
 			res.status(400).json({ message: 'Email already exists' })
 		} else {
 			const validate = await controller.checkRegister( fullName , email , dateBirth, password )
-			const info = await axios.post(`${_var.CONNECT_DB}register/user`, {
-				fullName: validate.data.fullName,
-				email: validate.data.email,
-				dateBirth: new Date(validate.data.dateBirth),
-				password: validate.data.password
-			})
-			delete validate.data.password
-			res.status(validate.code).json(validate)
+
+			if(validate.data){
+				const info = await axios.post(`${_var.CONNECT_DB}register/user`, {
+					fullName: validate.data.fullName,
+					email: validate.data.email,
+					dateBirth: new Date(validate.data.dateBirth),
+					password: validate.data.password
+				})
+				delete validate.data.password
+				res.status(validate.code).json(validate)
+			}else{
+				res.status(validate.code).json(validate)
+			}
+
 		}
   } catch (err) {
     handleError(err, res)
