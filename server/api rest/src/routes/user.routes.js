@@ -13,7 +13,7 @@ router.post(_var.REGISTER, async (req, res) => {
 
 		const user = inf.find(u => u.email === email)
 		if (user) {
-			res.status(400).json({ message: 'Email already exists' })
+			return res.status(400).json({ message: 'Email already exists' })
 		} else {
 			const validate = await controller.checkRegister( fullName , email , dateBirth, password )
 
@@ -25,9 +25,9 @@ router.post(_var.REGISTER, async (req, res) => {
 					password: validate.data.password
 				})
 				delete validate.data.password
-				res.status(validate.code).json(validate)
+				return res.status(validate.code).json(validate)
 			}else{
-				res.status(validate.code).json(validate)
+				return res.status(validate.code).json(validate)
 			}
 
 		}
@@ -38,7 +38,7 @@ router.post(_var.REGISTER, async (req, res) => {
 
 async function handleError(err, res) {
   console.error(err)
-  res.status(500).json({ error: 'Internal server error' })
+  return res.status(500).json({ error: 'Internal server error' })
 }
 
 router.post(_var.LOGIN, async (req, res) => {
@@ -54,13 +54,13 @@ router.post(_var.LOGIN, async (req, res) => {
 		let info = response.data.data
 
 		if (email == "" || info[0] === undefined) {
-      let msg = {
-        code: 202,
-        status: true,
-        message: "Something is wrong with your email",
-      }
-			res.status(msg.code).json(msg)
-    }
+      		let msg = {
+        		code: 202,
+        		status: true,
+        		message: "Something is wrong with your email",
+      		}
+			return res.status(msg.code).json(msg)
+    	}
 
 		let validateUser = await controller.checkLogin(email, password , info)
 		delete info[0].password
@@ -72,10 +72,11 @@ router.post(_var.LOGIN, async (req, res) => {
 			]
 		}
 		
-		res.status(validateUser.code).json(returnedData)
+		return res.status(validateUser.code).json(returnedData)
+		
 	} catch (err) { 
-		res.status(500).json({ message: 'Error in the request to the registration API' })
-	}
+			return res.status(500).json({ message: 'Error in the request to the registration API' })
+		}
 })
 
 router.post(_var.EDIT_USER, async (req, res) => {
@@ -84,19 +85,20 @@ router.post(_var.EDIT_USER, async (req, res) => {
 		
 		const edit = await controller.editUser(newData)
 		if (edit.code === 202) {
-			res.send(res.status(edit.code).json(edit))
+			return res.status(edit.code).json(edit)
 		} else if(edit.code === 200) {
 			const editUser = await axios.post(`${_var.CONNECT_DB}update/user`, {
 			userId: userId,
-      newData: {
+      		
+			newData: {
 				fullName: edit.data.fullName,
-        email: edit.data.email,
-        dateBirth: new Date(edit.data.dateBirth),
-        password: edit.data.password
+				email: edit.data.email,
+				dateBirth: new Date(edit.data.dateBirth),
+				password: edit.data.password
 			}
 		})
 		.then((result) => {
-			res.send({
+			return res.send({
 				msg: result.data.msg, 
 				status: result.data.status, 
 				data: edit.data
@@ -115,7 +117,7 @@ router.get(_var.DELETE_USER, async (req, res) => {
 		const { userId } = req.body
 		const deleteUser = await axios.post(`${_var.CONNECT_DB}delete/user`, { userId })
 		.then((result) => {
-      res.send({
+      	res.send({
 				msg: result.data.msg,
 				status: result.data.status,
 				data: userId

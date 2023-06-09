@@ -15,14 +15,14 @@ router.post(_var.ADDCAR, async (req, res) => {
         const validate = funct.carValidate(car, productId, quantityProducts)
 
         if (validate.code === 202) {
-          res.status(validate.code).json(validate)
+          return res.status(validate.code).json(validate)
         } else if (validate.code === 200) {
           axios.post(`${_var.CONNECT_DB}add/cart`, {
             userId,
             productId,
             quantityProducts,
           })
-          res.status(validate.code).json(validate)
+          return res.status(validate.code).json(validate)
         }
       })
       .catch((err) => {
