@@ -1,6 +1,7 @@
 {% extends 'pages/base.min.html' %}
 {% import 'macros/import_files.min.html' as files %}
 {% import 'macros/other_sections.min.html' as sections %}
+{% import 'macros/modal.html' as modals %}
 
 {% block title %} {{ super() }} {% endblock %}
 
@@ -16,10 +17,27 @@
 {% block products %}
   <section id="main">
     {% for opt in adminOptions %}
-      <a href="{{ opt.url }}" class="option {{ opt.color }}">
+      <a class="option {{ opt.color }}">
         <i class='{{ opt.icon }} icon-opt'></i>
         <h1>{{ opt.name }}</h1>
       </a>
     {% endfor %}
   </section>
+  {% for element in modal %}
+    {% if element.options|length > 1 %}
+      <div class="modal_bg">
+        {{ modals.modal_option(element.options) }}
+      </div>
+    {% else %}
+      {% for option in element.options %} 
+        <div class="modal_bg">
+          {{ modals.modal(option) }} 
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+
+{% block scripts %}
+  {{ files.render_scripts(sheets[name]['js']) }}
 {% endblock %}

@@ -33,12 +33,13 @@ user_controller.findUsers = async (req, res) => {
       status: 200,
       data: []
     }
-    const users = await User.find().lean()
-    if(!users.length){
+    const users = await User.paginate({}, {page: 1, limit: 5})
+
+    if(!users.docs.length){
       return res.status(response.status).json(response)
     }
     response.msg = "Here's the users"
-    response.data = users
+    response.data = users.docs
     return res.status(response.status).json(response)
   } catch (error) {
     let response = {
@@ -86,13 +87,30 @@ user_controller.findByFilter = async (req, res) => {
       status: 200,
       data: []
     }
-    const {filter} = req.body
-    const users = await User.find(filter)
-    if(!users.length){
-      return res.status(response.status).json(response)
+    const {filter}    = req.body
+    let foundUsers = []
+    if(filter.length){
+      filter.map((elm,key) => {
+        let k = Object.keys(elm)
+        let m = filter[key][k]
+        let c = new RegExp('^'+m+'$')
+        filter[key][k] = c
+      })
+      foundUsers = await User.paginate({"$or": filter}, {page: 1, limit: 5})
+    }else{
+      if(typeof Object.values(filter)[0] == "string"){
+        let k = Object.keys(filter)
+        let m = filter[k]
+        let c = new RegExp(m)
+        filter[k] = c
+        k = k[0]
+        foundUsers = await User.paginate({[k]: {$regex: c}}, {page: 1, limit: 5})
+      }
+      foundUsers = await User.paginate(filter, {page: 1, limit: 5})
     }
+    if(!foundUsers.docs.length) return res.status(response.status).json(response) 
     response.msg = "Here's the users"
-    response.data = users
+    response.data = foundUsers.docs
     res.status(response.status).json(response)
   } catch (error) {
     let response = {

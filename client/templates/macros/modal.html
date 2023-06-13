@@ -1,0 +1,78 @@
+{% macro modal(option) %}
+<div class="modal">
+  <i class='bx bx-x close_btn'></i>
+  <h1>{{option.title}}</h1>
+
+  {% if option.filters %}           
+    {{ modal_filter(option.filters) }}
+  {% endif %}
+
+  {% if option.data %}
+    {{ modal_content(option.data) }}
+  {% endif %}
+
+  {% if option.inputs %}
+    {{ modal_form(option.inputs) }}
+  {% endif %}
+</div>
+{% endmacro %}
+
+{% macro modal_option(options) %}
+<div class="modal">
+  <i class='bx bx-x close_btn'></i>
+  <div class="modal_options">
+    {% for option in options %}
+      <button class="modal_option">{{option.title}}</button>
+    {% endfor %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro modal_filter(filters) %}
+<div class="modal_filters">
+  <span>Selecciona un filtro</span>
+  <select name="filter">
+    {% for filter_name in filters %} <option>{{ filter_name }}</option> {% endfor %}
+  </select>
+  <input type="text" placeholder="Escribe el valor del filtro">
+  <button class="search_btn">Buscar</button>
+</div>
+{% endmacro %}
+
+{% macro modal_content(data) %}
+{% if not data %}
+  <h1>No hay usuarios registrados:(</h1>
+{% else %}
+  <table class="modal_content" cellspacing="0">
+    <thead>
+      <tr>
+        {% for col in data.cols %} <th>{{ col }}</th> {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data.rows %} 
+        <tr>
+          {% for register in row.register %} 
+            <td>{{ register }}</td> 
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+{% endmacro %}
+
+{% macro modal_form(inputs) %}
+<form class="modal_form" action="/" method="POST">
+  {% for input in inputs %}
+    <input 
+      name="{{input.name}}"
+      type="{{input.type}}"
+      placeholder="{{input.placeholder}}"
+      value="{{input.value}}"
+      required
+    >
+  {% endfor %}
+  <button class="register_btn">Guardar</button>
+</form>
+{% endmacro %}

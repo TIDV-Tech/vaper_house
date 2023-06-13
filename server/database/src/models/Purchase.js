@@ -1,4 +1,5 @@
-import {Schema, model} from "mongoose"
+import {Schema, model}    from "mongoose"
+import aggregatePaginate  from "mongoose-aggregate-paginate-v2"
 
 const purchaseSchema = new Schema({
   user: {type: Schema.Types.ObjectId, required: true},
@@ -9,5 +10,7 @@ const purchaseSchema = new Schema({
   timestamps: true,
   versionKey: false
 })
+
+purchaseSchema.plugin(aggregatePaginate)
 
 export const Purchase = model("purchase", purchaseSchema)

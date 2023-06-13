@@ -82,7 +82,7 @@ purchase_controller.showPurchases = async (req, res) => {
       status: 200,
       data: []
     }
-    let purchases = await Purchase.aggregate([
+    const aggregates = Purchase.aggregate([
       {
         $lookup: {
           from: "users",
@@ -108,10 +108,16 @@ purchase_controller.showPurchases = async (req, res) => {
         }
       }
     ])
+    
+    const options = { page: 1, limit: 5 }
+
+    let purchases = await Purchase.aggregatePaginate(aggregates, options)
+
     response.msg = "Here's the purchases"
-    purchases = purchases.map(purchase => {
-      const {_id, paymentMethod, createdAt, updatedAt, totalPrice, user_purchase, products_purchase} = purchase
-      return {_id, paymentMethod, createdAt, updatedAt, totalPrice, user_purchase, products_purchase}
+
+    purchases = purchases.docs.map(purchase => {
+      const {_id, user_purchase, products_purchase, paymentMethod, totalPrice, createdAt, updatedAt} = purchase
+      return {_id, user_purchase: user_purchase[0]._id, products_purchase: products_purchase.map(product => product._id), paymentMethod, totalPrice, createdAt, updatedAt}
     })
     response.data = purchases 
     res.status(response.status).json(response)
@@ -122,6 +128,48 @@ purchase_controller.showPurchases = async (req, res) => {
       error: error.message
     }
     return res.status(response.status).json(response)
+  }
+}
+
+purchase_controller.findByFilter = async (req, res) => {
+  try {
+    let response = {
+      msg: "Purchases not found!",
+      status: 200,
+      data: []
+    }
+    const {filter}    = req.body
+    let foundPurchases = []
+    if(filter.length){
+      filter.map((elm,key) => {
+        let k = Object.keys(elm)
+        let m = filter[key][k]
+        let c = new RegExp('^'+m+'$')
+        filter[key][k] = c
+      })
+      foundPurchases = await Purchase.find({"$or": filter})
+    }else{
+      if(typeof Object.values(filter)[0] == "string"){
+        let k = Object.keys(filter)
+        let m = filter[k]
+        let c = new RegExp(m)
+        filter[k] = c
+        k = k[0]
+        foundPurchases = await Purchase.find({[k]: {$regex: c}})
+      }
+      foundPurchases = await Purchase.find(filter)
+    }
+    if(!foundPurchases.length) return res.status(response.status).json(response) 
+    response.msg = "Here's the purchases"
+    response.data = foundPurchases
+    res.status(response.status).json(response)
+  } catch (error) {
+    let response = {
+      msg: "Something went wrong...",
+      status: 400,
+      error: error.message
+    }
+    res.status(response.status).json(response)
   }
 }
 

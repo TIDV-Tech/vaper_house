@@ -112,6 +112,9 @@ data = {
       'css': [
         'root.min.css',
         'admin.min.css',
+      ],
+      'js': [
+        'handle_modal.js'
       ]
     }
   },
@@ -120,6 +123,136 @@ data = {
   'warning_msg': '''Advertencia: Prohibida la venta a menores de 18 años.
     Algunos productos contienen nicotina, una sustancia
     altamente adictiva''',
+  'modal': [
+    {
+      "options": [
+        {
+          "title": "Listar",
+          "filters": [
+            "ID del cliente",
+            "Nombre",
+            "Fecha de nacimiento",
+            "Correo",
+            "Fecha de creación",
+            "Fecha de edición"
+          ], 
+          "data": []
+        },
+        {
+          "title": "Eliminar",
+          "inputs": [
+            {"name": "find_by_id", "type": "text", "placeholder": "Ingresa el ID del usuario a eliminar"}
+          ]
+        }
+      ],
+    },
+    {
+      "options": [
+        {
+          "title": "Listar", 
+          "filters": [
+            "ID de la venta",
+            "ID del cliente",
+            "ID de los productos",
+            "Método de pago",
+            "Precio total",
+            "Fecha de creación",
+            "Fecha de edición"
+          ],
+          "data": []
+        },
+        {
+          "title": "Eliminar",
+          "inputs": [
+            {"name": "find_by_id", "placeholder": "Ingresa el ID de la venta a eliminar"}
+          ]
+        }
+      ]
+    },
+    {
+      "options": [
+        {
+          "title": "Listar",
+          "filters": [
+            "ID del producto",
+            "Nombre", 
+            "Descripción", 
+            "Tipo", 
+            "Marca", 
+            "Colores",
+            "Nicotina",
+            "Sabores",
+            "Disponible", 
+            "Promoción",
+            "Cantidad",
+            "Precio",
+            "Precio de promoción",
+            "Categoria",
+            "Reviews", 
+            "Fecha de registro",
+            "Fecha de edición"
+          ],
+          "data": []
+        },
+        {
+          "title": "Editar",
+          "inputs": [
+            {"name": "filter_by_id", "type": "text", "placeholder": "Ingresa el ID del producto a editar"}
+          ]
+        },
+        {
+          "title": "Eliminar",
+          "inputs": [
+            {"name": "filter_by_id", "placeholder": "Ingresa el ID del producto a eliminar"}
+          ]
+        },
+      ]
+    },
+    {
+      "options": [
+        {"title": "Listar", "data": []}
+      ]
+    },
+    {
+      "options": [
+        {"title": "Listar", "data": []}
+      ]
+    },
+    {
+      "options": [
+        {"title": "Listar", "data": []}
+      ]
+    },
+    {
+      "options": [
+        {"title": "Listar", "data": []}
+      ]
+    },
+    {
+      "options": [
+        {
+          "title": "Listar", 
+          "filters": [
+            "ID del producto"
+          ],
+          "data": []
+        }
+      ]
+    },
+    {
+      "options": [
+        {
+          "title": "Registrar",
+          "inputs": [
+            {"name": "fullName", "placeholder": "Ingresa el nombre del usuario"},
+            {"name": "datebirth", "placeholder": "Ingresa la fecha de nacimiento del usuario"},
+            {"name": "email", "placeholder": "Ingresa el correo del usuario"},
+            {"name": "password", "placeholder": "Ingresa la clave del usuario"},
+          ]
+        }
+      ]
+    }
+  ],
   'options': [
     {
       'name': 'Inicio',

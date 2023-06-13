@@ -1,4 +1,5 @@
-import {Schema, model} from "mongoose"
+import {Schema, model}  from "mongoose"
+import paginate         from "mongoose-paginate-v2"
 
 const userSchema = new Schema({
   fullName: { type: String, required: true },
@@ -9,5 +10,7 @@ const userSchema = new Schema({
   timestamps: true,
   versionKey: false
 })
+
+userSchema.plugin(paginate)
 
 export const User = model("user", userSchema)

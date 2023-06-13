@@ -65,6 +65,15 @@
               <a class="txt2" href="/acceso?page=register">
                 Crear una cuenta
                 <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    {% for message in messages %} 
+                    <div class="text-center p-t-12">
+                      <p>{{ message }}</p>
+                    </div> 
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
               </a>
             {% else %}
               <a class="txt2" href="/acceso?page=login">

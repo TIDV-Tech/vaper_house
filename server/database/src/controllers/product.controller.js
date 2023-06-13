@@ -80,8 +80,8 @@ product_controller.findProducts = async (req, res) => {
       status: 200,
       data: []
     }
-    const { limit } = req.body
-    let products  = await Product.aggregate([
+
+    const aggregates = Product.aggregate([
       {
         $lookup: {
           from: "categories",
@@ -107,30 +107,21 @@ product_controller.findProducts = async (req, res) => {
         }
       }
     ])
-    let limitedProducts = []
-    if(!limit){
-      products = products.map(product => {
-        const { _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product, reviews_products } = product
-        return { _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product, reviews_products }
-      })
-      if(!products.length){
-        return res.status(response.status).json(response)
-      }
-      response.data = products
-    }else{
-      for(let i = 1; i <= limit; i++){
-        if(i <= limit){
-          const { _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product, reviews_products } = products[i]
-          limitedProducts.push({ _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product, reviews_products }) 
-        }else{
-          break
-        }
-      }
-      if(!limitedProducts.length){
-        return res.status(response.status).json(response)
-      }
-      response.data = limitedProducts
+
+    const options = {page: 1, limit: 5}
+
+    let products  = await Product.aggregatePaginate(aggregates, options)
+
+    if(!products.docs.length){
+      return res.status(response.status).json(response)
     }
+    
+    products = products.docs.map(product => {
+      const { _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product, reviews_products, createdAt, updatedAt } = product
+      return { _id, name, description, type, brand, color, nicotine, flavor, img, avaible, promotion, quantity, price, promotionPrice, category_product: category_product[0].title, reviews_products, createdAt, updatedAt }
+    })
+
+    response.data = products
     response.msg  = "Here's the products" 
     res.status(response.status).json(response)
   } catch (error) {
